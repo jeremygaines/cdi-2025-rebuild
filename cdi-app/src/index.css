@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  /* CDI Component Colors */
+  --color-cdi-finance: #1B8A8A;
+  --color-cdi-investment: #4A7FC1;
+  --color-cdi-migration: #6B5CA5;
+  --color-cdi-trade: #2B4970;
+  --color-cdi-environment: #E59C39;
+  --color-cdi-health: #C45C26;
+  --color-cdi-security: #8B4513;
+  --color-cdi-technology: #A0522D;
+
+  /* CDI Brand Colors */
+  --color-cdi-primary: #1B5E5E;
+  --color-cdi-dark: #0D3B3B;
+  --color-cdi-light: #F5F7F8;
+}
+
+body {
+  @apply bg-white text-gray-900 antialiased;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#root {
+  @apply min-h-screen flex flex-col;
+}
+
+/* Mobile-first responsive table */
+@media (max-width: 768px) {
+  .ranking-table {
+    @apply text-xs;
+  }
+
+  .ranking-table th,
+  .ranking-table td {
+    @apply px-1 py-2;
+  }
+}
+
+/* Smooth scrolling for overflow tables */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Print styles */
+@media print {
+  header,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  @apply outline-2 outline-offset-2 outline-cdi-primary;
+}
+
+/* Custom scrollbar for webkit browsers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-gray-100 rounded;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded hover:bg-gray-400;
+}
