@@ -21,54 +21,62 @@ const OUTPUT_DIR = path.join(__dirname, '../public/data');
 // Countries to exclude
 const EXCLUDED_COUNTRIES = ['ISR', 'RUS'];
 
-// Component definitions with colors and metadata
-const COMPONENT_DEFINITIONS: Record<string, { name: string; shortName: string; color: string; description: string }> = {
+// Component definitions with colors and metadata - extracted from live CDI site
+const COMPONENT_DEFINITIONS: Record<string, { name: string; shortName: string; color: string; group: string; description: string }> = {
   'development-finance': {
     name: 'Development Finance',
-    shortName: 'Finance',
-    color: '#1B8A8A',
+    shortName: 'Development Finance',
+    color: 'rgb(146, 101, 171)',  // purple #9265AB
+    group: 'finance',
     description: 'Measures the quantity and quality of aid and other development finance.'
   },
   'investment': {
     name: 'Investment',
     shortName: 'Investment',
-    color: '#4A7FC1',
+    color: 'rgb(68, 195, 255)',   // light blue #44C3FF
+    group: 'exchange',
     description: 'Evaluates policies affecting investment in developing countries.'
   },
   'migration': {
     name: 'Migration',
     shortName: 'Migration',
-    color: '#6B5CA5',
+    color: 'rgb(0, 129, 214)',    // blue #0081D6
+    group: 'exchange',
     description: 'Assesses policies on immigration and integration of migrants.'
   },
   'trade': {
     name: 'Trade',
     shortName: 'Trade',
-    color: '#2B4970',
+    color: 'rgb(29, 74, 184)',    // navy #1D4AB8
+    group: 'exchange',
     description: 'Examines trade policies and their impact on developing countries.'
   },
   'environment': {
     name: 'Environment',
     shortName: 'Environment',
-    color: '#E59C39',
+    color: 'rgb(255, 193, 39)',   // yellow/gold #FFC127
+    group: 'global',
     description: 'Measures environmental policies and climate change mitigation efforts.'
   },
   'health': {
     name: 'Health',
     shortName: 'Health',
-    color: '#C45C26',
+    color: 'rgb(255, 157, 58)',   // orange #FF9D3A
+    group: 'global',
     description: 'Evaluates contributions to global health.'
   },
   'security': {
     name: 'Security',
     shortName: 'Security',
-    color: '#8B4513',
+    color: 'rgb(241, 100, 0)',    // red-orange #F16400
+    group: 'global',
     description: 'Assesses contributions to international peace and security.'
   },
   'technology': {
     name: 'Technology',
     shortName: 'Technology',
-    color: '#A0522D',
+    color: 'rgb(204, 85, 0)',     // dark orange #CC5500
+    group: 'global',
     description: 'Measures policies supporting technology transfer and innovation.'
   }
 };
@@ -322,6 +330,7 @@ function main() {
       name: def.name,
       shortName: def.shortName,
       color: def.color,
+      group: def.group,
       description: def.description,
       subcomponents: subcomponentIds
     };

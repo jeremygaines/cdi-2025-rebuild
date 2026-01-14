@@ -39,6 +39,7 @@ export interface Component {
   name: string;
   shortName: string;
   color: string;
+  group: 'finance' | 'exchange' | 'global';
   description: string;
   subcomponents: string[]; // array of subcomponent IDs
 }

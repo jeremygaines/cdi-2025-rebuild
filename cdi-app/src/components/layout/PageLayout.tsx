@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from './Header';
 import { ErrorBoundary } from '@/components/common/ErrorBoundary';
 
 interface PageLayoutProps {
@@ -9,8 +8,7 @@ interface PageLayoutProps {
 
 export function PageLayout({ children }: PageLayoutProps) {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
+    <div className="min-h-screen flex flex-col bg-white">
       <main className="flex-1">
         <ErrorBoundary>{children}</ErrorBoundary>
       </main>
