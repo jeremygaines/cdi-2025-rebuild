@@ -1,10 +1,10 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
-import { DetailDrawer } from '@/components/drawer/DetailDrawer';
 import { HelpModal } from '@/components/modals/HelpModal';
 import { helpContent, type HelpContentKey } from '@/content/helpContent';
+import { CountryOverview } from './CountryOverview';
 import type { Country, Component } from '@/types';
 
 type SortField = 'rank' | 'score' | string;
@@ -40,8 +40,7 @@ export function RankingTable() {
   const { selectedGroupId, showAdjusted } = useFilters();
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
-  const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
+  const [selectedCountryId, setSelectedCountryId] = useState<string | null>(null);
   const [activeHelpModal, setActiveHelpModal] = useState<HelpContentKey | null>(null);
 
   const filteredCountries = useMemo(() => {
@@ -83,14 +82,8 @@ export function RankingTable() {
     }
   };
 
-  const handleCellClick = (country: Country, componentId: string) => {
-    setSelectedCountry(country);
-    setSelectedComponentId(componentId);
-  };
-
-  const handleCloseDrawer = () => {
-    setSelectedCountry(null);
-    setSelectedComponentId(null);
+  const handleRowClick = (countryId: string) => {
+    setSelectedCountryId(prev => prev === countryId ? null : countryId);
   };
 
   // Group components by their group
@@ -191,15 +184,22 @@ export function RankingTable() {
 
           <tbody>
             {sortedCountries.map((country, index) => (
-              <CountryRow
-                key={country.id}
-                country={country}
-                components={components}
-                showAdjusted={showAdjusted}
-                isEven={index % 2 === 1}
-                onCellClick={handleCellClick}
-                isSelected={selectedCountry?.id === country.id}
-              />
+              <Fragment key={country.id}>
+                <CountryRow
+                  country={country}
+                  components={components}
+                  showAdjusted={showAdjusted}
+                  isEven={index % 2 === 1}
+                  onRowClick={handleRowClick}
+                  isSelected={selectedCountryId === country.id}
+                />
+                {selectedCountryId === country.id && (
+                  <CountryOverview
+                    country={country}
+                    onClose={() => setSelectedCountryId(null)}
+                  />
+                )}
+              </Fragment>
             ))}
           </tbody>
         </table>
@@ -210,13 +210,6 @@ export function RankingTable() {
           No countries found for the selected filter.
         </div>
       )}
-
-      <DetailDrawer
-        isOpen={selectedCountry !== null}
-        onClose={handleCloseDrawer}
-        country={selectedCountry}
-        componentId={selectedComponentId}
-      />
 
       <HelpModal
         isOpen={activeHelpModal !== null}
@@ -233,11 +226,11 @@ interface CountryRowProps {
   components: Component[];
   showAdjusted: boolean;
   isEven: boolean;
-  onCellClick: (country: Country, componentId: string) => void;
+  onRowClick: (countryId: string) => void;
   isSelected: boolean;
 }
 
-function CountryRow({ country, components, showAdjusted, isEven, onCellClick, isSelected }: CountryRowProps) {
+function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isSelected }: CountryRowProps) {
   const rank = showAdjusted ? country.rankAdjusted : country.rank;
   const score = showAdjusted ? country.scoreAdjusted : country.score;
 
@@ -245,7 +238,10 @@ function CountryRow({ country, components, showAdjusted, isEven, onCellClick, is
   const firstColsBg = isSelected ? 'rgb(200, 220, 255)' : getRowBgColor(ROW_BASE_COLOR, isEven);
 
   return (
-    <tr className="border-b border-gray-200 hover:brightness-95 transition-all">
+    <tr
+      className="border-b border-gray-200 hover:brightness-95 transition-all cursor-pointer"
+      onClick={() => onRowClick(country.id)}
+    >
       {/* Rank cell with teal color and left bar */}
       <td
         className="py-4 relative"
@@ -280,13 +276,12 @@ function CountryRow({ country, components, showAdjusted, isEven, onCellClick, is
         className="px-4 py-4"
         style={{ background: firstColsBg }}
       >
-        <Link
-          to={`/country/${country.id}`}
-          className="text-gray-800 hover:underline font-medium"
+        <span
+          className="text-gray-800 font-medium"
           style={{ color: 'rgb(0, 105, 112)' }}
         >
           {country.name}
-        </Link>
+        </span>
       </td>
 
       {/* Component cells */}
@@ -304,9 +299,8 @@ function CountryRow({ country, components, showAdjusted, isEven, onCellClick, is
         return (
           <td
             key={component.id}
-            className="px-2 py-3 cursor-pointer hover:brightness-90 transition-all"
+            className="px-2 py-3"
             style={{ background: cellBg }}
-            onClick={() => onCellClick(country, component.id)}
           >
             <div className="flex flex-col items-center gap-1">
               {/* Percentage value */}
