@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { DetailDrawer } from '@/components/drawer/DetailDrawer';
+import { HelpModal } from '@/components/modals/HelpModal';
+import { helpContent, type HelpContentKey } from '@/content/helpContent';
 import type { Country, Component } from '@/types';
 
 type SortField = 'rank' | 'score' | string;
@@ -40,6 +42,7 @@ export function RankingTable() {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [selectedComponentId, setSelectedComponentId] = useState<string | null>(null);
+  const [activeHelpModal, setActiveHelpModal] = useState<HelpContentKey | null>(null);
 
   const filteredCountries = useMemo(() => {
     if (selectedGroupId === 'all') return countries;
@@ -110,7 +113,10 @@ export function RankingTable() {
               >
                 <span style={{ color: COMPONENT_GROUPS.finance.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.finance.name}
-                  <InfoIcon color={COMPONENT_GROUPS.finance.color} />
+                  <InfoIcon
+                    color={COMPONENT_GROUPS.finance.color}
+                    onClick={() => setActiveHelpModal('developmentFinance')}
+                  />
                 </span>
               </th>
               {/* Exchange group */}
@@ -120,7 +126,10 @@ export function RankingTable() {
               >
                 <span style={{ color: COMPONENT_GROUPS.exchange.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.exchange.name}
-                  <InfoIcon color={COMPONENT_GROUPS.exchange.color} />
+                  <InfoIcon
+                    color={COMPONENT_GROUPS.exchange.color}
+                    onClick={() => setActiveHelpModal('exchange')}
+                  />
                 </span>
               </th>
               {/* Global Public Goods group */}
@@ -130,7 +139,10 @@ export function RankingTable() {
               >
                 <span style={{ color: COMPONENT_GROUPS.global.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.global.name}
-                  <InfoIcon color={COMPONENT_GROUPS.global.color} />
+                  <InfoIcon
+                    color={COMPONENT_GROUPS.global.color}
+                    onClick={() => setActiveHelpModal('globalPublicGoods')}
+                  />
                 </span>
               </th>
             </tr>
@@ -204,6 +216,13 @@ export function RankingTable() {
         onClose={handleCloseDrawer}
         country={selectedCountry}
         componentId={selectedComponentId}
+      />
+
+      <HelpModal
+        isOpen={activeHelpModal !== null}
+        onClose={() => setActiveHelpModal(null)}
+        title={activeHelpModal ? helpContent[activeHelpModal].title : ''}
+        content={activeHelpModal ? helpContent[activeHelpModal].content : null}
       />
     </div>
   );
@@ -312,14 +331,15 @@ function CountryRow({ country, components, showAdjusted, isEven, onCellClick, is
   );
 }
 
-function InfoIcon({ color }: { color: string }) {
+function InfoIcon({ color, onClick }: { color: string; onClick: () => void }) {
   return (
-    <span
-      className="inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] cursor-help border"
+    <button
+      onClick={onClick}
+      className="inline-flex items-center justify-center w-4 h-4 rounded-full text-[10px] cursor-pointer border hover:opacity-70 transition-opacity"
       style={{ borderColor: color, color: color }}
-      title="More information"
+      aria-label="More information"
     >
       ?
-    </span>
+    </button>
   );
 }

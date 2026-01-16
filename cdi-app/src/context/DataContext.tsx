@@ -27,12 +27,35 @@ export function DataProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     async function loadData() {
       try {
-        const response = await fetch('/data/cdi-data.json');
-        if (!response.ok) {
+        // Load main CDI data
+        const cdiResponse = await fetch('/data/cdi-data.json');
+        if (!cdiResponse.ok) {
           throw new Error('Failed to load CDI data');
         }
-        const json = await response.json();
-        setData(json);
+        const cdiData = await cdiResponse.json();
+
+        // Load country groups
+        const groupsResponse = await fetch('/data/country-groups.json');
+        if (!groupsResponse.ok) {
+          throw new Error('Failed to load country groups');
+        }
+        const groupsData = await groupsResponse.json();
+
+        // Transform country groups to match our data structure
+        const countryGroups: CountryGroup[] = [
+          { id: 'all', name: 'All Countries', countryIds: cdiData.countries.map((c: Country) => c.id) },
+          ...Object.entries(groupsData.countryGroups).map(([key, value]: [string, any]) => ({
+            id: key,
+            name: value.name,
+            countryIds: value.countries
+          }))
+        ];
+
+        // Merge the data
+        setData({
+          ...cdiData,
+          countryGroups
+        });
       } catch (err) {
         setError(err instanceof Error ? err : new Error('Unknown error'));
       } finally {

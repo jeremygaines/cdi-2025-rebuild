@@ -13033,7 +13033,7 @@
       "id": "development-finance",
       "name": "Development Finance",
       "shortName": "Development Finance",
-      "color": "#1B998B",
+      "color": "rgb(146, 101, 171)",
       "group": "finance",
       "description": "Measures the quantity and quality of aid and other development finance.",
       "subcomponents": [
@@ -13045,7 +13045,7 @@
       "id": "investment",
       "name": "Investment",
       "shortName": "Investment",
-      "color": "#4A90D9",
+      "color": "rgb(68, 195, 255)",
       "group": "exchange",
       "description": "Evaluates policies affecting investment in developing countries.",
       "subcomponents": [
@@ -13061,7 +13061,7 @@
       "id": "migration",
       "name": "Migration",
       "shortName": "Migration",
-      "color": "#7B68EE",
+      "color": "rgb(0, 129, 214)",
       "group": "exchange",
       "description": "Assesses policies on immigration and integration of migrants.",
       "subcomponents": [
@@ -13076,7 +13076,7 @@
       "id": "trade",
       "name": "Trade",
       "shortName": "Trade",
-      "color": "#2B4970",
+      "color": "rgb(29, 74, 184)",
       "group": "exchange",
       "description": "Examines trade policies and their impact on developing countries.",
       "subcomponents": [
@@ -13091,7 +13091,7 @@
       "id": "environment",
       "name": "Environment",
       "shortName": "Environment",
-      "color": "#DAA520",
+      "color": "rgb(255, 193, 39)",
       "group": "global",
       "description": "Measures environmental policies and climate change mitigation efforts.",
       "subcomponents": [
@@ -13108,7 +13108,7 @@
       "id": "health",
       "name": "Health",
       "shortName": "Health",
-      "color": "#E57C23",
+      "color": "rgb(255, 157, 58)",
       "group": "global",
       "description": "Evaluates contributions to global health.",
       "subcomponents": [
@@ -13124,7 +13124,7 @@
       "id": "security",
       "name": "Security",
       "shortName": "Security",
-      "color": "#CD5C5C",
+      "color": "rgb(241, 100, 0)",
       "group": "global",
       "description": "Assesses contributions to international peace and security.",
       "subcomponents": [
@@ -13139,7 +13139,7 @@
       "id": "technology",
       "name": "Technology",
       "shortName": "Technology",
-      "color": "#8B6914",
+      "color": "rgb(204, 85, 0)",
       "group": "global",
       "description": "Measures policies supporting technology transfer and innovation.",
       "subcomponents": [

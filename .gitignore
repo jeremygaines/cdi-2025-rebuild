@@ -30,4 +30,4 @@ npm-debug.log*
 # Vite
 .vite/
 
-site_code_backup/*
+site_code_backup/

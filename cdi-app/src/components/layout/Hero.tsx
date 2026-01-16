@@ -21,18 +21,12 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
             {/* Left side - Logo and title */}
             <div className="flex items-center gap-4">
               {/* CDI Logo */}
-              <div className="w-16 h-16 md:w-20 md:h-20 flex-shrink-0">
-                <svg viewBox="0 0 100 100" className="w-full h-full">
-                  <circle cx="50" cy="50" r="45" fill="#3D5C5C" stroke="#5A7A7A" strokeWidth="2"/>
-                  <text x="50" y="58" textAnchor="middle" fill="white" fontSize="24" fontWeight="bold">CDI</text>
-                  {/* Decorative segments */}
-                  <path d="M50 10 A40 40 0 0 1 85 35" stroke="#1B998B" strokeWidth="6" fill="none"/>
-                  <path d="M85 35 A40 40 0 0 1 85 65" stroke="#4A90D9" strokeWidth="6" fill="none"/>
-                  <path d="M85 65 A40 40 0 0 1 50 90" stroke="#7B68EE" strokeWidth="6" fill="none"/>
-                  <path d="M50 90 A40 40 0 0 1 15 65" stroke="#DAA520" strokeWidth="6" fill="none"/>
-                  <path d="M15 65 A40 40 0 0 1 15 35" stroke="#E57C23" strokeWidth="6" fill="none"/>
-                  <path d="M15 35 A40 40 0 0 1 50 10" stroke="#CD5C5C" strokeWidth="6" fill="none"/>
-                </svg>
+              <div className="w-auto h-16 md:h-20 flex-shrink-0">
+                <img
+                  src="/cdi-logo.png"
+                  alt="CDI Logo"
+                  className="h-full w-auto object-contain"
+                />
               </div>
               {/* Title */}
               <h1 className="text-xl sm:text-2xl md:text-3xl font-light tracking-wide">
