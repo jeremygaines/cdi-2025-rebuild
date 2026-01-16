@@ -92,17 +92,17 @@ export function RankingTable() {
   const globalComponents = components.filter(c => c.group === 'global');
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-6">
+    <div className="w-full py-6">
       <div className="overflow-x-auto">
         <table className="w-full border-collapse">
           {/* Group headers row */}
-          <thead>
+          <thead className="sticky top-0 z-10">
             <tr>
               <th colSpan={3} className="bg-white"></th>
               {/* Development Finance group */}
               <th
                 colSpan={financeComponents.length}
-                className="text-center py-2 text-xs"
+                className="bg-white text-center py-2 text-xs"
               >
                 <span style={{ color: COMPONENT_GROUPS.finance.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.finance.name}
@@ -115,7 +115,7 @@ export function RankingTable() {
               {/* Exchange group */}
               <th
                 colSpan={exchangeComponents.length}
-                className="text-center py-2 text-xs"
+                className="bg-white text-center py-2 text-xs"
               >
                 <span style={{ color: COMPONENT_GROUPS.exchange.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.exchange.name}
@@ -128,7 +128,7 @@ export function RankingTable() {
               {/* Global Public Goods group */}
               <th
                 colSpan={globalComponents.length}
-                className="text-center py-2 text-xs"
+                className="bg-white text-center py-2 text-xs"
               >
                 <span style={{ color: COMPONENT_GROUPS.global.color }} className="flex items-center justify-center gap-1">
                   {COMPONENT_GROUPS.global.name}
@@ -143,7 +143,7 @@ export function RankingTable() {
             {/* Column headers row */}
             <tr>
               <th
-                className="px-2 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide cursor-pointer hover:bg-gray-50 w-16"
+                className="bg-white px-2 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide cursor-pointer hover:bg-gray-50 w-16"
                 onClick={() => handleSort('rank')}
               >
                 Rank
@@ -152,18 +152,18 @@ export function RankingTable() {
                 )}
               </th>
               <th
-                className="px-2 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide cursor-pointer hover:bg-gray-50 w-16"
+                className="bg-white px-2 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide cursor-pointer hover:bg-gray-50 w-16"
                 onClick={() => handleSort('score')}
               >
                 Score
               </th>
-              <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide w-32">
+              <th className="bg-white px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wide w-32">
                 Overall
               </th>
               {components.map(component => (
                 <th
                   key={component.id}
-                  className="px-2 py-3 text-center text-xs font-bold uppercase tracking-wide cursor-pointer hover:opacity-80 min-w-[100px]"
+                  className="bg-white px-2 py-3 text-center text-xs font-bold uppercase tracking-wide cursor-pointer hover:opacity-80 min-w-[100px]"
                   style={{
                     color: component.color,
                     borderBottom: `3px solid ${component.color}`
@@ -242,18 +242,14 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
       className="border-b border-gray-200 hover:brightness-95 transition-all cursor-pointer"
       onClick={() => onRowClick(country.id)}
     >
-      {/* Rank cell with teal color and left bar */}
+      {/* Rank cell with white pill bubble */}
       <td
-        className="py-4 relative"
+        className="py-4 px-2"
         style={{ background: firstColsBg }}
       >
-        <div className="flex items-center">
-          <div
-            className="w-1 h-8 absolute left-0"
-            style={{ background: 'rgb(0, 105, 112)' }}
-          ></div>
+        <div className="flex items-center justify-center">
           <span
-            className="font-bold text-lg pl-4"
+            className="bg-white px-3 py-1 rounded-full font-bold text-lg"
             style={{ color: 'rgb(0, 105, 112)' }}
           >
             {rank}
@@ -266,7 +262,7 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
         className="px-2 py-4"
         style={{ background: firstColsBg }}
       >
-        <span className="text-gray-700 font-medium">
+        <span className="font-medium" style={{ color: '#73706f' }}>
           {Math.round(score)}
         </span>
       </td>
@@ -277,8 +273,8 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
         style={{ background: firstColsBg }}
       >
         <span
-          className="text-gray-800 font-medium"
-          style={{ color: 'rgb(0, 105, 112)' }}
+          className="font-medium"
+          style={{ color: '#73706f' }}
         >
           {country.name}
         </span>
@@ -304,7 +300,7 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
           >
             <div className="flex flex-col items-center gap-1">
               {/* Percentage value */}
-              <span className="text-sm text-gray-700">
+              <span className="text-sm" style={{ color: '#5e6666' }}>
                 {percentage}%
               </span>
               {/* Progress bar */}

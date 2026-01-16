@@ -11,7 +11,7 @@ export function FilterBar() {
 
   return (
     <>
-      <div className="bg-white border-b">
+      <div className="border-b" style={{ backgroundColor: '#f0ece7' }}>
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             {/* Left side - Country group filter */}

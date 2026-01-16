@@ -38,8 +38,13 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
 
   return (
     <div>
-      {/* Main hero section */}
-      <div className="bg-cdi-dark text-white">
+      {/* Main hero section with diagonal split */}
+      <div
+        className="text-white"
+        style={{
+          background: 'linear-gradient(70deg, #3e3531 50%, #f0ece7 50%)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
             {/* Left side - Logo and title */}
@@ -78,7 +83,7 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
                           key={index}
                           className="w-full flex-shrink-0"
                         >
-                          <p className="text-sm md:text-base italic text-white/90 leading-relaxed">
+                          <p className="text-sm md:text-base italic leading-relaxed" style={{ color: '#4a8e91' }}>
                             {finding}
                           </p>
                         </div>
@@ -92,11 +97,12 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
                       <button
                         key={index}
                         onClick={() => setCurrentSlide(index)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          index === currentSlide
-                            ? 'bg-white w-6'
-                            : 'bg-white/40 hover:bg-white/60'
-                        }`}
+                        className="w-2 h-2 rounded-full transition-all"
+                        style={{
+                          backgroundColor: '#ebae66',
+                          opacity: index === currentSlide ? 1 : 0.4,
+                          width: index === currentSlide ? '1.5rem' : '0.5rem'
+                        }}
                         aria-label={`Go to slide ${index + 1}`}
                       />
                     ))}
@@ -118,7 +124,7 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
       </div>
 
       {/* About link section */}
-      <div className="bg-cdi-dark border-t border-white/20">
+      <div className="border-t border-white/20" style={{ backgroundColor: '#006a71' }}>
         <div className="max-w-7xl mx-auto px-4 py-3 text-center">
           <a
             href="https://www.cgdev.org/cdi"
