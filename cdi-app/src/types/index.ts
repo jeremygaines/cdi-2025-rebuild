@@ -48,7 +48,9 @@ export interface Subcomponent {
   id: string;
   name: string;
   componentId: string;
+  subtitle: string;
   description: string;
+  weight: string;
   indicators: string[]; // array of indicator IDs
 }
 

@@ -1,0 +1,11 @@
+make subcomponent report page match component page in styles
+add indicator report 
+clean up all indicator page in footer, either making useful or removing
+add top bar with inc adj and country filter to component/subcomponent/indicator pages
+maybe add country > component pages, although I'm not sure what they add
+make country > component pop-out drawers better styled like original + let you click outside to hide
+deal with mobile version
+add tooltips, add measure scores
+handle indicators that aren't on 0 to 100 scale
+
+build out import chain--restructure json if needed, create import scripts with error reporting, provide structured documents to team for next time

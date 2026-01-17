@@ -175,14 +175,17 @@ export function ComponentPage() {
               <div className="mt-2">
                 {componentSubcomponents.map(subcomp => (
                   <div key={subcomp.id} className="border-b border-gray-200">
-                    <div className="p-3">
+                    <Link
+                      to={`/component/${component.id}/${subcomp.id}`}
+                      className="block p-3 hover:bg-gray-50 transition-colors"
+                    >
                       <h5
-                        className="font-semibold"
+                        className="font-semibold hover:underline"
                         style={{ color: componentColor }}
                       >
                         {subcomp.name}
                       </h5>
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>

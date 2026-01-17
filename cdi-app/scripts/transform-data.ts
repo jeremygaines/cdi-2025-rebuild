@@ -200,6 +200,228 @@ const SUBCOMPONENT_TO_COMPONENT: Record<string, string> = {
   'Intellectual Property Rights': 'technology'
 };
 
+// Subcomponent descriptions - these are placeholders to be filled in later
+const SUBCOMPONENT_DESCRIPTIONS: Record<string, { subtitle: string; description: string; weight: string }> = {
+  // Development Finance
+  'Development Finance Quality': {
+    subtitle: 'How effectively aid is delivered and aligned with recipient needs',
+    description: 'This indicator assesses the quality of development finance provided by each country. Quality considerations include transparency, alignment with partner country priorities, use of country systems, predictability, and untying of aid. Higher quality aid is more effective at achieving development outcomes.',
+    weight: '50 percent of the development finance component'
+  },
+  'Development Finance Quantity': {
+    subtitle: 'Volume of cross-border development finance relative to GNI',
+    description: 'This indicator measures the quantity of Finance for International Development (FID) provided by each country as a percentage of gross national income. FID includes official development assistance and other official flows that support development in recipient countries.',
+    weight: '50 percent of the development finance component'
+  },
+  // Investment
+  'Financial Secrecy': {
+    subtitle: 'Measures to prevent illicit financial flows and money laundering',
+    description: 'This indicator assesses the degree to which countries contribute to or combat financial secrecy. It includes measures such as automatic exchange of tax information, beneficial ownership transparency, and anti-money laundering provisions.',
+    weight: '20 percent of the investment component'
+  },
+  'Business & Human Rights': {
+    subtitle: 'Implementation of human rights standards for business operations',
+    description: 'This indicator evaluates countries on their implementation of the OECD Guidelines for Multinational Enterprises and other business and human rights frameworks that protect workers and communities affected by international investment.',
+    weight: '15 percent of the investment component'
+  },
+  'Natural Resources': {
+    subtitle: 'Governance of natural resource investment and extraction',
+    description: 'This indicator assesses countries commitment to transparent and sustainable natural resource governance, including participation in initiatives like the Extractive Industries Transparency Initiative and the Kimberley Process.',
+    weight: '15 percent of the investment component'
+  },
+  'Anti-corruption': {
+    subtitle: 'Enforcement of anti-bribery laws for international business',
+    description: 'This indicator measures how actively countries enforce the OECD Anti-Bribery Convention and other anti-corruption measures that affect international investment and governance in developing countries.',
+    weight: '15 percent of the investment component'
+  },
+  'Investment Agreements': {
+    subtitle: 'Development-friendliness of bilateral investment treaties',
+    description: 'This indicator evaluates how much policy space countries bilateral investment agreements leave for developing country partners to pursue their own development objectives and regulate foreign investment.',
+    weight: '20 percent of the investment component'
+  },
+  'Corporate Tax Rate Alignment': {
+    subtitle: 'Participation in global minimum tax frameworks',
+    description: 'This indicator assesses countries alignment with global efforts to establish minimum corporate tax rates and prevent base erosion and profit shifting by multinational enterprises.',
+    weight: '15 percent of the investment component'
+  },
+  // Migration
+  'Migrant Inflow': {
+    subtitle: 'Acceptance of migrants from lower-income countries',
+    description: 'This indicator measures the number of migrants from developing countries that each CDI country accepts relative to its population, reflecting openness to migration as a development opportunity.',
+    weight: '25 percent of the migration component'
+  },
+  'Female Immigrants': {
+    subtitle: 'Gender balance among accepted migrants',
+    description: 'This indicator assesses the proportion of migrants accepted that are female, recognizing that migration can provide important opportunities for women from developing countries.',
+    weight: '10 percent of the migration component'
+  },
+  'Refugee Hosting': {
+    subtitle: 'Number of refugees hosted relative to population',
+    description: 'This indicator measures the number of refugees each country hosts relative to its population, reflecting commitment to international refugee protection responsibilities.',
+    weight: '25 percent of the migration component'
+  },
+  'International Migration Conventions': {
+    subtitle: 'Participation in international frameworks protecting migrants',
+    description: 'This indicator assesses participation in international conventions and frameworks that protect the rights of migrant workers and promote safe, orderly migration.',
+    weight: '15 percent of the migration component'
+  },
+  'Integration Policies': {
+    subtitle: 'Policies enabling migrants to integrate into society',
+    description: 'This indicator evaluates policies that enable migrants to integrate into host societies, including access to education, healthcare, employment, and pathways to citizenship.',
+    weight: '25 percent of the migration component'
+  },
+  // Trade
+  'Tariff Average': {
+    subtitle: 'Average tariff rates weighted by partner country income',
+    description: 'This indicator measures average tariff rates, with higher weight given to tariffs on goods from poorer countries. Lower tariffs on developing country exports support their economic growth.',
+    weight: '25 percent of the trade component'
+  },
+  'Tariff Peaks': {
+    subtitle: 'Prevalence of very high tariffs on specific products',
+    description: 'This indicator counts tariff peaks (rates of 15% or more) that often affect products important to developing country exporters, such as agricultural goods and textiles.',
+    weight: '15 percent of the trade component'
+  },
+  'Agricultural Subsidies': {
+    subtitle: 'Trade-distorting support to domestic agricultural producers',
+    description: 'This indicator measures agricultural subsidies that distort trade and harm farmers in developing countries by artificially lowering prices or restricting market access.',
+    weight: '25 percent of the trade component'
+  },
+  'Trade Logistics': {
+    subtitle: 'Quality of customs procedures and trade infrastructure',
+    description: 'This indicator assesses the quality of customs procedures, port infrastructure, and other trade facilitation measures that affect the ability of developing countries to trade efficiently.',
+    weight: '20 percent of the trade component'
+  },
+  'Services Trade Restrictiveness': {
+    subtitle: 'Barriers to trade in services with developing countries',
+    description: 'This indicator measures restrictions on trade in services, which is increasingly important for development as services constitute a growing share of developing country economies.',
+    weight: '15 percent of the trade component'
+  },
+  // Environment
+  'Greenhouse Gas Emissions': {
+    subtitle: 'Direct emissions from energy, industry, waste, and agriculture',
+    description: 'This indicator measures greenhouse gas emissions per capita from energy use, industrial processes, waste, and agriculture (excluding land use change). Climate change disproportionately affects developing countries.',
+    weight: '20 percent of the environment component'
+  },
+  'NDC Ambition': {
+    subtitle: 'Planned emissions reduction as percentage of projected emissions in 2030 under business-as-usual scenario',
+    description: 'This indicator assesses the degree to which a country\'s Nationally Determined Contribution, as submitted to the UNFCCC, represents increased ambition to reduce its emissions by 2030 over expected emissions based on GDP growth projections from the IMF\'s World Economic Outlook. We calculate the planned emissions reduction as the expected emissions in 2030 under a business-as-usual scenario minus the NDC emissions target in 2030, and present this as a percentage of the expected emissions in 2030.\n\nThis indicator relies on data assembled and analyzed by the Climate Action Tracker (CAT). CAT makes adjustments to exclude Land Use, Land Use Change, and Forestry (LULUCF) in their analysis of countries\' NDC targets in 2030. In some cases, countries present their NDC targets as a range between a minimum and maximum, in which case we take the mid-point between these two figures to represent their NDC target. Further details about CAT\'s methodology and assumptions are available here.',
+    weight: '10 percent of the environment component'
+  },
+  'Fossil Fuel Production': {
+    subtitle: 'Production of oil, gas, and coal relative to population',
+    description: 'This indicator measures the production of fossil fuels (oil, gas, and coal) relative to population size. Continued fossil fuel production contributes to climate change that disproportionately harms developing countries.',
+    weight: '15 percent of the environment component'
+  },
+  'Fossil Fuel Support': {
+    subtitle: 'Subsidies supporting fossil fuel production and consumption',
+    description: 'This indicator measures government support for fossil fuels as a percentage of GNI, including production and consumption subsidies that encourage continued use of carbon-intensive energy sources.',
+    weight: '15 percent of the environment component'
+  },
+  'Carbon Pricing': {
+    subtitle: 'Effective carbon price through taxes and emissions trading',
+    description: 'This indicator measures the effective price of carbon emissions through carbon taxes and emissions trading schemes, which incentivize reductions in greenhouse gas emissions.',
+    weight: '15 percent of the environment component'
+  },
+  'Fishing subsidies': {
+    subtitle: 'Subsidies contributing to overfishing and harmful practices',
+    description: 'This indicator assesses fishing subsidies that contribute to overfishing and harmful fishing practices, which threaten marine biodiversity and the livelihoods of coastal communities in developing countries.',
+    weight: '10 percent of the environment component'
+  },
+  'International Environmental Conventions': {
+    subtitle: 'Participation in biodiversity and environmental agreements',
+    description: 'This indicator assesses participation in and implementation of international environmental treaties and conventions, including the Paris Agreement, biodiversity conventions, and other multilateral environmental agreements.',
+    weight: '15 percent of the environment component'
+  },
+  // Health
+  'Antimicrobial Resistance': {
+    subtitle: 'Policies and consumption related to antibiotic resistance',
+    description: 'This indicator assesses countries\' contribution to the global challenge of antimicrobial resistance, including antibiotic consumption levels in humans and livestock and governance frameworks for AMR.',
+    weight: '20 percent of the health component'
+  },
+  'Vaccination Coverage': {
+    subtitle: 'Domestic vaccination rates for globally important diseases',
+    description: 'This indicator measures vaccination coverage rates for diseases like measles and DTP3, as high coverage prevents outbreaks that can spread internationally and supports global health security.',
+    weight: '15 percent of the health component'
+  },
+  'Pandemic Preparedness': {
+    subtitle: 'Readiness systems and plans for disease outbreaks',
+    description: 'This indicator assesses pandemic preparedness including completion of Joint External Evaluations with the WHO and development of national influenza plans and response capabilities.',
+    weight: '20 percent of the health component'
+  },
+  'Treaties': {
+    subtitle: 'Participation in international health treaties and codes',
+    description: 'This indicator evaluates participation in international health frameworks including WHO surveillance systems, the International Health Regulations, and codes on breast milk substitutes.',
+    weight: '15 percent of the health component'
+  },
+  'Export Restrictions on Food and Health': {
+    subtitle: 'Restrictions on exports of food and health products',
+    description: 'This indicator measures the extent to which countries impose export restrictions on food and health-related goods, which can harm food and health security in developing countries.',
+    weight: '15 percent of the health component'
+  },
+  'Tobacco Supply Chains': {
+    subtitle: 'Regulation of international tobacco trade',
+    description: 'This indicator assesses implementation of the WHO Framework Convention on Tobacco Control and measures to prevent illicit trade in tobacco products.',
+    weight: '15 percent of the health component'
+  },
+  // Security
+  'Peacekeeping Contributions': {
+    subtitle: 'Financial and personnel contributions to UN peacekeeping',
+    description: 'This indicator measures contributions to UN peacekeeping operations including financial contributions to the Department of Peacekeeping Operations and troop contributions to UN and non-UN missions.',
+    weight: '30 percent of the security component'
+  },
+  'Female Peacekeepers': {
+    subtitle: 'Proportion of peacekeepers who are women',
+    description: 'This indicator assesses the gender balance of peacekeeping contributions, recognizing that female peacekeepers can be more effective at engaging with local women and addressing gender-based violence.',
+    weight: '10 percent of the security component'
+  },
+  'Sea Lanes Protection': {
+    subtitle: 'Naval contributions to protecting international shipping',
+    description: 'This indicator measures contributions to protecting international sea lanes, which are vital for global trade and particularly important for developing countries dependent on maritime commerce.',
+    weight: '20 percent of the security component'
+  },
+  'Arms Trade': {
+    subtitle: 'Volume and destination of arms exports',
+    description: 'This indicator assesses the volume of arms exports and their destinations, penalizing sales to poorer, less democratic, and more militaristic states that are more likely to use them in conflict.',
+    weight: '25 percent of the security component'
+  },
+  'International Security Conventions': {
+    subtitle: 'Participation in international security treaties',
+    description: 'This indicator evaluates ratification of international security treaties including conventions on anti-personnel mines, cluster munitions, and the Arms Trade Treaty.',
+    weight: '15 percent of the security component'
+  },
+  // Technology
+  'Government Support': {
+    subtitle: 'Direct government funding for research and development',
+    description: 'This indicator measures government budget allocations for research and development as a percentage of GNI, reflecting investment in technology creation that can benefit developing countries.',
+    weight: '20 percent of the technology component'
+  },
+  'Tax Incentives': {
+    subtitle: 'Tax incentives for private sector R&D investment',
+    description: 'This indicator measures tax incentives provided to stimulate private sector research and development, which contributes to global innovation and technology creation.',
+    weight: '15 percent of the technology component'
+  },
+  'Foreign Students': {
+    subtitle: 'Students from developing countries welcomed for study',
+    description: 'This indicator measures the number of students from developing countries welcomed for higher education, enabling knowledge transfer and skill development.',
+    weight: '20 percent of the technology component'
+  },
+  'Female Students': {
+    subtitle: 'Gender balance among foreign students from developing countries',
+    description: 'This indicator assesses the proportion of foreign students from developing countries who are female, addressing gender disparities in access to educational opportunities.',
+    weight: '10 percent of the technology component'
+  },
+  'Research Collaboration': {
+    subtitle: 'Academic collaboration with researchers in developing countries',
+    description: 'This indicator measures the extent of research collaboration between a country\'s researchers and those in developing countries, facilitating knowledge sharing and capacity building.',
+    weight: '15 percent of the technology component'
+  },
+  'Intellectual Property Rights': {
+    subtitle: 'IPR provisions in trade agreements affecting technology access',
+    description: 'This indicator assesses the stringency of intellectual property rights provisions in trade agreements, which can restrict developing countries\' access to vital technologies and medicines.',
+    weight: '20 percent of the technology component'
+  }
+};
+
 // Helper to create machine-readable ID from name
 function toMachineId(name: string): string {
   return name
@@ -395,13 +617,22 @@ function main() {
   });
 
   // Build subcomponents array
-  const subcomponents = Object.entries(SUBCOMPONENT_TO_COMPONENT).map(([name, componentId]) => ({
-    id: toMachineId(name),
-    name: name.trim(),
-    componentId,
-    description: `Placeholder description for ${name}.`,
-    indicators: [] // Would need indicator mapping
-  }));
+  const subcomponents = Object.entries(SUBCOMPONENT_TO_COMPONENT).map(([name, componentId]) => {
+    const descData = SUBCOMPONENT_DESCRIPTIONS[name] || {
+      subtitle: `Measures ${name.toLowerCase()}`,
+      description: `Placeholder description for ${name}.`,
+      weight: 'Weight information not available'
+    };
+    return {
+      id: toMachineId(name),
+      name: name.trim(),
+      componentId,
+      subtitle: descData.subtitle,
+      description: descData.description,
+      weight: descData.weight,
+      indicators: [] // Would need indicator mapping
+    };
+  });
 
   // Build indicators array (from column headers in indicators.csv)
   const indicatorColumns = Object.keys(indicatorsData[0] || {})
