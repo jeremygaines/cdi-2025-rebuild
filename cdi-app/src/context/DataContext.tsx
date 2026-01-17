@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { CDIData, Country, Component, Subcomponent, Indicator, CountryGroup } from '@/types';
+import type { CDIData, Country, Component, Subcomponent, Indicator, CountryGroup, CountryReport } from '@/types';
 
 interface DataContextType {
   data: CDIData | null;
@@ -8,6 +8,7 @@ interface DataContextType {
   subcomponents: Subcomponent[];
   indicators: Indicator[];
   countryGroups: CountryGroup[];
+  countryReports: Record<string, CountryReport>;
   year: number;
   loading: boolean;
   error: Error | null;
@@ -15,12 +16,14 @@ interface DataContextType {
   getComponent: (id: string) => Component | undefined;
   getSubcomponent: (id: string) => Subcomponent | undefined;
   getIndicator: (id: string) => Indicator | undefined;
+  getCountryReport: (id: string) => CountryReport | undefined;
 }
 
 const DataContext = createContext<DataContextType | null>(null);
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<CDIData | null>(null);
+  const [countryReports, setCountryReports] = useState<Record<string, CountryReport>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -40,6 +43,14 @@ export function DataProvider({ children }: { children: ReactNode }) {
           throw new Error('Failed to load country groups');
         }
         const groupsData = await groupsResponse.json();
+
+        // Load country reports
+        const reportsResponse = await fetch('/data/country-reports.json');
+        if (!reportsResponse.ok) {
+          throw new Error('Failed to load country reports');
+        }
+        const reportsData = await reportsResponse.json();
+        setCountryReports(reportsData);
 
         // Transform country groups to match our data structure
         const countryGroups: CountryGroup[] = [
@@ -70,6 +81,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const getComponent = (id: string) => data?.components.find(c => c.id === id);
   const getSubcomponent = (id: string) => data?.subcomponents.find(s => s.id === id);
   const getIndicator = (id: string) => data?.indicators.find(i => i.id === id);
+  const getCountryReport = (id: string) => countryReports[id];
 
   const value: DataContextType = {
     data,
@@ -78,6 +90,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     subcomponents: data?.subcomponents ?? [],
     indicators: data?.indicators ?? [],
     countryGroups: data?.countryGroups ?? [],
+    countryReports,
     year: data?.year ?? 2025,
     loading,
     error,
@@ -85,6 +98,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     getComponent,
     getSubcomponent,
     getIndicator,
+    getCountryReport,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

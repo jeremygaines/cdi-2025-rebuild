@@ -48,7 +48,7 @@ function getOrdinalSuffix(n: number): string {
 
 export function CountryReportPage() {
   const { countryId } = useParams<{ countryId: string }>();
-  const { loading, error, getCountry, countries, components, subcomponents, indicators } = useData();
+  const { loading, error, getCountry, getCountryReport, countries, components, subcomponents, indicators } = useData();
   const { showAdjusted } = useFilters();
   const [expandedComponents, setExpandedComponents] = useState<Set<string>>(new Set(components.map(c => c.id)));
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
@@ -70,10 +70,9 @@ export function CountryReportPage() {
 
   const rank = showAdjusted ? country.rankAdjusted : country.rank;
 
-  // Placeholder overview text
-  const overviewText = `${country.name} ranks ${rank}${getOrdinalSuffix(rank)} in the Commitment to Development Index. It ranks in the top half on all components except for technology, and scores particularly well on both health and security, where it ranks 1st place.
-
-When we assess ${country.name}'s score relative to expectations based on its income level, its rank ${country.rankAdjusted < country.rank ? 'increases' : country.rankAdjusted > country.rank ? 'falls' : 'stays the same'}${country.rankAdjusted !== country.rank ? ` to ${country.rankAdjusted}${getOrdinalSuffix(country.rankAdjusted)}` : ''}. Full income-adjusted results are at the end of the country report.`;
+  // Get country report data
+  const countryReport = getCountryReport(country.id);
+  const overviewHtml = countryReport?.overall || `<p>${country.name} ranks ${rank}${getOrdinalSuffix(rank)} in the Commitment to Development Index.</p>`;
 
   const toggleComponent = (componentId: string) => {
     setExpandedComponents(prev => {
@@ -261,13 +260,10 @@ When we assess ${country.name}'s score relative to expectations based on its inc
       {/* Overall panel */}
       <div className="bg-[rgb(245,243,238)] py-8">
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="text-left space-y-4">
-            {overviewText.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="text-gray-700 leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <div
+            className="text-left space-y-4 text-gray-700 leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: overviewHtml }}
+          />
 
           <button
             onClick={expandedComponents.size > 0 ? collapseAll : expandAll}
@@ -288,6 +284,7 @@ When we assess ${country.name}'s score relative to expectations based on its inc
           title="Development Finance"
           components={financeComponents}
           country={country}
+          countryReport={countryReport}
           showAdjusted={showAdjusted}
           expandedComponents={expandedComponents}
           toggleComponent={toggleComponent}
@@ -302,6 +299,7 @@ When we assess ${country.name}'s score relative to expectations based on its inc
           title="Exchange"
           components={exchangeComponents}
           country={country}
+          countryReport={countryReport}
           showAdjusted={showAdjusted}
           expandedComponents={expandedComponents}
           toggleComponent={toggleComponent}
@@ -316,6 +314,7 @@ When we assess ${country.name}'s score relative to expectations based on its inc
           title="Global Public Goods"
           components={globalComponents}
           country={country}
+          countryReport={countryReport}
           showAdjusted={showAdjusted}
           expandedComponents={expandedComponents}
           toggleComponent={toggleComponent}
@@ -360,6 +359,7 @@ interface ComponentGroupSectionProps {
   title: string;
   components: ReturnType<typeof useData>['components'];
   country: NonNullable<ReturnType<ReturnType<typeof useData>['getCountry']>>;
+  countryReport: ReturnType<ReturnType<typeof useData>['getCountryReport']>;
   showAdjusted: boolean;
   expandedComponents: Set<string>;
   toggleComponent: (id: string) => void;
@@ -373,6 +373,7 @@ function ComponentGroupSection({
   title,
   components,
   country,
+  countryReport,
   showAdjusted,
   expandedComponents,
   toggleComponent,
@@ -401,8 +402,9 @@ function ComponentGroupSection({
             const isExpanded = expandedComponents.has(component.id);
             const compSubcomponents = getComponentSubcomponents(component.id);
 
-            // Placeholder component description
-            const componentDescription = `${country.name} ranks ${displayRank}${getOrdinalSuffix(displayRank ?? 0)} on ${component.name.toLowerCase()}. This component measures various aspects of the country's policies and their impact on development.`;
+            // Get component description from country report
+            const componentHtml = countryReport?.components[component.id] ||
+              `<p>${country.name} ranks ${displayRank}${getOrdinalSuffix(displayRank ?? 0)} on ${component.name.toLowerCase()}.</p>`;
 
             return (
               <div
@@ -445,7 +447,10 @@ function ComponentGroupSection({
 
                   {/* Component description and subcomponents */}
                   <div className="flex-1">
-                    <p className="text-gray-700 mb-4">{componentDescription}</p>
+                    <div
+                      className="text-gray-700 mb-4 space-y-4"
+                      dangerouslySetInnerHTML={{ __html: componentHtml }}
+                    />
 
                     <button
                       onClick={() => toggleComponent(component.id)}

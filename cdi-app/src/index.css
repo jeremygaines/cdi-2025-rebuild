@@ -61,3 +61,37 @@ input:focus-visible,
 select:focus-visible {
   @apply outline-2 outline-offset-2 outline-cdi-primary;
 }
+
+/* Country report content styles */
+.text-gray-700 a,
+.space-y-4 a {
+  @apply text-cdi-primary underline hover:text-cdi-dark;
+}
+
+.space-y-4 p {
+  @apply mb-4;
+}
+
+.space-y-4 em {
+  @apply italic;
+}
+
+.space-y-4 strong {
+  @apply font-bold;
+}
+
+.space-y-4 sub,
+.space-y-4 sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.space-y-4 sub {
+  bottom: -0.25em;
+}
+
+.space-y-4 sup {
+  top: -0.5em;
+}

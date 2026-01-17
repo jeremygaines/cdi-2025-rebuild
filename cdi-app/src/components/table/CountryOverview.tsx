@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useData } from '@/context/DataContext';
 import type { Country } from '@/types';
 
 interface CountryOverviewProps {
@@ -7,10 +8,11 @@ interface CountryOverviewProps {
 }
 
 export function CountryOverview({ country, onClose }: CountryOverviewProps) {
-  // Placeholder text - will be replaced with real data later
-  const overviewText = `${country.name} ranks 4th in the Commitment to Development Index. It ranks in the top half on all components except for technology, and scores particularly well on both health and security, where it ranks 1st place.
+  const { getCountryReport } = useData();
 
-When we assess ${country.name} relative to expectations based on its income level, its rank falls two places, to 6th. Full income-adjusted results are at the end of the country report.`;
+  // Get country report data
+  const countryReport = getCountryReport(country.id);
+  const overviewHtml = countryReport?.overall || `<p>${country.name} ranks ${country.rank}th in the Commitment to Development Index.</p>`;
 
   const shareUrl = typeof window !== 'undefined' ? window.location.origin + `/country/${country.id}` : '';
   const shareText = `Check out ${country.name}'s performance in the Commitment to Development Index`;
@@ -51,11 +53,10 @@ When we assess ${country.name} relative to expectations based on its income leve
             </button>
           </div>
 
-          <div className="text-gray-700 leading-relaxed space-y-3 mb-6">
-            {overviewText.split('\n\n').map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-          </div>
+          <div
+            className="text-gray-700 leading-relaxed space-y-4 mb-6"
+            dangerouslySetInnerHTML={{ __html: overviewHtml }}
+          />
 
           <div className="flex items-center gap-4">
             <Link

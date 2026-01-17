@@ -68,6 +68,13 @@ export interface CountryGroup {
   countryIds: string[];
 }
 
+export interface CountryReport {
+  countryCode: string;
+  countryName: string;
+  overall: string; // HTML content
+  components: Record<string, string>; // Component ID to HTML content
+}
+
 // Component IDs used throughout the app
 export type ComponentId =
   | 'development-finance'
