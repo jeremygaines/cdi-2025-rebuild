@@ -13035,7 +13035,7 @@
       "shortName": "Development Finance",
       "color": "rgb(146, 101, 171)",
       "group": "finance",
-      "description": "Measures the quantity and quality of aid and other development finance.",
+      "description": "Development finance is likely the first policy area that comes to mind when considering how countries help to promote development beyond their borders. It remains an important source of assistance for many developing countries. The OECD finds that aid has been the largest and most reliable source of finance for the least developed fragile states over the past decade. In 1969, the Pearson Commission on International Development proposed that rich countries should spend 0.7 percent of their gross national product (GNP) on foreign aid (later defined as \"official development assistance,\" or ODA, by the OECD's Development Assistance Committee). This 0.7 percent target was adopted by the UN in 1970, and in 1993, gross national income (GNI) replaced GNP as the measure. More than 50 years after it was set, only a handful of countries are meeting this target.\n\nQuantity is not all that matters in development finance. How it is provided can have a significant impact on development results, as acknowledged by donors in a series of High Level Fora on Aid Effectiveness. These fora contributed to establishing key principles for improving the effectiveness of development cooperation. Today, ownership, focus on results, inclusive development partnerships, and transparency and mutual accountability are standard criteria which donors and recipients use to implement development assistance interventions. These criteria were agreed upon by 160 countries, including new and emerging cooperation providers.",
       "subcomponents": [
         "development-finance-quality",
         "development-finance-quantity"
@@ -13047,7 +13047,7 @@
       "shortName": "Investment",
       "color": "rgb(68, 195, 255)",
       "group": "exchange",
-      "description": "Evaluates policies affecting investment in developing countries.",
+      "description": "Foreign direct investment is the largest source of external financing for many developing countries. Foreign investment can contribute to the development of infrastructure, housing, transport, energy supply, and many other areas. Major economies' policies can support or impede private investment beyond their borders and impact the wellbeing of many developing country citizens. The quantity of investment is not the only consideration—it is important that measures are in place to safeguard the environment and the general welfare of those affected by the investment.\n\nDomestic regulation also impacts international financial flows and their potential to facilitate crime, corruption, and tax evasion, which can inhibit development and undermine confidence. States have legal duties to screen, trace, freeze, seize, and return illicit wealth, and to detect, prevent, and punish foreign bribery. This supports the integrity of investment, public accountability, and revenue raising in developing countries.",
       "subcomponents": [
         "financial-secrecy",
         "business-human-rights",
@@ -13063,7 +13063,7 @@
       "shortName": "Migration",
       "color": "rgb(0, 129, 214)",
       "group": "exchange",
-      "description": "Assesses policies on immigration and integration of migrants.",
+      "description": "In 2016, all 193 UN member states agreed that protecting refugees is a responsibility which much be borne more equitably. In spite of this, hosting of the world's currently 35-million large refugee population has remained widely uneven. But in addition to the humanitarian imperative to provide shelter for those forced to flee their homes, international worker mobility is also a source of economic opportunities, both for host countries as well as countries of origin. Migration can broaden people's opportunities to earn higher incomes, access knowledge, gain valuable skills, and even to increase the knowledge base in their home countries. What's more, in 2022, migrant workers from low- and middle-income countries are estimated to have collectively sent remittances worth over $630 billion, helping to increase incomes and smooth consumption in their countries of origin. This flow exceeds official aid by a factor of three and is similar to levels of FDI.\n\nCountries differ widely on their policies for accepting and integrating migrants and refugees. The stronger the opportunities for migrants to integrate into their host societies, and the better their rights are protected, the more they can enjoy the opportunities available to them and contribute to the societies in which they live.",
       "subcomponents": [
         "migrant-inflow",
         "female-immigrants",
@@ -13078,7 +13078,7 @@
       "shortName": "Trade",
       "color": "rgb(29, 74, 184)",
       "group": "exchange",
-      "description": "Examines trade policies and their impact on developing countries.",
+      "description": "The policies of major economics have a significant impact on the trading prospects of developing countries. Trade is an important pathway to prosperity as it provides opportunities to develop dynamic export sectors, tap into global supply chains, attract investment, create jobs, and reduce poverty. In 2022, trade constituted 50 percent of the GDP of least developed countries. Yet many goods for which developing countries have a relative production advantage, such as agricultural goods or textiles, still face tariffs and other trade barriers. Also, trade in services is becoming increasingly important for development, but administrative barriers remain which restrict trade flows in services.",
       "subcomponents": [
         "tariff-average",
         "tariff-peaks",
@@ -13093,7 +13093,7 @@
       "shortName": "Environment",
       "color": "rgb(255, 193, 39)",
       "group": "global",
-      "description": "Measures environmental policies and climate change mitigation efforts.",
+      "description": "A healthy environment and global climate are global public goods, benefitting all but with few incentives to protect them.\n\nWhile wealthy countries bear the most responsibility for climate change, its impacts will be felt disproportionately in poor countries. The World Bank estimates that climate change could push an additional 100 million people into extreme poverty by 2030. Limiting greenhouse gas emissions, in production and consumption, is therefore crucial in promoting development. The removal of fossil fuel production and consumption subsidies, and the introduction of carbon pricing, could play a major role in such a transition.\n\nMany of the world's poor depend heavily on their surrounding environment to meet their daily needs. Countries can help safeguard biodiversity by committing to international conventions. Global fish stocks are also overexploited. Fishing subsidies provided by major economies result in overfishing, which negatively impacts biodiversity and the livelihoods of communities dependent on these resources.",
       "subcomponents": [
         "greenhouse-gas-emissions",
         "ndc-ambition",
@@ -13110,7 +13110,7 @@
       "shortName": "Health",
       "color": "rgb(255, 157, 58)",
       "group": "global",
-      "description": "Evaluates contributions to global health.",
+      "description": "The global COVID-19 pandemic brought into sharp focus the transboundary nature of disease outbreaks, the importance of spillovers of domestic policy decisions, and the need for international collaboration. While the international dimension of health is particularly visible during global crises such as COVID-19, \"peacetime\" policies also matter for development. For example, the risks posed by growing antimicrobial resistance, an \"endemic\" problem, also threaten human health beyond domestic borders.",
       "subcomponents": [
         "antimicrobial-resistance",
         "vaccination-coverage",
@@ -13126,7 +13126,7 @@
       "shortName": "Security",
       "color": "rgb(241, 100, 0)",
       "group": "global",
-      "description": "Assesses contributions to international peace and security.",
+      "description": "Security and development are closely interlinked. War and political violence devastate government infrastructure and public resources, and harm civilians and their homes and livelihoods. War decimates public capacities and political institutions and devastates citizens' lives. This causal link also works in reverse: poverty and institutional weakness make it easier for both challengers and incumbents to gain support for political violence and war. It is unsurprising that fragile and conflict-afflicted states are the most behind on the SDGs.\n\nWe measure a country's commitment to global security by focusing on three subcomponents: contributions to international peacekeeping efforts, participation in international security treaties, and avoiding damaging arms sales.",
       "subcomponents": [
         "peacekeeping-contributions",
         "female-peacekeepers",
@@ -13141,7 +13141,7 @@
       "shortName": "Technology",
       "color": "rgb(204, 85, 0)",
       "group": "global",
-      "description": "Measures policies supporting technology transfer and innovation.",
+      "description": "Technology is a critical factor in economic and human development, and not just for the poor. It can reduce the price of goods and services, making them more accessible to all. Advances in medicines, sustainable energy, and agricultural productivity raise the quality of life worldwide. The largest global economies can play a major role in both new knowledge creation and its diffusion worldwide.\n\nGovernments can contribute to global innovation and technological development through direct funding or through incentives to stimulate the private sector. They can encourage technology diffusion through international academic collaboration, or by opening the doors to foreign students to allow them to gain new knowledge and skills, and address gender inequalities by admitting more female students. But governments can also impede diffusion through excessively restrictive intellectual property right (IPR) terms within their foreign trade and investment agreements, which limit developing countries' access to vital technologies.",
       "subcomponents": [
         "government-support",
         "tax-incentives",
@@ -13461,8 +13461,8 @@
     {
       "id": "tied-status",
       "name": "Tied Status",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Tied Status.",
       "lowerIsBetter": false
@@ -13470,8 +13470,8 @@
     {
       "id": "transparency",
       "name": "Transparency",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Transparency.",
       "lowerIsBetter": false
@@ -13479,8 +13479,8 @@
     {
       "id": "multilateral-support",
       "name": "Multilateral Support",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Multilateral Support.",
       "lowerIsBetter": false
@@ -13488,8 +13488,8 @@
     {
       "id": "country-ownership",
       "name": "Country Ownership",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Country Ownership.",
       "lowerIsBetter": false
@@ -13497,8 +13497,8 @@
     {
       "id": "poverty-focus",
       "name": "Poverty Focus",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Poverty Focus.",
       "lowerIsBetter": false
@@ -13506,8 +13506,8 @@
     {
       "id": "fragility-focus",
       "name": "Fragility Focus",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "development-finance-quality",
+      "componentId": "development-finance",
       "unit": "score",
       "description": "Placeholder description for Fragility Focus.",
       "lowerIsBetter": false
@@ -13515,8 +13515,8 @@
     {
       "id": "banking-secrecy",
       "name": "Banking Secrecy",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Banking Secrecy.",
       "lowerIsBetter": false
@@ -13524,8 +13524,8 @@
     {
       "id": "country-by-country-reporting",
       "name": "Country by Country Reporting",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Country by Country Reporting.",
       "lowerIsBetter": false
@@ -13533,8 +13533,8 @@
     {
       "id": "public-statistics",
       "name": "Public Statistics",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Public Statistics.",
       "lowerIsBetter": false
@@ -13542,8 +13542,8 @@
     {
       "id": "anti-money-laundering",
       "name": "Anti-Money Laundering",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Anti-Money Laundering.",
       "lowerIsBetter": false
@@ -13551,8 +13551,8 @@
     {
       "id": "automatic-exchange-of-information",
       "name": "Automatic Exchange of Information",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Automatic Exchange of Information.",
       "lowerIsBetter": false
@@ -13560,8 +13560,8 @@
     {
       "id": "bilateral-treaties",
       "name": "Bilateral Treaties",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Bilateral Treaties.",
       "lowerIsBetter": false
@@ -13569,8 +13569,8 @@
     {
       "id": "international-legal-cooperation",
       "name": "International Legal Cooperation",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for International Legal Cooperation.",
       "lowerIsBetter": false
@@ -13578,8 +13578,8 @@
     {
       "id": "beneficial-ownership",
       "name": "Beneficial Ownership",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "financial-secrecy",
+      "componentId": "investment",
       "unit": "score",
       "description": "Placeholder description for Beneficial Ownership.",
       "lowerIsBetter": false
@@ -13731,8 +13731,8 @@
     {
       "id": "emissions-excluding-lulucf",
       "name": "Emissions (excluding LULUCF)",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "greenhouse-gas-emissions",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Emissions (excluding LULUCF).",
       "lowerIsBetter": false
@@ -13740,8 +13740,8 @@
     {
       "id": "ndc-ambition",
       "name": "NDC Ambition",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "greenhouse-gas-emissions",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for NDC Ambition.",
       "lowerIsBetter": false
@@ -13749,8 +13749,8 @@
     {
       "id": "emissions-from-lulucf",
       "name": "Emissions from LULUCF",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "greenhouse-gas-emissions",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Emissions from LULUCF.",
       "lowerIsBetter": false
@@ -13758,8 +13758,8 @@
     {
       "id": "emissions-from-trade",
       "name": "Emissions from Trade",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "greenhouse-gas-emissions",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Emissions from Trade.",
       "lowerIsBetter": false
@@ -13767,8 +13767,8 @@
     {
       "id": "oil-production",
       "name": "Oil Production",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-production",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Oil Production.",
       "lowerIsBetter": false
@@ -13776,8 +13776,8 @@
     {
       "id": "gas-production",
       "name": "Gas Production",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-production",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Gas Production.",
       "lowerIsBetter": false
@@ -13785,8 +13785,8 @@
     {
       "id": "coal-production",
       "name": "Coal Production",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-production",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Coal Production.",
       "lowerIsBetter": false
@@ -13794,8 +13794,8 @@
     {
       "id": "support-to-oil",
       "name": "Support to Oil",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-support",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Support to Oil.",
       "lowerIsBetter": false
@@ -13803,8 +13803,8 @@
     {
       "id": "support-to-gas",
       "name": "Support to Gas",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-support",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Support to Gas.",
       "lowerIsBetter": false
@@ -13812,8 +13812,8 @@
     {
       "id": "support-to-coal",
       "name": "Support to Coal",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-support",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Support to Coal.",
       "lowerIsBetter": false
@@ -13821,8 +13821,8 @@
     {
       "id": "support-to-electricity",
       "name": "Support to Electricity",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "fossil-fuel-support",
+      "componentId": "environment",
       "unit": "score",
       "description": "Placeholder description for Support to Electricity.",
       "lowerIsBetter": false
@@ -13857,8 +13857,8 @@
     {
       "id": "antibiotic-consumption-in-humans",
       "name": "Antibiotic Consumption in Humans",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "antimicrobial-resistance",
+      "componentId": "health",
       "unit": "score",
       "description": "Placeholder description for Antibiotic Consumption in Humans.",
       "lowerIsBetter": false
@@ -13866,8 +13866,8 @@
     {
       "id": "antibiotic-consumption-in-livestock-animals",
       "name": "Antibiotic Consumption in Livestock Animals",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "antimicrobial-resistance",
+      "componentId": "health",
       "unit": "score",
       "description": "Placeholder description for Antibiotic Consumption in Livestock Animals.",
       "lowerIsBetter": false
@@ -13875,8 +13875,8 @@
     {
       "id": "amr-governance",
       "name": "AMR Governance",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "antimicrobial-resistance",
+      "componentId": "health",
       "unit": "score",
       "description": "Placeholder description for AMR Governance.",
       "lowerIsBetter": false
@@ -13884,8 +13884,8 @@
     {
       "id": "measles-vaccine-mcv2-coverage",
       "name": "Measles Vaccine (MCV2) Coverage",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "vaccination-coverage",
+      "componentId": "health",
       "unit": "score",
       "description": "Placeholder description for Measles Vaccine (MCV2) Coverage.",
       "lowerIsBetter": false
@@ -13893,8 +13893,8 @@
     {
       "id": "diphtheria-tetanus-toxoid-and-pertussis-vaccine-dtp3-coverage",
       "name": "Diphtheria, Tetanus Toxoid, and Pertussis Vaccine (DTP3) Coverage",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "vaccination-coverage",
+      "componentId": "health",
       "unit": "score",
       "description": "Placeholder description for Diphtheria, Tetanus Toxoid, and Pertussis Vaccine (DTP3) Coverage.",
       "lowerIsBetter": false
@@ -13992,8 +13992,8 @@
     {
       "id": "arms-trade-volume",
       "name": "Arms Trade Volume",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "arms-trade",
+      "componentId": "security",
       "unit": "score",
       "description": "Placeholder description for Arms Trade Volume.",
       "lowerIsBetter": false
@@ -14001,8 +14001,8 @@
     {
       "id": "conflict-potential-of-arms-exports",
       "name": "Conflict Potential of Arms Exports",
-      "subcomponentId": "",
-      "componentId": "",
+      "subcomponentId": "arms-trade",
+      "componentId": "security",
       "unit": "score",
       "description": "Placeholder description for Conflict Potential of Arms Exports.",
       "lowerIsBetter": false

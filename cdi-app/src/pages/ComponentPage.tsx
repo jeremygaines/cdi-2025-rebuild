@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
-import type { Country, Component, Subcomponent } from '@/types';
+import type { Country, Component, Subcomponent, Indicator } from '@/types';
 
 // Component colors
 const COMPONENT_COLORS: Record<string, string> = {
@@ -48,7 +48,7 @@ const ROW_BASE_COLOR = 'rgb(153, 129, 92)';
 
 export function ComponentPage() {
   const { componentId } = useParams<{ componentId: string }>();
-  const { loading, error, getComponent, components, countries, subcomponents } = useData();
+  const { loading, error, getComponent, components, countries, subcomponents, indicators } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -73,6 +73,12 @@ export function ComponentPage() {
     if (!component) return [];
     return subcomponents.filter(s => s.componentId === component.id);
   }, [subcomponents, component]);
+
+  // Get indicators for this component, grouped by subcomponent
+  const componentIndicators = useMemo(() => {
+    if (!component) return [];
+    return indicators.filter(i => i.componentId === component.id);
+  }, [indicators, component]);
 
   if (loading) return <Loading />;
   if (error) return <div className="p-8 text-red-600">Error: {error.message}</div>;
@@ -139,9 +145,17 @@ export function ComponentPage() {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left column - Description */}
             <div className="lg:w-1/2">
-              <p className="text-gray-700 leading-relaxed">
-                {component.description || `${component.name} is one of the eight components that make up the Commitment to Development Index. This component measures how countries' policies in this area affect developing nations.`}
-              </p>
+              {component.description && (
+                <div
+                  className="text-gray-700 leading-relaxed space-y-4"
+                  dangerouslySetInnerHTML={{
+                    __html: component.description
+                      .split('\n\n')
+                      .map(para => `<p>${para}</p>`)
+                      .join('')
+                  }}
+                />
+              )}
             </div>
 
             {/* Right column - Subcomponents list */}
@@ -285,6 +299,7 @@ export function ComponentPage() {
             componentColor={componentColor}
             headerColor={headerColor}
             subcomponents={componentSubcomponents}
+            indicators={componentIndicators}
             countries={countries}
             showAdjusted={showAdjusted}
             prevComponent={prevComponent}
@@ -338,6 +353,7 @@ interface DetailsDrawerProps {
   componentColor: string;
   headerColor: string;
   subcomponents: Subcomponent[];
+  indicators: Indicator[];
   countries: Country[];
   showAdjusted: boolean;
   prevComponent: Component | null;
@@ -351,6 +367,7 @@ function DetailsDrawer({
   componentColor,
   headerColor,
   subcomponents,
+  indicators,
   countries,
   showAdjusted,
   prevComponent,
@@ -370,61 +387,64 @@ function DetailsDrawer({
     >
       {/* Header */}
       <div className="sticky top-0 bg-white z-10 border-b">
-        <div className="flex items-start p-4 gap-4">
-          {/* Country Info - Left */}
-          <div className="flex-1">
-            <h2 className="text-3xl font-light text-gray-800">{country.name}</h2>
-            <div className="text-gray-400 text-sm mt-1">
-              Overall Rank: {overallRank}{getOrdinalSuffix(overallRank)} / Overall Score: {overallScore.toFixed(4)}%
+        {/* Beige bar with country info */}
+        <div className="relative" style={{ backgroundColor: '#f0ece7' }}>
+          <div className="flex items-center justify-between px-6 py-4">
+            {/* Country Info - Left */}
+            <div className="flex-1 pr-4">
+              <h2 className="text-3xl font-light text-gray-800">{country.name}</h2>
+              <div className="text-gray-400 text-sm mt-1">
+                Overall Rank: {overallRank}{getOrdinalSuffix(overallRank)} / Overall Score: {overallScore.toFixed(4)}%
+              </div>
             </div>
-          </div>
 
-          {/* Component Score Card - Center */}
-          <div className="flex-shrink-0">
-            <div
-              className="text-white text-center py-1.5 px-6 text-sm font-medium"
-              style={{ backgroundColor: headerColor }}
-            >
-              {component.name}
-            </div>
-            <div
-              className="text-white px-4 py-3"
-              style={{ backgroundColor: componentColor }}
-            >
-              <div className="flex gap-6">
-                <div className="text-center">
-                  <div className="text-xs opacity-70">Rank</div>
-                  <div className="text-3xl font-bold">
-                    {displayRank}
-                    <sup className="text-sm ml-0.5">{getOrdinalSuffix(displayRank ?? 0)}</sup>
+            {/* Component Score Card - Overlapping on right */}
+            <div className="flex-shrink-0 shadow-lg">
+              <div
+                className="text-white text-center py-1.5 px-6 text-sm font-medium"
+                style={{ backgroundColor: headerColor }}
+              >
+                {component.name}
+              </div>
+              <div
+                className="text-white px-6 py-4"
+                style={{ backgroundColor: componentColor }}
+              >
+                <div className="flex gap-8">
+                  <div className="text-center">
+                    <div className="text-xs opacity-70">Rank</div>
+                    <div className="text-4xl font-bold">
+                      {displayRank}
+                      <sup className="text-sm ml-0.5">{getOrdinalSuffix(displayRank ?? 0)}</sup>
+                    </div>
+                    <div className="text-xs opacity-70">of {countries.length}</div>
                   </div>
-                  <div className="text-xs opacity-70">of {countries.length}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-xs opacity-70">Score</div>
-                  <div className="text-3xl font-bold">{Math.round(displayScore ?? 0)}%</div>
+                  <div className="text-center">
+                    <div className="text-xs opacity-70">Score</div>
+                    <div className="text-4xl font-bold">{Math.round(displayScore ?? 0)}%</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Actions - Right */}
-          <div className="flex items-center gap-3">
-            <Link
-              to={`/country/${country.id}`}
-              className="border border-cdi-primary text-cdi-primary px-4 py-2 text-sm uppercase tracking-wide hover:bg-cdi-primary hover:text-white transition-colors"
-            >
-              View Country Report
-            </Link>
-            <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </button>
-          </div>
+        {/* Actions bar - below beige section */}
+        <div className="flex items-center justify-end gap-3 px-6 py-3 bg-white">
+          <Link
+            to={`/country/${country.id}`}
+            className="border border-cdi-primary text-cdi-primary px-4 py-2 text-sm uppercase tracking-wide hover:bg-cdi-primary hover:text-white transition-colors"
+          >
+            View Country Report
+          </Link>
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-gray-600"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </button>
         </div>
       </div>
 
@@ -434,14 +454,18 @@ function DetailsDrawer({
           {component.name}
         </h3>
 
-        <div className="text-gray-600 mb-8 leading-relaxed space-y-4">
-          <p>
-            {country.name} ranks {displayRank}{getOrdinalSuffix(displayRank ?? 0)} in the {component.name.toLowerCase()} component
-            {showAdjusted ? ', using income-adjusted scores' : ''}.
-          </p>
-          <p>
-            {component.description || `The ${component.name.toLowerCase()} component measures how ${country.name}'s policies in this area contribute to global development. This assessment considers multiple factors including policy effectiveness, resource allocation, and international cooperation.`}
-          </p>
+        <div className="text-gray-600 mb-8 leading-relaxed">
+          {component.description && (
+            <div
+              className="space-y-4"
+              dangerouslySetInnerHTML={{
+                __html: component.description
+                  .split('\n\n')
+                  .map(para => `<p>${para}</p>`)
+                  .join('')
+              }}
+            />
+          )}
         </div>
 
         {/* Subcomponents with bars */}
@@ -451,6 +475,9 @@ function DetailsDrawer({
           const baseValue = Math.abs(hashCode % 100);
           const value = baseValue + (Math.abs((hashCode >> 8) % 20) - 10);
           const median = 45 + Math.abs((hashCode >> 4) % 20);
+
+          // Get indicators that belong to this subcomponent
+          const subcompIndicators = indicators.filter(ind => ind.subcomponentId === subcomp.id);
 
           return (
             <div key={subcomp.id} className="mb-8">
@@ -469,6 +496,34 @@ function DetailsDrawer({
                 max={100}
                 median={median}
               />
+
+              {/* Indicators - indented under the subcomponent */}
+              {subcompIndicators.length > 0 && (
+                <div className="ml-6 mt-4 pl-4 border-l-2 border-gray-200">
+                  {subcompIndicators.map(indicator => {
+                    // Generate consistent values for each indicator
+                    const indHashCode = indicator.id.split('').reduce((a, b) => ((a << 5) - a) + b.charCodeAt(0), 0);
+                    const indBaseValue = Math.abs(indHashCode % 100);
+                    const indValue = indBaseValue + (Math.abs((indHashCode >> 8) % 20) - 10);
+                    const indMedian = 45 + Math.abs((indHashCode >> 4) % 20);
+
+                    return (
+                      <div key={indicator.id} className="mb-4">
+                        <IndicatorBar
+                          name={indicator.name}
+                          unit={indicator.unit}
+                          color={componentColor}
+                          value={Math.max(0, Math.min(100, indValue))}
+                          min={0}
+                          max={100}
+                          median={indMedian}
+                          isIndented
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           );
         })}
@@ -532,9 +587,10 @@ interface IndicatorBarProps {
   min: number;
   max: number;
   median: number;
+  isIndented?: boolean;
 }
 
-function IndicatorBar({ name, unit, color, value, min, max, median }: IndicatorBarProps) {
+function IndicatorBar({ name, unit, color, value, min, max, median, isIndented = false }: IndicatorBarProps) {
   const range = max - min;
   const valuePercent = range > 0 ? ((value - min) / range) * 100 : 0;
   const medianPercent = range > 0 ? ((median - min) / range) * 100 : 50;
@@ -548,11 +604,22 @@ function IndicatorBar({ name, unit, color, value, min, max, median }: IndicatorB
     return n.toFixed(2);
   };
 
+  // Convert rgb to rgba for indented indicators (80% opacity)
+  const getBarColor = () => {
+    if (!isIndented) return color;
+    const match = color.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (match) {
+      return `rgba(${match[1]}, ${match[2]}, ${match[3]}, 0.8)`;
+    }
+    return color;
+  };
+  const barColor = getBarColor();
+
   return (
     <div>
       {/* Header row: name with ?, then unit */}
       <div className="flex items-center gap-2 mb-1">
-        <span className="text-sm text-gray-700">
+        <span className={isIndented ? "text-xs text-gray-600" : "text-sm text-gray-700"}>
           {name}
         </span>
         <span className="text-gray-400 text-[10px] rounded-full border border-gray-300 w-3.5 h-3.5 flex items-center justify-center cursor-help">?</span>
@@ -565,20 +632,20 @@ function IndicatorBar({ name, unit, color, value, min, max, median }: IndicatorB
 
       {/* Value displayed above bar on right */}
       <div className="flex justify-end mb-1">
-        <span className="text-xl font-semibold text-gray-700">
+        <span className={isIndented ? "text-lg font-semibold text-gray-600" : "text-xl font-semibold text-gray-700"}>
           {formatNumber(value)}
         </span>
       </div>
 
       {/* Progress bar */}
-      <div className="relative mb-6">
-        <div className="h-3 bg-gray-200 relative">
+      <div className={isIndented ? "relative mb-4" : "relative mb-6"}>
+        <div className={isIndented ? "h-2 bg-gray-200 relative" : "h-3 bg-gray-200 relative"}>
           {/* Value bar */}
           <div
             className="h-full"
             style={{
               width: `${Math.min(valuePercent, 100)}%`,
-              backgroundColor: color,
+              backgroundColor: barColor,
             }}
           />
           {/* Median marker - vertical line */}
@@ -594,7 +661,7 @@ function IndicatorBar({ name, unit, color, value, min, max, median }: IndicatorB
         </div>
 
         {/* Min/Max labels below bar */}
-        <div className="flex justify-between text-sm text-gray-500 mt-1">
+        <div className="flex justify-between text-xs text-gray-400 mt-1">
           <span>{formatNumber(min)}</span>
           <span>{formatNumber(max)}</span>
         </div>

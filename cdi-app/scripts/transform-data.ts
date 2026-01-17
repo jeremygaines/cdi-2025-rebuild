@@ -28,56 +28,56 @@ const COMPONENT_DEFINITIONS: Record<string, { name: string; shortName: string; c
     shortName: 'Development Finance',
     color: 'rgb(146, 101, 171)',  // purple #9265AB
     group: 'finance',
-    description: 'Measures the quantity and quality of aid and other development finance.'
+    description: `Development finance is likely the first policy area that comes to mind when considering how countries help to promote development beyond their borders. It remains an important source of assistance for many developing countries. The OECD finds that aid has been the largest and most reliable source of finance for the least developed fragile states over the past decade. In 1969, the Pearson Commission on International Development proposed that rich countries should spend 0.7 percent of their gross national product (GNP) on foreign aid (later defined as "official development assistance," or ODA, by the OECD's Development Assistance Committee). This 0.7 percent target was adopted by the UN in 1970, and in 1993, gross national income (GNI) replaced GNP as the measure. More than 50 years after it was set, only a handful of countries are meeting this target.\n\nQuantity is not all that matters in development finance. How it is provided can have a significant impact on development results, as acknowledged by donors in a series of High Level Fora on Aid Effectiveness. These fora contributed to establishing key principles for improving the effectiveness of development cooperation. Today, ownership, focus on results, inclusive development partnerships, and transparency and mutual accountability are standard criteria which donors and recipients use to implement development assistance interventions. These criteria were agreed upon by 160 countries, including new and emerging cooperation providers.`
   },
   'investment': {
     name: 'Investment',
     shortName: 'Investment',
     color: 'rgb(68, 195, 255)',   // light blue #44C3FF
     group: 'exchange',
-    description: 'Evaluates policies affecting investment in developing countries.'
+    description: `Foreign direct investment is the largest source of external financing for many developing countries. Foreign investment can contribute to the development of infrastructure, housing, transport, energy supply, and many other areas. Major economies' policies can support or impede private investment beyond their borders and impact the wellbeing of many developing country citizens. The quantity of investment is not the only consideration—it is important that measures are in place to safeguard the environment and the general welfare of those affected by the investment.\n\nDomestic regulation also impacts international financial flows and their potential to facilitate crime, corruption, and tax evasion, which can inhibit development and undermine confidence. States have legal duties to screen, trace, freeze, seize, and return illicit wealth, and to detect, prevent, and punish foreign bribery. This supports the integrity of investment, public accountability, and revenue raising in developing countries.`
   },
   'migration': {
     name: 'Migration',
     shortName: 'Migration',
     color: 'rgb(0, 129, 214)',    // blue #0081D6
     group: 'exchange',
-    description: 'Assesses policies on immigration and integration of migrants.'
+    description: `In 2016, all 193 UN member states agreed that protecting refugees is a responsibility which much be borne more equitably. In spite of this, hosting of the world's currently 35-million large refugee population has remained widely uneven. But in addition to the humanitarian imperative to provide shelter for those forced to flee their homes, international worker mobility is also a source of economic opportunities, both for host countries as well as countries of origin. Migration can broaden people's opportunities to earn higher incomes, access knowledge, gain valuable skills, and even to increase the knowledge base in their home countries. What's more, in 2022, migrant workers from low- and middle-income countries are estimated to have collectively sent remittances worth over $630 billion, helping to increase incomes and smooth consumption in their countries of origin. This flow exceeds official aid by a factor of three and is similar to levels of FDI.\n\nCountries differ widely on their policies for accepting and integrating migrants and refugees. The stronger the opportunities for migrants to integrate into their host societies, and the better their rights are protected, the more they can enjoy the opportunities available to them and contribute to the societies in which they live.`
   },
   'trade': {
     name: 'Trade',
     shortName: 'Trade',
     color: 'rgb(29, 74, 184)',    // navy #1D4AB8
     group: 'exchange',
-    description: 'Examines trade policies and their impact on developing countries.'
+    description: `The policies of major economics have a significant impact on the trading prospects of developing countries. Trade is an important pathway to prosperity as it provides opportunities to develop dynamic export sectors, tap into global supply chains, attract investment, create jobs, and reduce poverty. In 2022, trade constituted 50 percent of the GDP of least developed countries. Yet many goods for which developing countries have a relative production advantage, such as agricultural goods or textiles, still face tariffs and other trade barriers. Also, trade in services is becoming increasingly important for development, but administrative barriers remain which restrict trade flows in services.`
   },
   'environment': {
     name: 'Environment',
     shortName: 'Environment',
     color: 'rgb(255, 193, 39)',   // yellow/gold #FFC127
     group: 'global',
-    description: 'Measures environmental policies and climate change mitigation efforts.'
+    description: `A healthy environment and global climate are global public goods, benefitting all but with few incentives to protect them.\n\nWhile wealthy countries bear the most responsibility for climate change, its impacts will be felt disproportionately in poor countries. The World Bank estimates that climate change could push an additional 100 million people into extreme poverty by 2030. Limiting greenhouse gas emissions, in production and consumption, is therefore crucial in promoting development. The removal of fossil fuel production and consumption subsidies, and the introduction of carbon pricing, could play a major role in such a transition.\n\nMany of the world's poor depend heavily on their surrounding environment to meet their daily needs. Countries can help safeguard biodiversity by committing to international conventions. Global fish stocks are also overexploited. Fishing subsidies provided by major economies result in overfishing, which negatively impacts biodiversity and the livelihoods of communities dependent on these resources.`
   },
   'health': {
     name: 'Health',
     shortName: 'Health',
     color: 'rgb(255, 157, 58)',   // orange #FF9D3A
     group: 'global',
-    description: 'Evaluates contributions to global health.'
+    description: `The global COVID-19 pandemic brought into sharp focus the transboundary nature of disease outbreaks, the importance of spillovers of domestic policy decisions, and the need for international collaboration. While the international dimension of health is particularly visible during global crises such as COVID-19, "peacetime" policies also matter for development. For example, the risks posed by growing antimicrobial resistance, an "endemic" problem, also threaten human health beyond domestic borders.`
   },
   'security': {
     name: 'Security',
     shortName: 'Security',
     color: 'rgb(241, 100, 0)',    // red-orange #F16400
     group: 'global',
-    description: 'Assesses contributions to international peace and security.'
+    description: `Security and development are closely interlinked. War and political violence devastate government infrastructure and public resources, and harm civilians and their homes and livelihoods. War decimates public capacities and political institutions and devastates citizens' lives. This causal link also works in reverse: poverty and institutional weakness make it easier for both challengers and incumbents to gain support for political violence and war. It is unsurprising that fragile and conflict-afflicted states are the most behind on the SDGs.\n\nWe measure a country's commitment to global security by focusing on three subcomponents: contributions to international peacekeeping efforts, participation in international security treaties, and avoiding damaging arms sales.`
   },
   'technology': {
     name: 'Technology',
     shortName: 'Technology',
     color: 'rgb(204, 85, 0)',     // dark orange #CC5500
     group: 'global',
-    description: 'Measures policies supporting technology transfer and innovation.'
+    description: `Technology is a critical factor in economic and human development, and not just for the poor. It can reduce the price of goods and services, making them more accessible to all. Advances in medicines, sustainable energy, and agricultural productivity raise the quality of life worldwide. The largest global economies can play a major role in both new knowledge creation and its diffusion worldwide.\n\nGovernments can contribute to global innovation and technological development through direct funding or through incentives to stimulate the private sector. They can encourage technology diffusion through international academic collaboration, or by opening the doors to foreign students to allow them to gain new knowledge and skills, and address gender inequalities by admitting more female students. But governments can also impede diffusion through excessively restrictive intellectual property right (IPR) terms within their foreign trade and investment agreements, which limit developing countries' access to vital technologies.`
   }
 };
 
@@ -91,6 +91,67 @@ const COMPONENT_NAME_MAP: Record<string, string> = {
   'Health': 'health',
   'Security': 'security',
   'Technology': 'technology'
+};
+
+// Map indicator names to their parent subcomponent
+const INDICATOR_TO_SUBCOMPONENT: Record<string, string> = {
+  // Development Finance Quality indicators
+  'Multilateral Support': 'development-finance-quality',
+  'Poverty Focus': 'development-finance-quality',
+  'Fragility Focus': 'development-finance-quality',
+  'Fragility focus': 'development-finance-quality',
+  'Tied Status': 'development-finance-quality',
+  'Transparency': 'development-finance-quality',
+  'Country Ownership': 'development-finance-quality',
+
+  // Financial Secrecy indicators (Investment)
+  'Banking Secrecy': 'financial-secrecy',
+  'Country by Country Reporting': 'financial-secrecy',
+  'Public Statistics': 'financial-secrecy',
+  'Anti-Money Laundering': 'financial-secrecy',
+  'Automatic Exchange of Information': 'financial-secrecy',
+  'Bilateral Treaties': 'financial-secrecy',
+  'International Legal Cooperation': 'financial-secrecy',
+  'Beneficial Ownership': 'financial-secrecy',
+
+  // Greenhouse Gas Emissions indicators (Environment)
+  'Emissions (excluding LULUCF)': 'greenhouse-gas-emissions',
+  'NDC Ambition': 'greenhouse-gas-emissions',
+  'Emissions from LULUCF': 'greenhouse-gas-emissions',
+  'Emissions from Trade': 'greenhouse-gas-emissions',
+
+  // Fossil Fuel Production indicators (Environment)
+  'Oil Production': 'fossil-fuel-production',
+  'Gas Production': 'fossil-fuel-production',
+  'Coal Production': 'fossil-fuel-production',
+
+  // Fossil Fuel Support indicators (Environment)
+  'Support to Oil': 'fossil-fuel-support',
+  'Support to Gas': 'fossil-fuel-support',
+  'Support to Coal': 'fossil-fuel-support',
+  'Support to Electricity': 'fossil-fuel-support',
+
+  // Antimicrobial Resistance indicators (Health)
+  'Antibiotic Consumption in Humans': 'antimicrobial-resistance',
+  'Antibiotic Consumption in Livestock Animals': 'antimicrobial-resistance',
+  'AMR Governance': 'antimicrobial-resistance',
+
+  // Vaccination Coverage indicators (Health)
+  'Measles Vaccine (MCV2) Coverage': 'vaccination-coverage',
+  'Diphtheria, Tetanus Toxoid, and Pertussis Vaccine (DTP3) Coverage': 'vaccination-coverage',
+
+  // Export Restrictions indicators (Health)
+  'Duration of Export Restrictions': 'export-restrictions-on-food-and-health',
+  'Number of Products Covered': 'export-restrictions-on-food-and-health',
+
+  // Peacekeeping Contributions indicators (Security)
+  'Financial Contributions to UN DPO': 'peacekeeping-contributions',
+  'UN Troop Contributions': 'peacekeeping-contributions',
+  'Non-UN Troop Contributions': 'peacekeeping-contributions',
+
+  // Arms Trade indicators (Security)
+  'Arms Trade Volume': 'arms-trade',
+  'Conflict Potential of Arms Exports': 'arms-trade',
 };
 
 // Map subcomponent names to their parent component
@@ -201,9 +262,6 @@ function main() {
     row => row.ISO && !EXCLUDED_COUNTRIES.includes(row.ISO)
   );
   const filteredSubcomponents = subcomponentsData.filter(
-    row => row.ISO && !EXCLUDED_COUNTRIES.includes(row.ISO)
-  );
-  const filteredIndicators = indicatorsData.filter(
     row => row.ISO && !EXCLUDED_COUNTRIES.includes(row.ISO)
   );
 
@@ -353,15 +411,24 @@ function main() {
     );
 
   const indicators = indicatorColumns.map(name => {
+    const trimmedName = name.trim();
     // Find which subcomponent this indicator belongs to
-    // For now, we'll leave this as a placeholder
+    const subcomponentId = INDICATOR_TO_SUBCOMPONENT[trimmedName] || '';
+    // Find which component the subcomponent belongs to
+    let componentId = '';
+    if (subcomponentId) {
+      const subcomp = subcomponents.find(s => s.id === subcomponentId);
+      if (subcomp) {
+        componentId = subcomp.componentId;
+      }
+    }
     return {
-      id: toMachineId(name),
-      name: name.trim(),
-      subcomponentId: '', // Would need proper mapping
-      componentId: '',
+      id: toMachineId(trimmedName),
+      name: trimmedName,
+      subcomponentId,
+      componentId,
       unit: 'score',
-      description: `Placeholder description for ${name}.`,
+      description: `Placeholder description for ${trimmedName}.`,
       lowerIsBetter: false
     };
   });
