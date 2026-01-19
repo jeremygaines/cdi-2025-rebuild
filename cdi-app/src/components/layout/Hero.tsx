@@ -40,12 +40,19 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
     <div>
       {/* Main hero section with diagonal split */}
       <div
-        className="text-white"
+        className="text-white relative"
         style={{
-          background: 'linear-gradient(70deg, #3e3531 50%, #f0ece7 50%)'
+          background: '#3e3531'
         }}
       >
-        <div className="max-w-7xl mx-auto px-4 py-6 md:py-8">
+        {/* Diagonal gradient overlay - only on large screens */}
+        <div
+          className="hidden lg:block absolute inset-0 pointer-events-none"
+          style={{
+            background: 'linear-gradient(70deg, transparent 50%, #f0ece7 50%)'
+          }}
+        />
+        <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 relative z-10">
           <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
             {/* Left side - Logo and title */}
             <div className="flex items-center gap-4">
@@ -68,9 +75,9 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
               </h1>
             </div>
 
-            {/* Right side - Key findings slider */}
+            {/* Right side - Key findings slider - hidden on mobile */}
             {showKeyFindings && !subtitle && (
-              <div className="lg:max-w-md xl:max-w-lg">
+              <div className="hidden lg:block lg:max-w-md xl:max-w-lg">
                 <div className="relative">
                   {/* Slider content */}
                   <div className="overflow-hidden">
