@@ -80,14 +80,14 @@ async function parseDocxFile(filePath: string): Promise<CountryReport | null> {
     const report: CountryReport = {
       countryCode,
       countryName: countryName || countryCode,
-      overall: sections['Overall'] || '',
+      overall: sections['Overall'] || '<p>placeholder</p>',
       components: {}
     };
 
     // Extract component sections
     for (const componentName of COMPONENT_NAMES) {
       const componentId = toMachineId(componentName);
-      report.components[componentId] = sections[componentName] || '';
+      report.components[componentId] = sections[componentName] || '<p>placeholder</p>';
     }
 
     return report;
@@ -108,6 +108,7 @@ async function main() {
   console.log(`Found ${files.length} country report documents`);
 
   const reports: CountryReport[] = [];
+  const missingSections: { [country: string]: string[] } = {};
 
   // Parse each file
   for (const file of files) {
@@ -117,6 +118,21 @@ async function main() {
     const report = await parseDocxFile(filePath);
     if (report) {
       reports.push(report);
+
+      // Track missing sections
+      const missing: string[] = [];
+      if (report.overall === '<p>placeholder</p>') {
+        missing.push('Overall');
+      }
+      for (const componentName of COMPONENT_NAMES) {
+        const componentId = toMachineId(componentName);
+        if (report.components[componentId] === '<p>placeholder</p>') {
+          missing.push(componentName);
+        }
+      }
+      if (missing.length > 0) {
+        missingSections[report.countryCode] = missing;
+      }
     }
   }
 
@@ -139,7 +155,19 @@ async function main() {
     console.log(`\nSample (${sample.countryCode}):`);
     console.log(`  Country: ${sample.countryName}`);
     console.log(`  Overall length: ${sample.overall.length} chars`);
-    console.log(`  Components with content: ${Object.keys(sample.components).filter(k => sample.components[k]).length}`);
+    console.log(`  Components with content: ${Object.keys(sample.components).filter(k => sample.components[k] !== '<p>placeholder</p>').length}`);
+  }
+
+  // Report missing sections
+  console.log('\n=== MISSING SECTIONS REPORT ===');
+  if (Object.keys(missingSections).length === 0) {
+    console.log('✓ All sections present for all countries');
+  } else {
+    console.log(`Countries with missing sections: ${Object.keys(missingSections).length}\n`);
+    for (const [countryCode, missing] of Object.entries(missingSections)) {
+      console.log(`${countryCode}:`);
+      missing.forEach(section => console.log(`  - ${section}`));
+    }
   }
 }
 
