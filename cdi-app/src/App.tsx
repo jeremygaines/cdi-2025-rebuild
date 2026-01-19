@@ -5,6 +5,7 @@ import { PageLayout } from '@/components/layout/PageLayout';
 import { HomePage } from '@/pages/HomePage';
 import { ComponentPage } from '@/pages/ComponentPage';
 import { SubcomponentPage } from '@/pages/SubcomponentPage';
+import { IndicatorPage } from '@/pages/IndicatorPage';
 import { IndicatorIndexPage } from '@/pages/IndicatorIndexPage';
 import { CountryReportPage } from '@/pages/CountryReportPage';
 import { CountryComponentPage } from '@/pages/CountryComponentPage';
@@ -20,6 +21,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/component/:componentId" element={<ComponentPage />} />
               <Route path="/component/:componentId/:subcomponentId" element={<SubcomponentPage />} />
+              <Route path="/component/:componentId/:subcomponentId/:indicatorId" element={<IndicatorPage />} />
               <Route path="/indicators" element={<IndicatorIndexPage />} />
               <Route path="/country/:countryId" element={<CountryReportPage />} />
               <Route path="/country/:countryId/:componentId" element={<CountryComponentPage />} />

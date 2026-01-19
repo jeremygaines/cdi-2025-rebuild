@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
-import type { Country, Component, Subcomponent } from '@/types';
+import type { Country, Component, Subcomponent, Indicator } from '@/types';
 
 // Component colors - same as ComponentPage
 const COMPONENT_COLORS: Record<string, string> = {
@@ -46,48 +46,58 @@ function getRowBgColor(baseColor: string, isEven: boolean): string {
 
 const ROW_BASE_COLOR = 'rgb(153, 129, 92)';
 
-export function SubcomponentPage() {
-  const { componentId, subcomponentId } = useParams<{
+export function IndicatorPage() {
+  const { componentId, subcomponentId, indicatorId } = useParams<{
     componentId: string;
     subcomponentId: string;
+    indicatorId: string;
   }>();
-  const { loading, error, getComponent, components, subcomponents, countries } = useData();
+  const { loading, error, getComponent, getSubcomponent, getIndicator, components, subcomponents, indicators, countries } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
   const component = getComponent(componentId ?? '');
-  const subcomponent = subcomponents.find(s => s.id === subcomponentId);
+  const subcomponent = getSubcomponent(subcomponentId ?? '');
+  const indicator = getIndicator(indicatorId ?? '');
   const componentColor = component ? COMPONENT_COLORS[component.id] || component.color : '#888';
   const headerColor = component ? HEADER_COLORS[component.id] || componentColor : '#666';
 
-  // Get all subcomponents for this component (for sidebar)
+  // Get all subcomponents for this component
   const componentSubcomponents = useMemo(() => {
     if (!component) return [];
     return subcomponents.filter(s => s.componentId === component.id);
   }, [subcomponents, component]);
 
-  // Sort countries by subcomponent score
+  // Get all indicators for this subcomponent
+  const subcomponentIndicators = useMemo(() => {
+    if (!subcomponent) return [];
+    return indicators.filter(i => i.subcomponentId === subcomponent.id);
+  }, [indicators, subcomponent]);
+
+  // Sort countries by indicator score
   const sortedCountries = useMemo(() => {
-    if (!subcomponent || !component) return [];
+    if (!indicator || !component || !subcomponent) return [];
 
     return [...countries].sort((a, b) => {
       const aComp = a.components[component.id];
       const bComp = b.components[component.id];
       const aSubScore = aComp?.subcomponents?.[subcomponent.id];
       const bSubScore = bComp?.subcomponents?.[subcomponent.id];
-      const aRank = aSubScore?.rank ?? 999;
-      const bRank = bSubScore?.rank ?? 999;
+      const aIndScore = aSubScore?.indicators?.[indicator.id];
+      const bIndScore = bSubScore?.indicators?.[indicator.id];
+      const aRank = aIndScore?.rank ?? 999;
+      const bRank = bIndScore?.rank ?? 999;
       return aRank - bRank;
     });
-  }, [countries, component, subcomponent]);
+  }, [countries, component, subcomponent, indicator]);
 
   if (loading) return <Loading />;
   if (error) return <div className="p-8 text-red-600">Error: {error.message}</div>;
 
-  if (!component || !subcomponent) {
+  if (!component || !subcomponent || !indicator) {
     return (
       <div className="p-8 text-center">
-        <h2 className="text-2xl font-bold mb-4">Subcomponent not found</h2>
+        <h2 className="text-2xl font-bold mb-4">Indicator not found</h2>
         <Link to="/" className="text-cdi-primary hover:underline">
           Return to main ranking
         </Link>
@@ -95,21 +105,21 @@ export function SubcomponentPage() {
     );
   }
 
-  // Get previous and next subcomponents for navigation
-  const currentSubIndex = componentSubcomponents.findIndex(s => s.id === subcomponentId);
-  const prevSubcomponent = currentSubIndex > 0 ? componentSubcomponents[currentSubIndex - 1] : null;
-  const nextSubcomponent = currentSubIndex < componentSubcomponents.length - 1 ? componentSubcomponents[currentSubIndex + 1] : null;
+  // Get previous and next indicators for navigation
+  const currentIndIndex = subcomponentIndicators.findIndex(i => i.id === indicatorId);
+  const prevIndicator = currentIndIndex > 0 ? subcomponentIndicators[currentIndIndex - 1] : null;
+  const nextIndicator = currentIndIndex < subcomponentIndicators.length - 1 ? subcomponentIndicators[currentIndIndex + 1] : null;
 
   return (
     <div className="min-h-screen bg-white">
       {/* Top bar - Go back link */}
       <div className="bg-[rgb(245,243,238)] border-b">
         <div className="max-w-7xl mx-auto px-4 py-3">
-          <Link to={`/component/${component.id}`} className="text-cdi-primary hover:underline flex items-center gap-2">
+          <Link to={`/component/${component.id}/${subcomponent.id}`} className="text-cdi-primary hover:underline flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            GO BACK TO {component.name.toUpperCase()} PAGE
+            GO BACK TO {subcomponent.name.toUpperCase()} PAGE
           </Link>
         </div>
       </div>
@@ -147,19 +157,22 @@ export function SubcomponentPage() {
             {/* Left column - Description */}
             <div className="lg:w-1/2">
               <h1 className="text-3xl font-light text-gray-800 mb-2">
-                {subcomponent.name}
+                {indicator.name}
               </h1>
-              {subcomponent.subtitle && (
-                <p className="text-lg italic text-gray-500 mb-6">
-                  {subcomponent.subtitle}
+              {indicator.unit && (
+                <p className="text-sm text-gray-500 mb-4">
+                  Unit: <span className="font-medium text-cdi-primary">{indicator.unit}</span>
+                  {indicator.lowerIsBetter && (
+                    <span className="ml-3 text-xs bg-gray-100 px-2 py-1 rounded">Lower is better</span>
+                  )}
                 </p>
               )}
 
-              {subcomponent.description && (
+              {indicator.description && (
                 <div
                   className="text-gray-700 leading-relaxed space-y-4"
                   dangerouslySetInnerHTML={{
-                    __html: subcomponent.description
+                    __html: indicator.description
                       .split('\n\n')
                       .map(para => `<p>${para}</p>`)
                       .join('')
@@ -168,11 +181,23 @@ export function SubcomponentPage() {
               )}
 
               <p className="mt-6 text-gray-600">
-                The weight of this indicator is <strong>{subcomponent.weight}</strong>.
+                Part of <Link
+                  to={`/component/${component.id}/${subcomponent.id}`}
+                  className="font-semibold hover:underline"
+                  style={{ color: componentColor }}
+                >
+                  {subcomponent.name}
+                </Link> in <Link
+                  to={`/component/${component.id}`}
+                  className="font-semibold hover:underline"
+                  style={{ color: componentColor }}
+                >
+                  {component.name}
+                </Link>.
               </p>
             </div>
 
-            {/* Right column - Subcomponents list */}
+            {/* Right column - Indicators list */}
             <div className="lg:w-1/2 lg:pl-8">
               <div
                 className="p-3"
@@ -182,17 +207,18 @@ export function SubcomponentPage() {
                   className="font-bold uppercase m-0"
                   style={{ color: componentColor }}
                 >
-                  {component.name}
+                  {subcomponent.name}
                 </h5>
+                <p className="text-xs text-gray-500 mt-1">Indicators</p>
               </div>
 
               <div className="mt-2">
-                {componentSubcomponents.map(subcomp => {
-                  const isActive = subcomp.id === subcomponent.id;
+                {subcomponentIndicators.map(ind => {
+                  const isActive = ind.id === indicator.id;
                   return (
-                    <div key={subcomp.id} className="border-b border-gray-200">
+                    <div key={ind.id} className="border-b border-gray-200">
                       <Link
-                        to={`/component/${component.id}/${subcomp.id}`}
+                        to={`/component/${component.id}/${subcomponent.id}/${ind.id}`}
                         className="block p-3 hover:bg-gray-50 transition-colors"
                         style={{
                           backgroundColor: isActive ? `${componentColor}20` : 'transparent'
@@ -202,13 +228,30 @@ export function SubcomponentPage() {
                           className={`hover:underline ${isActive ? 'font-bold' : 'font-semibold'}`}
                           style={{ color: componentColor }}
                         >
-                          {subcomp.name}
+                          {ind.name}
                           {isActive && <span className="ml-2 text-gray-400">›</span>}
                         </h5>
+                        {ind.unit && (
+                          <span className="text-xs text-gray-400">{ind.unit}</span>
+                        )}
                       </Link>
                     </div>
                   );
                 })}
+              </div>
+
+              {/* Link back to subcomponent */}
+              <div className="mt-4">
+                <Link
+                  to={`/component/${component.id}/${subcomponent.id}`}
+                  className="text-sm hover:underline flex items-center gap-1"
+                  style={{ color: componentColor }}
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  Back to {subcomponent.name}
+                </Link>
               </div>
             </div>
           </div>
@@ -231,7 +274,7 @@ export function SubcomponentPage() {
                   className="px-4 py-3 text-center text-xs font-semibold uppercase"
                   style={{ color: componentColor, borderBottom: `3px solid ${componentColor}` }}
                 >
-                  {subcomponent.name}
+                  {indicator.name}
                 </th>
                 <th className="px-4 py-3 w-32"></th>
               </tr>
@@ -240,8 +283,10 @@ export function SubcomponentPage() {
               {sortedCountries.map((country, index) => {
                 const compScore = country.components[component.id];
                 const subScore = compScore?.subcomponents?.[subcomponent.id];
-                const displayScore = subScore?.score ?? 0;
-                const displayRank = subScore?.rank ?? 999;
+                const indScore = subScore?.indicators?.[indicator.id];
+                const displayScore = indScore?.score ?? 0;
+                const displayRank = indScore?.rank ?? index + 1;
+                const hasMissingData = indScore?.missingData ?? false;
                 const percentage = Math.round(displayScore);
                 const isEven = index % 2 === 1;
                 const isSelected = selectedCountry?.id === country.id;
@@ -277,19 +322,22 @@ export function SubcomponentPage() {
                       }}
                     >
                       {country.name}
+                      {hasMissingData && (
+                        <span className="ml-2 text-xs text-gray-400" title="Missing data">*</span>
+                      )}
                     </td>
 
                     {/* Score cell */}
                     <td className="px-5 py-4" style={{ background: scoreBg }}>
                       <div className="flex flex-col items-center gap-1">
                         <span className="text-sm" style={{ color: '#5e6666' }}>
-                          {percentage}%
+                          {hasMissingData ? 'N/A' : `${percentage}%`}
                         </span>
                         <div className="w-full h-2.5 bg-gray-200 rounded-sm overflow-hidden">
                           <div
                             className="h-full transition-all duration-300"
                             style={{
-                              width: `${percentage}%`,
+                              width: hasMissingData ? '0%' : `${percentage}%`,
                               backgroundColor: componentColor,
                             }}
                           />
@@ -322,13 +370,14 @@ export function SubcomponentPage() {
             country={selectedCountry}
             component={component}
             subcomponent={subcomponent}
+            indicator={indicator}
             componentColor={componentColor}
             headerColor={headerColor}
-            subcomponents={componentSubcomponents}
+            indicators={subcomponentIndicators}
             countries={countries}
             showAdjusted={showAdjusted}
-            prevSubcomponent={prevSubcomponent}
-            nextSubcomponent={nextSubcomponent}
+            prevIndicator={prevIndicator}
+            nextIndicator={nextIndicator}
             onClose={() => setSelectedCountry(null)}
           />
         )}
@@ -337,28 +386,28 @@ export function SubcomponentPage() {
       {/* Navigation */}
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="flex justify-between items-center pt-6 border-t">
-          {prevSubcomponent ? (
+          {prevIndicator ? (
             <Link
-              to={`/component/${component.id}/${prevSubcomponent.id}`}
+              to={`/component/${component.id}/${subcomponent.id}/${prevIndicator.id}`}
               className="text-cdi-primary hover:underline flex items-center gap-2"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              {prevSubcomponent.name}
+              {prevIndicator.name}
             </Link>
           ) : (
             <div />
           )}
-          <Link to={`/component/${component.id}`} className="text-cdi-primary hover:underline">
-            Back to {component.name}
+          <Link to={`/component/${component.id}/${subcomponent.id}`} className="text-cdi-primary hover:underline">
+            Back to {subcomponent.name}
           </Link>
-          {nextSubcomponent ? (
+          {nextIndicator ? (
             <Link
-              to={`/component/${component.id}/${nextSubcomponent.id}`}
+              to={`/component/${component.id}/${subcomponent.id}/${nextIndicator.id}`}
               className="text-cdi-primary hover:underline flex items-center gap-2"
             >
-              {nextSubcomponent.name}
+              {nextIndicator.name}
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
@@ -376,13 +425,14 @@ interface DetailsDrawerProps {
   country: Country;
   component: Component;
   subcomponent: Subcomponent;
+  indicator: Indicator;
   componentColor: string;
   headerColor: string;
-  subcomponents: Subcomponent[];
+  indicators: Indicator[];
   countries: Country[];
   showAdjusted: boolean;
-  prevSubcomponent: Subcomponent | null;
-  nextSubcomponent: Subcomponent | null;
+  prevIndicator: Indicator | null;
+  nextIndicator: Indicator | null;
   onClose: () => void;
 }
 
@@ -390,19 +440,22 @@ function DetailsDrawer({
   country,
   component,
   subcomponent,
+  indicator,
   componentColor,
   headerColor,
-  subcomponents,
+  indicators,
   countries,
   showAdjusted,
-  prevSubcomponent,
-  nextSubcomponent,
+  prevIndicator,
+  nextIndicator,
   onClose,
 }: DetailsDrawerProps) {
   const compScore = country.components[component.id];
   const subScore = compScore?.subcomponents?.[subcomponent.id];
-  const displayScore = subScore?.score ?? 0;
-  const displayRank = subScore?.rank ?? 999;
+  const indScore = subScore?.indicators?.[indicator.id];
+  const displayScore = indScore?.score ?? 0;
+  const displayRank = indScore?.rank ?? 0;
+  const hasMissingData = indScore?.missingData ?? false;
   const overallRank = showAdjusted ? country.rankAdjusted : country.rank;
   const overallScore = showAdjusted ? country.scoreAdjusted : country.score;
 
@@ -424,13 +477,13 @@ function DetailsDrawer({
               </div>
             </div>
 
-            {/* Subcomponent Score Card - Overlapping on right */}
+            {/* Indicator Score Card - Overlapping on right */}
             <div className="flex-shrink-0 shadow-lg">
               <div
                 className="text-white text-center py-1.5 px-6 text-sm font-medium"
                 style={{ backgroundColor: headerColor }}
               >
-                {subcomponent.name}
+                {indicator.name}
               </div>
               <div
                 className="text-white px-6 py-4"
@@ -440,14 +493,20 @@ function DetailsDrawer({
                   <div className="text-center">
                     <div className="text-xs opacity-70">Rank</div>
                     <div className="text-4xl font-bold">
-                      {displayRank}
-                      <sup className="text-sm ml-0.5">{getOrdinalSuffix(displayRank)}</sup>
+                      {hasMissingData ? 'N/A' : (
+                        <>
+                          {displayRank}
+                          <sup className="text-sm ml-0.5">{getOrdinalSuffix(displayRank)}</sup>
+                        </>
+                      )}
                     </div>
                     <div className="text-xs opacity-70">of {countries.length}</div>
                   </div>
                   <div className="text-center">
                     <div className="text-xs opacity-70">Score</div>
-                    <div className="text-4xl font-bold">{Math.round(displayScore)}%</div>
+                    <div className="text-4xl font-bold">
+                      {hasMissingData ? 'N/A' : `${Math.round(displayScore)}%`}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -477,15 +536,24 @@ function DetailsDrawer({
       {/* Content */}
       <div className="p-6">
         <h3 className="text-2xl font-light text-gray-800 mb-4">
-          {subcomponent.name}
+          {indicator.name}
         </h3>
 
-        {subcomponent.description && (
+        {indicator.unit && (
+          <p className="text-sm text-gray-500 mb-4">
+            Unit: <span className="font-medium text-cdi-primary">{indicator.unit}</span>
+            {indicator.lowerIsBetter && (
+              <span className="ml-3 text-xs bg-gray-100 px-2 py-1 rounded">Lower is better</span>
+            )}
+          </p>
+        )}
+
+        {indicator.description && (
           <div className="text-gray-600 mb-8 leading-relaxed">
             <div
               className="space-y-4"
               dangerouslySetInnerHTML={{
-                __html: subcomponent.description
+                __html: indicator.description
                   .split('\n\n')
                   .map(para => `<p>${para}</p>`)
                   .join('')
@@ -495,24 +563,31 @@ function DetailsDrawer({
         )}
 
         <p className="text-gray-600 mb-8">
-          Weight: <strong>{subcomponent.weight}</strong>
+          Part of <Link
+            to={`/component/${component.id}/${subcomponent.id}`}
+            className="font-semibold hover:underline"
+            style={{ color: componentColor }}
+            onClick={onClose}
+          >
+            {subcomponent.name}
+          </Link>
         </p>
 
-        {/* Other subcomponents in this component */}
+        {/* Other indicators in this subcomponent */}
         <div className="border-t pt-6">
           <h4 className="text-lg font-light text-gray-700 mb-4">
-            Other indicators in {component.name}:
+            Other indicators in {subcomponent.name}:
           </h4>
           <div className="grid grid-cols-2 gap-2">
-            {subcomponents.filter(s => s.id !== subcomponent.id).map(subcomp => (
+            {indicators.filter(i => i.id !== indicator.id).map(ind => (
               <Link
-                key={subcomp.id}
-                to={`/component/${component.id}/${subcomp.id}`}
+                key={ind.id}
+                to={`/component/${component.id}/${subcomponent.id}/${ind.id}`}
                 className="p-3 border border-gray-200 hover:border-gray-400 transition-colors text-sm"
                 style={{ color: componentColor }}
                 onClick={onClose}
               >
-                {subcomp.name}
+                {ind.name}
               </Link>
             ))}
           </div>
@@ -520,9 +595,9 @@ function DetailsDrawer({
 
         {/* Navigation Footer */}
         <div className="flex justify-between items-center pt-6 mt-8">
-          {prevSubcomponent ? (
+          {prevIndicator ? (
             <Link
-              to={`/component/${component.id}/${prevSubcomponent.id}`}
+              to={`/component/${component.id}/${subcomponent.id}/${prevIndicator.id}`}
               className="flex items-center gap-3"
               onClick={onClose}
             >
@@ -531,7 +606,7 @@ function DetailsDrawer({
               </svg>
               <div>
                 <div className="text-xs text-gray-400 uppercase tracking-wide">Prev</div>
-                <div className="text-cdi-primary uppercase font-medium">{prevSubcomponent.name}</div>
+                <div className="text-cdi-primary uppercase font-medium">{prevIndicator.name}</div>
               </div>
             </Link>
           ) : (
@@ -546,15 +621,15 @@ function DetailsDrawer({
             Go to Country Report
           </Link>
 
-          {nextSubcomponent ? (
+          {nextIndicator ? (
             <Link
-              to={`/component/${component.id}/${nextSubcomponent.id}`}
+              to={`/component/${component.id}/${subcomponent.id}/${nextIndicator.id}`}
               className="flex items-center gap-3"
               onClick={onClose}
             >
               <div className="text-right">
                 <div className="text-xs text-gray-400 uppercase tracking-wide">Next</div>
-                <div className="text-cdi-primary uppercase font-medium">{nextSubcomponent.name}</div>
+                <div className="text-cdi-primary uppercase font-medium">{nextIndicator.name}</div>
               </div>
               <svg className="w-5 h-5 text-cdi-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
