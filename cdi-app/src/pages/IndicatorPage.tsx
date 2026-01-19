@@ -52,7 +52,7 @@ export function IndicatorPage() {
     subcomponentId: string;
     indicatorId: string;
   }>();
-  const { loading, error, getComponent, getSubcomponent, getIndicator, components, subcomponents, indicators, countries } = useData();
+  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -61,12 +61,6 @@ export function IndicatorPage() {
   const indicator = getIndicator(indicatorId ?? '');
   const componentColor = component ? COMPONENT_COLORS[component.id] || component.color : '#888';
   const headerColor = component ? HEADER_COLORS[component.id] || componentColor : '#666';
-
-  // Get all subcomponents for this component
-  const componentSubcomponents = useMemo(() => {
-    if (!component) return [];
-    return subcomponents.filter(s => s.componentId === component.id);
-  }, [subcomponents, component]);
 
   // Get all indicators for this subcomponent
   const subcomponentIndicators = useMemo(() => {
