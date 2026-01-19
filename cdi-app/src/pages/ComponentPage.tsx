@@ -51,6 +51,7 @@ export function ComponentPage() {
   const { loading, error, getComponent, components, countries, subcomponents, indicators } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
 
   const component = getComponent(componentId ?? '');
   const componentColor = component ? COMPONENT_COLORS[component.id] || component.color : '#888';
@@ -79,6 +80,32 @@ export function ComponentPage() {
     if (!component) return [];
     return indicators.filter(i => i.componentId === component.id);
   }, [indicators, component]);
+
+  // Get indicators grouped by subcomponent
+  const indicatorsBySubcomponent = useMemo(() => {
+    const grouped: Record<string, Indicator[]> = {};
+    for (const ind of componentIndicators) {
+      if (ind.subcomponentId) {
+        if (!grouped[ind.subcomponentId]) {
+          grouped[ind.subcomponentId] = [];
+        }
+        grouped[ind.subcomponentId].push(ind);
+      }
+    }
+    return grouped;
+  }, [componentIndicators]);
+
+  const toggleSubcomponent = (subcompId: string) => {
+    setExpandedSubcomponents(prev => {
+      const next = new Set(prev);
+      if (next.has(subcompId)) {
+        next.delete(subcompId);
+      } else {
+        next.add(subcompId);
+      }
+      return next;
+    });
+  };
 
   if (loading) return <Loading />;
   if (error) return <div className="p-8 text-red-600">Error: {error.message}</div>;
@@ -173,21 +200,60 @@ export function ComponentPage() {
               </div>
 
               <div className="mt-2">
-                {componentSubcomponents.map(subcomp => (
-                  <div key={subcomp.id} className="border-b border-gray-200">
-                    <Link
-                      to={`/component/${component.id}/${subcomp.id}`}
-                      className="block p-3 hover:bg-gray-50 transition-colors"
-                    >
-                      <h5
-                        className="font-semibold hover:underline"
-                        style={{ color: componentColor }}
-                      >
-                        {subcomp.name}
-                      </h5>
-                    </Link>
-                  </div>
-                ))}
+                {componentSubcomponents.map(subcomp => {
+                  const subcompIndicators = indicatorsBySubcomponent[subcomp.id] || [];
+                  const isExpanded = expandedSubcomponents.has(subcomp.id);
+                  const hasIndicators = subcompIndicators.length > 0;
+
+                  return (
+                    <div key={subcomp.id} className="border-b border-gray-200">
+                      <div className="flex items-center">
+                        {hasIndicators && (
+                          <button
+                            onClick={() => toggleSubcomponent(subcomp.id)}
+                            className="p-3 hover:bg-gray-50 transition-colors"
+                            aria-label={isExpanded ? 'Collapse' : 'Expand'}
+                          >
+                            <svg
+                              className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        )}
+                        <Link
+                          to={`/component/${component.id}/${subcomp.id}`}
+                          className={`flex-1 p-3 hover:bg-gray-50 transition-colors ${!hasIndicators ? 'pl-10' : 'pl-0'}`}
+                        >
+                          <h5
+                            className="font-semibold hover:underline"
+                            style={{ color: componentColor }}
+                          >
+                            {subcomp.name}
+                          </h5>
+                        </Link>
+                      </div>
+
+                      {/* Expandable indicators list */}
+                      {isExpanded && hasIndicators && (
+                        <div className="pl-10 pb-2">
+                          {subcompIndicators.map(ind => (
+                            <Link
+                              key={ind.id}
+                              to={`/component/${component.id}/${subcomp.id}/${ind.id}`}
+                              className="block py-1.5 px-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                            >
+                              {ind.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>

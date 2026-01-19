@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
-import type { Country, Component, Subcomponent } from '@/types';
+import type { Country, Component, Subcomponent, Indicator } from '@/types';
 
 // Component colors - same as ComponentPage
 const COMPONENT_COLORS: Record<string, string> = {
@@ -51,9 +51,10 @@ export function SubcomponentPage() {
     componentId: string;
     subcomponentId: string;
   }>();
-  const { loading, error, getComponent, components, subcomponents, countries } = useData();
+  const { loading, error, getComponent, components, subcomponents, indicators, countries } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
 
   const component = getComponent(componentId ?? '');
   const subcomponent = subcomponents.find(s => s.id === subcomponentId);
@@ -65,6 +66,34 @@ export function SubcomponentPage() {
     if (!component) return [];
     return subcomponents.filter(s => s.componentId === component.id);
   }, [subcomponents, component]);
+
+  // Get indicators grouped by subcomponent
+  const indicatorsBySubcomponent = useMemo(() => {
+    if (!component) return {};
+    const componentIndicators = indicators.filter(i => i.componentId === component.id);
+    const grouped: Record<string, Indicator[]> = {};
+    for (const ind of componentIndicators) {
+      if (ind.subcomponentId) {
+        if (!grouped[ind.subcomponentId]) {
+          grouped[ind.subcomponentId] = [];
+        }
+        grouped[ind.subcomponentId].push(ind);
+      }
+    }
+    return grouped;
+  }, [indicators, component]);
+
+  const toggleSubcomponent = (subcompId: string) => {
+    setExpandedSubcomponents(prev => {
+      const next = new Set(prev);
+      if (next.has(subcompId)) {
+        next.delete(subcompId);
+      } else {
+        next.add(subcompId);
+      }
+      return next;
+    });
+  };
 
   // Sort countries by subcomponent score
   const sortedCountries = useMemo(() => {
@@ -189,23 +218,67 @@ export function SubcomponentPage() {
               <div className="mt-2">
                 {componentSubcomponents.map(subcomp => {
                   const isActive = subcomp.id === subcomponent.id;
+                  const subcompIndicators = indicatorsBySubcomponent[subcomp.id] || [];
+                  const isExpanded = expandedSubcomponents.has(subcomp.id) || isActive;
+                  const hasIndicators = subcompIndicators.length > 0;
+
                   return (
                     <div key={subcomp.id} className="border-b border-gray-200">
-                      <Link
-                        to={`/component/${component.id}/${subcomp.id}`}
-                        className="block p-3 hover:bg-gray-50 transition-colors"
+                      <div
+                        className="flex items-center"
                         style={{
                           backgroundColor: isActive ? `${componentColor}20` : 'transparent'
                         }}
                       >
-                        <h5
-                          className={`hover:underline ${isActive ? 'font-bold' : 'font-semibold'}`}
-                          style={{ color: componentColor }}
+                        {hasIndicators && (
+                          <button
+                            onClick={() => toggleSubcomponent(subcomp.id)}
+                            className="p-3 hover:bg-gray-100 transition-colors"
+                            aria-label={isExpanded ? 'Collapse' : 'Expand'}
+                          >
+                            <svg
+                              className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        )}
+                        <Link
+                          to={`/component/${component.id}/${subcomp.id}`}
+                          className={`flex-1 p-3 hover:bg-gray-50 transition-colors ${!hasIndicators ? 'pl-10' : 'pl-0'}`}
                         >
-                          {subcomp.name}
-                          {isActive && <span className="ml-2 text-gray-400">›</span>}
-                        </h5>
-                      </Link>
+                          <h5
+                            className={`hover:underline ${isActive ? 'font-bold' : 'font-semibold'}`}
+                            style={{ color: componentColor }}
+                          >
+                            {subcomp.name}
+                            {isActive && <span className="ml-2 text-gray-400">›</span>}
+                          </h5>
+                        </Link>
+                      </div>
+
+                      {/* Expandable indicators list */}
+                      {isExpanded && hasIndicators && (
+                        <div
+                          className="pl-10 pb-2"
+                          style={{
+                            backgroundColor: isActive ? `${componentColor}10` : 'transparent'
+                          }}
+                        >
+                          {subcompIndicators.map(ind => (
+                            <Link
+                              key={ind.id}
+                              to={`/component/${component.id}/${subcomp.id}/${ind.id}`}
+                              className="block py-1.5 px-3 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-colors"
+                            >
+                              {ind.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
