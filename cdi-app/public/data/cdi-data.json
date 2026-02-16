@@ -13035,7 +13035,6 @@
       "shortName": "Development Finance",
       "color": "rgb(146, 101, 171)",
       "group": "finance",
-      "description": "Development finance is likely the first policy area that comes to mind when considering how countries help to promote development beyond their borders. It remains an important source of assistance for many developing countries. The OECD finds that aid has been the largest and most reliable source of finance for the least developed fragile states over the past decade. In 1969, the Pearson Commission on International Development proposed that rich countries should spend 0.7 percent of their gross national product (GNP) on foreign aid (later defined as \"official development assistance,\" or ODA, by the OECD's Development Assistance Committee). This 0.7 percent target was adopted by the UN in 1970, and in 1993, gross national income (GNI) replaced GNP as the measure. More than 50 years after it was set, only a handful of countries are meeting this target.\n\nQuantity is not all that matters in development finance. How it is provided can have a significant impact on development results, as acknowledged by donors in a series of High Level Fora on Aid Effectiveness. These fora contributed to establishing key principles for improving the effectiveness of development cooperation. Today, ownership, focus on results, inclusive development partnerships, and transparency and mutual accountability are standard criteria which donors and recipients use to implement development assistance interventions. These criteria were agreed upon by 160 countries, including new and emerging cooperation providers.",
       "subcomponents": [
         "development-finance-quality",
         "development-finance-quantity"
@@ -13047,7 +13046,6 @@
       "shortName": "Investment",
       "color": "rgb(68, 195, 255)",
       "group": "exchange",
-      "description": "Foreign direct investment is the largest source of external financing for many developing countries. Foreign investment can contribute to the development of infrastructure, housing, transport, energy supply, and many other areas. Major economies' policies can support or impede private investment beyond their borders and impact the wellbeing of many developing country citizens. The quantity of investment is not the only consideration—it is important that measures are in place to safeguard the environment and the general welfare of those affected by the investment.\n\nDomestic regulation also impacts international financial flows and their potential to facilitate crime, corruption, and tax evasion, which can inhibit development and undermine confidence. States have legal duties to screen, trace, freeze, seize, and return illicit wealth, and to detect, prevent, and punish foreign bribery. This supports the integrity of investment, public accountability, and revenue raising in developing countries.",
       "subcomponents": [
         "financial-secrecy",
         "business-human-rights",
@@ -13063,7 +13061,6 @@
       "shortName": "Migration",
       "color": "rgb(0, 129, 214)",
       "group": "exchange",
-      "description": "In 2016, all 193 UN member states agreed that protecting refugees is a responsibility which much be borne more equitably. In spite of this, hosting of the world's currently 35-million large refugee population has remained widely uneven. But in addition to the humanitarian imperative to provide shelter for those forced to flee their homes, international worker mobility is also a source of economic opportunities, both for host countries as well as countries of origin. Migration can broaden people's opportunities to earn higher incomes, access knowledge, gain valuable skills, and even to increase the knowledge base in their home countries. What's more, in 2022, migrant workers from low- and middle-income countries are estimated to have collectively sent remittances worth over $630 billion, helping to increase incomes and smooth consumption in their countries of origin. This flow exceeds official aid by a factor of three and is similar to levels of FDI.\n\nCountries differ widely on their policies for accepting and integrating migrants and refugees. The stronger the opportunities for migrants to integrate into their host societies, and the better their rights are protected, the more they can enjoy the opportunities available to them and contribute to the societies in which they live.",
       "subcomponents": [
         "migrant-inflow",
         "female-immigrants",
@@ -13078,7 +13075,6 @@
       "shortName": "Trade",
       "color": "rgb(29, 74, 184)",
       "group": "exchange",
-      "description": "The policies of major economics have a significant impact on the trading prospects of developing countries. Trade is an important pathway to prosperity as it provides opportunities to develop dynamic export sectors, tap into global supply chains, attract investment, create jobs, and reduce poverty. In 2022, trade constituted 50 percent of the GDP of least developed countries. Yet many goods for which developing countries have a relative production advantage, such as agricultural goods or textiles, still face tariffs and other trade barriers. Also, trade in services is becoming increasingly important for development, but administrative barriers remain which restrict trade flows in services.",
       "subcomponents": [
         "tariff-average",
         "tariff-peaks",
@@ -13093,7 +13089,6 @@
       "shortName": "Environment",
       "color": "rgb(255, 193, 39)",
       "group": "global",
-      "description": "A healthy environment and global climate are global public goods, benefitting all but with few incentives to protect them.\n\nWhile wealthy countries bear the most responsibility for climate change, its impacts will be felt disproportionately in poor countries. The World Bank estimates that climate change could push an additional 100 million people into extreme poverty by 2030. Limiting greenhouse gas emissions, in production and consumption, is therefore crucial in promoting development. The removal of fossil fuel production and consumption subsidies, and the introduction of carbon pricing, could play a major role in such a transition.\n\nMany of the world's poor depend heavily on their surrounding environment to meet their daily needs. Countries can help safeguard biodiversity by committing to international conventions. Global fish stocks are also overexploited. Fishing subsidies provided by major economies result in overfishing, which negatively impacts biodiversity and the livelihoods of communities dependent on these resources.",
       "subcomponents": [
         "greenhouse-gas-emissions",
         "ndc-ambition",
@@ -13110,7 +13105,6 @@
       "shortName": "Health",
       "color": "rgb(255, 157, 58)",
       "group": "global",
-      "description": "The global COVID-19 pandemic brought into sharp focus the transboundary nature of disease outbreaks, the importance of spillovers of domestic policy decisions, and the need for international collaboration. While the international dimension of health is particularly visible during global crises such as COVID-19, \"peacetime\" policies also matter for development. For example, the risks posed by growing antimicrobial resistance, an \"endemic\" problem, also threaten human health beyond domestic borders.",
       "subcomponents": [
         "antimicrobial-resistance",
         "vaccination-coverage",
@@ -13126,7 +13120,6 @@
       "shortName": "Security",
       "color": "rgb(241, 100, 0)",
       "group": "global",
-      "description": "Security and development are closely interlinked. War and political violence devastate government infrastructure and public resources, and harm civilians and their homes and livelihoods. War decimates public capacities and political institutions and devastates citizens' lives. This causal link also works in reverse: poverty and institutional weakness make it easier for both challengers and incumbents to gain support for political violence and war. It is unsurprising that fragile and conflict-afflicted states are the most behind on the SDGs.\n\nWe measure a country's commitment to global security by focusing on three subcomponents: contributions to international peacekeeping efforts, participation in international security treaties, and avoiding damaging arms sales.",
       "subcomponents": [
         "peacekeeping-contributions",
         "female-peacekeepers",
@@ -13141,7 +13134,6 @@
       "shortName": "Technology",
       "color": "rgb(204, 85, 0)",
       "group": "global",
-      "description": "Technology is a critical factor in economic and human development, and not just for the poor. It can reduce the price of goods and services, making them more accessible to all. Advances in medicines, sustainable energy, and agricultural productivity raise the quality of life worldwide. The largest global economies can play a major role in both new knowledge creation and its diffusion worldwide.\n\nGovernments can contribute to global innovation and technological development through direct funding or through incentives to stimulate the private sector. They can encourage technology diffusion through international academic collaboration, or by opening the doors to foreign students to allow them to gain new knowledge and skills, and address gender inequalities by admitting more female students. But governments can also impede diffusion through excessively restrictive intellectual property right (IPR) terms within their foreign trade and investment agreements, which limit developing countries' access to vital technologies.",
       "subcomponents": [
         "government-support",
         "tax-incentives",
@@ -13158,7 +13150,6 @@
       "name": "Development Finance Quality",
       "componentId": "development-finance",
       "subtitle": "How effectively aid is delivered and aligned with recipient needs",
-      "description": "This indicator assesses the quality of development finance provided by each country. Quality considerations include transparency, alignment with partner country priorities, use of country systems, predictability, and untying of aid. Higher quality aid is more effective at achieving development outcomes.",
       "weight": "50 percent of the development finance component",
       "indicators": []
     },
@@ -13167,7 +13158,6 @@
       "name": "Development Finance Quantity",
       "componentId": "development-finance",
       "subtitle": "Volume of cross-border development finance relative to GNI",
-      "description": "This indicator measures the quantity of Finance for International Development (FID) provided by each country as a percentage of gross national income. FID includes official development assistance and other official flows that support development in recipient countries.",
       "weight": "50 percent of the development finance component",
       "indicators": []
     },
@@ -13176,7 +13166,6 @@
       "name": "Financial Secrecy",
       "componentId": "investment",
       "subtitle": "Measures to prevent illicit financial flows and money laundering",
-      "description": "This indicator assesses the degree to which countries contribute to or combat financial secrecy. It includes measures such as automatic exchange of tax information, beneficial ownership transparency, and anti-money laundering provisions.",
       "weight": "20 percent of the investment component",
       "indicators": []
     },
@@ -13185,7 +13174,6 @@
       "name": "Business & Human Rights",
       "componentId": "investment",
       "subtitle": "Implementation of human rights standards for business operations",
-      "description": "This indicator evaluates countries on their implementation of the OECD Guidelines for Multinational Enterprises and other business and human rights frameworks that protect workers and communities affected by international investment.",
       "weight": "15 percent of the investment component",
       "indicators": []
     },
@@ -13194,7 +13182,6 @@
       "name": "Natural Resources",
       "componentId": "investment",
       "subtitle": "Governance of natural resource investment and extraction",
-      "description": "This indicator assesses countries commitment to transparent and sustainable natural resource governance, including participation in initiatives like the Extractive Industries Transparency Initiative and the Kimberley Process.",
       "weight": "15 percent of the investment component",
       "indicators": []
     },
@@ -13203,7 +13190,6 @@
       "name": "Anti-corruption",
       "componentId": "investment",
       "subtitle": "Enforcement of anti-bribery laws for international business",
-      "description": "This indicator measures how actively countries enforce the OECD Anti-Bribery Convention and other anti-corruption measures that affect international investment and governance in developing countries.",
       "weight": "15 percent of the investment component",
       "indicators": []
     },
@@ -13212,7 +13198,6 @@
       "name": "Investment Agreements",
       "componentId": "investment",
       "subtitle": "Development-friendliness of bilateral investment treaties",
-      "description": "This indicator evaluates how much policy space countries bilateral investment agreements leave for developing country partners to pursue their own development objectives and regulate foreign investment.",
       "weight": "20 percent of the investment component",
       "indicators": []
     },
@@ -13221,7 +13206,6 @@
       "name": "Corporate Tax Rate Alignment",
       "componentId": "investment",
       "subtitle": "Participation in global minimum tax frameworks",
-      "description": "This indicator assesses countries alignment with global efforts to establish minimum corporate tax rates and prevent base erosion and profit shifting by multinational enterprises.",
       "weight": "15 percent of the investment component",
       "indicators": []
     },
@@ -13230,7 +13214,6 @@
       "name": "Migrant Inflow",
       "componentId": "migration",
       "subtitle": "Acceptance of migrants from lower-income countries",
-      "description": "This indicator measures the number of migrants from developing countries that each CDI country accepts relative to its population, reflecting openness to migration as a development opportunity.",
       "weight": "25 percent of the migration component",
       "indicators": []
     },
@@ -13239,7 +13222,6 @@
       "name": "Female Immigrants",
       "componentId": "migration",
       "subtitle": "Gender balance among accepted migrants",
-      "description": "This indicator assesses the proportion of migrants accepted that are female, recognizing that migration can provide important opportunities for women from developing countries.",
       "weight": "10 percent of the migration component",
       "indicators": []
     },
@@ -13248,7 +13230,6 @@
       "name": "Refugee Hosting",
       "componentId": "migration",
       "subtitle": "Number of refugees hosted relative to population",
-      "description": "This indicator measures the number of refugees each country hosts relative to its population, reflecting commitment to international refugee protection responsibilities.",
       "weight": "25 percent of the migration component",
       "indicators": []
     },
@@ -13257,7 +13238,6 @@
       "name": "International Migration Conventions",
       "componentId": "migration",
       "subtitle": "Participation in international frameworks protecting migrants",
-      "description": "This indicator assesses participation in international conventions and frameworks that protect the rights of migrant workers and promote safe, orderly migration.",
       "weight": "15 percent of the migration component",
       "indicators": []
     },
@@ -13266,7 +13246,6 @@
       "name": "Integration Policies",
       "componentId": "migration",
       "subtitle": "Policies enabling migrants to integrate into society",
-      "description": "This indicator evaluates policies that enable migrants to integrate into host societies, including access to education, healthcare, employment, and pathways to citizenship.",
       "weight": "25 percent of the migration component",
       "indicators": []
     },
@@ -13275,7 +13254,6 @@
       "name": "Tariff Average",
       "componentId": "trade",
       "subtitle": "Average tariff rates weighted by partner country income",
-      "description": "This indicator measures average tariff rates, with higher weight given to tariffs on goods from poorer countries. Lower tariffs on developing country exports support their economic growth.",
       "weight": "25 percent of the trade component",
       "indicators": []
     },
@@ -13284,7 +13262,6 @@
       "name": "Tariff Peaks",
       "componentId": "trade",
       "subtitle": "Prevalence of very high tariffs on specific products",
-      "description": "This indicator counts tariff peaks (rates of 15% or more) that often affect products important to developing country exporters, such as agricultural goods and textiles.",
       "weight": "15 percent of the trade component",
       "indicators": []
     },
@@ -13293,7 +13270,6 @@
       "name": "Agricultural Subsidies",
       "componentId": "trade",
       "subtitle": "Trade-distorting support to domestic agricultural producers",
-      "description": "This indicator measures agricultural subsidies that distort trade and harm farmers in developing countries by artificially lowering prices or restricting market access.",
       "weight": "25 percent of the trade component",
       "indicators": []
     },
@@ -13302,7 +13278,6 @@
       "name": "Trade Logistics",
       "componentId": "trade",
       "subtitle": "Quality of customs procedures and trade infrastructure",
-      "description": "This indicator assesses the quality of customs procedures, port infrastructure, and other trade facilitation measures that affect the ability of developing countries to trade efficiently.",
       "weight": "20 percent of the trade component",
       "indicators": []
     },
@@ -13311,7 +13286,6 @@
       "name": "Services Trade Restrictiveness",
       "componentId": "trade",
       "subtitle": "Barriers to trade in services with developing countries",
-      "description": "This indicator measures restrictions on trade in services, which is increasingly important for development as services constitute a growing share of developing country economies.",
       "weight": "15 percent of the trade component",
       "indicators": []
     },
@@ -13320,7 +13294,6 @@
       "name": "Greenhouse Gas Emissions",
       "componentId": "environment",
       "subtitle": "Direct emissions from energy, industry, waste, and agriculture",
-      "description": "This indicator measures greenhouse gas emissions per capita from energy use, industrial processes, waste, and agriculture (excluding land use change). Climate change disproportionately affects developing countries.",
       "weight": "20 percent of the environment component",
       "indicators": []
     },
@@ -13329,7 +13302,6 @@
       "name": "NDC Ambition",
       "componentId": "environment",
       "subtitle": "Planned emissions reduction as percentage of projected emissions in 2030 under business-as-usual scenario",
-      "description": "This indicator assesses the degree to which a country's Nationally Determined Contribution, as submitted to the UNFCCC, represents increased ambition to reduce its emissions by 2030 over expected emissions based on GDP growth projections from the IMF's World Economic Outlook. We calculate the planned emissions reduction as the expected emissions in 2030 under a business-as-usual scenario minus the NDC emissions target in 2030, and present this as a percentage of the expected emissions in 2030.\n\nThis indicator relies on data assembled and analyzed by the Climate Action Tracker (CAT). CAT makes adjustments to exclude Land Use, Land Use Change, and Forestry (LULUCF) in their analysis of countries' NDC targets in 2030. In some cases, countries present their NDC targets as a range between a minimum and maximum, in which case we take the mid-point between these two figures to represent their NDC target. Further details about CAT's methodology and assumptions are available here.",
       "weight": "10 percent of the environment component",
       "indicators": []
     },
@@ -13338,7 +13310,6 @@
       "name": "Fossil Fuel Production",
       "componentId": "environment",
       "subtitle": "Production of oil, gas, and coal relative to population",
-      "description": "This indicator measures the production of fossil fuels (oil, gas, and coal) relative to population size. Continued fossil fuel production contributes to climate change that disproportionately harms developing countries.",
       "weight": "15 percent of the environment component",
       "indicators": []
     },
@@ -13347,7 +13318,6 @@
       "name": "Fossil Fuel Support",
       "componentId": "environment",
       "subtitle": "Subsidies supporting fossil fuel production and consumption",
-      "description": "This indicator measures government support for fossil fuels as a percentage of GNI, including production and consumption subsidies that encourage continued use of carbon-intensive energy sources.",
       "weight": "15 percent of the environment component",
       "indicators": []
     },
@@ -13356,7 +13326,6 @@
       "name": "Carbon Pricing",
       "componentId": "environment",
       "subtitle": "Effective carbon price through taxes and emissions trading",
-      "description": "This indicator measures the effective price of carbon emissions through carbon taxes and emissions trading schemes, which incentivize reductions in greenhouse gas emissions.",
       "weight": "15 percent of the environment component",
       "indicators": []
     },
@@ -13365,7 +13334,6 @@
       "name": "Fishing subsidies",
       "componentId": "environment",
       "subtitle": "Subsidies contributing to overfishing and harmful practices",
-      "description": "This indicator assesses fishing subsidies that contribute to overfishing and harmful fishing practices, which threaten marine biodiversity and the livelihoods of coastal communities in developing countries.",
       "weight": "10 percent of the environment component",
       "indicators": []
     },
@@ -13374,7 +13342,6 @@
       "name": "International Environmental Conventions",
       "componentId": "environment",
       "subtitle": "Participation in biodiversity and environmental agreements",
-      "description": "This indicator assesses participation in and implementation of international environmental treaties and conventions, including the Paris Agreement, biodiversity conventions, and other multilateral environmental agreements.",
       "weight": "15 percent of the environment component",
       "indicators": []
     },
@@ -13383,7 +13350,6 @@
       "name": "Antimicrobial Resistance",
       "componentId": "health",
       "subtitle": "Policies and consumption related to antibiotic resistance",
-      "description": "This indicator assesses countries' contribution to the global challenge of antimicrobial resistance, including antibiotic consumption levels in humans and livestock and governance frameworks for AMR.",
       "weight": "20 percent of the health component",
       "indicators": []
     },
@@ -13392,7 +13358,6 @@
       "name": "Vaccination Coverage",
       "componentId": "health",
       "subtitle": "Domestic vaccination rates for globally important diseases",
-      "description": "This indicator measures vaccination coverage rates for diseases like measles and DTP3, as high coverage prevents outbreaks that can spread internationally and supports global health security.",
       "weight": "15 percent of the health component",
       "indicators": []
     },
@@ -13401,7 +13366,6 @@
       "name": "Pandemic Preparedness",
       "componentId": "health",
       "subtitle": "Readiness systems and plans for disease outbreaks",
-      "description": "This indicator assesses pandemic preparedness including completion of Joint External Evaluations with the WHO and development of national influenza plans and response capabilities.",
       "weight": "20 percent of the health component",
       "indicators": []
     },
@@ -13410,7 +13374,6 @@
       "name": "Treaties",
       "componentId": "health",
       "subtitle": "Participation in international health treaties and codes",
-      "description": "This indicator evaluates participation in international health frameworks including WHO surveillance systems, the International Health Regulations, and codes on breast milk substitutes.",
       "weight": "15 percent of the health component",
       "indicators": []
     },
@@ -13419,7 +13382,6 @@
       "name": "Export Restrictions on Food and Health",
       "componentId": "health",
       "subtitle": "Restrictions on exports of food and health products",
-      "description": "This indicator measures the extent to which countries impose export restrictions on food and health-related goods, which can harm food and health security in developing countries.",
       "weight": "15 percent of the health component",
       "indicators": []
     },
@@ -13428,7 +13390,6 @@
       "name": "Tobacco Supply Chains",
       "componentId": "health",
       "subtitle": "Regulation of international tobacco trade",
-      "description": "This indicator assesses implementation of the WHO Framework Convention on Tobacco Control and measures to prevent illicit trade in tobacco products.",
       "weight": "15 percent of the health component",
       "indicators": []
     },
@@ -13437,7 +13398,6 @@
       "name": "Peacekeeping Contributions",
       "componentId": "security",
       "subtitle": "Financial and personnel contributions to UN peacekeeping",
-      "description": "This indicator measures contributions to UN peacekeeping operations including financial contributions to the Department of Peacekeeping Operations and troop contributions to UN and non-UN missions.",
       "weight": "30 percent of the security component",
       "indicators": []
     },
@@ -13446,7 +13406,6 @@
       "name": "Female Peacekeepers",
       "componentId": "security",
       "subtitle": "Proportion of peacekeepers who are women",
-      "description": "This indicator assesses the gender balance of peacekeeping contributions, recognizing that female peacekeepers can be more effective at engaging with local women and addressing gender-based violence.",
       "weight": "10 percent of the security component",
       "indicators": []
     },
@@ -13455,7 +13414,6 @@
       "name": "Sea Lanes Protection",
       "componentId": "security",
       "subtitle": "Naval contributions to protecting international shipping",
-      "description": "This indicator measures contributions to protecting international sea lanes, which are vital for global trade and particularly important for developing countries dependent on maritime commerce.",
       "weight": "20 percent of the security component",
       "indicators": []
     },
@@ -13464,7 +13422,6 @@
       "name": "Arms Trade",
       "componentId": "security",
       "subtitle": "Volume and destination of arms exports",
-      "description": "This indicator assesses the volume of arms exports and their destinations, penalizing sales to poorer, less democratic, and more militaristic states that are more likely to use them in conflict.",
       "weight": "25 percent of the security component",
       "indicators": []
     },
@@ -13473,7 +13430,6 @@
       "name": "International Security Conventions",
       "componentId": "security",
       "subtitle": "Participation in international security treaties",
-      "description": "This indicator evaluates ratification of international security treaties including conventions on anti-personnel mines, cluster munitions, and the Arms Trade Treaty.",
       "weight": "15 percent of the security component",
       "indicators": []
     },
@@ -13482,7 +13438,6 @@
       "name": "Government Support",
       "componentId": "technology",
       "subtitle": "Direct government funding for research and development",
-      "description": "This indicator measures government budget allocations for research and development as a percentage of GNI, reflecting investment in technology creation that can benefit developing countries.",
       "weight": "20 percent of the technology component",
       "indicators": []
     },
@@ -13491,7 +13446,6 @@
       "name": "Tax Incentives",
       "componentId": "technology",
       "subtitle": "Tax incentives for private sector R&D investment",
-      "description": "This indicator measures tax incentives provided to stimulate private sector research and development, which contributes to global innovation and technology creation.",
       "weight": "15 percent of the technology component",
       "indicators": []
     },
@@ -13500,7 +13454,6 @@
       "name": "Foreign Students",
       "componentId": "technology",
       "subtitle": "Students from developing countries welcomed for study",
-      "description": "This indicator measures the number of students from developing countries welcomed for higher education, enabling knowledge transfer and skill development.",
       "weight": "20 percent of the technology component",
       "indicators": []
     },
@@ -13509,7 +13462,6 @@
       "name": "Female Students",
       "componentId": "technology",
       "subtitle": "Gender balance among foreign students from developing countries",
-      "description": "This indicator assesses the proportion of foreign students from developing countries who are female, addressing gender disparities in access to educational opportunities.",
       "weight": "10 percent of the technology component",
       "indicators": []
     },
@@ -13518,7 +13470,6 @@
       "name": "Research Collaboration",
       "componentId": "technology",
       "subtitle": "Academic collaboration with researchers in developing countries",
-      "description": "This indicator measures the extent of research collaboration between a country's researchers and those in developing countries, facilitating knowledge sharing and capacity building.",
       "weight": "15 percent of the technology component",
       "indicators": []
     },
@@ -13527,7 +13478,6 @@
       "name": "Intellectual Property Rights",
       "componentId": "technology",
       "subtitle": "IPR provisions in trade agreements affecting technology access",
-      "description": "This indicator assesses the stringency of intellectual property rights provisions in trade agreements, which can restrict developing countries' access to vital technologies and medicines.",
       "weight": "20 percent of the technology component",
       "indicators": []
     }
@@ -13539,7 +13489,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Development Finance Quantity.",
       "lowerIsBetter": false
     },
     {
@@ -13548,7 +13497,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Tied Status.",
       "lowerIsBetter": false
     },
     {
@@ -13557,7 +13505,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Transparency.",
       "lowerIsBetter": false
     },
     {
@@ -13566,7 +13513,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Multilateral Support.",
       "lowerIsBetter": false
     },
     {
@@ -13575,7 +13521,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Country Ownership.",
       "lowerIsBetter": false
     },
     {
@@ -13584,7 +13529,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Poverty Focus.",
       "lowerIsBetter": false
     },
     {
@@ -13593,7 +13537,6 @@
       "subcomponentId": "development-finance-quality",
       "componentId": "development-finance",
       "unit": "score",
-      "description": "Placeholder description for Fragility Focus.",
       "lowerIsBetter": false
     },
     {
@@ -13602,7 +13545,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Banking Secrecy.",
       "lowerIsBetter": false
     },
     {
@@ -13611,7 +13553,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Country by Country Reporting.",
       "lowerIsBetter": false
     },
     {
@@ -13620,7 +13561,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Public Statistics.",
       "lowerIsBetter": false
     },
     {
@@ -13629,7 +13569,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Anti-Money Laundering.",
       "lowerIsBetter": false
     },
     {
@@ -13638,7 +13577,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Automatic Exchange of Information.",
       "lowerIsBetter": false
     },
     {
@@ -13647,7 +13585,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Bilateral Treaties.",
       "lowerIsBetter": false
     },
     {
@@ -13656,7 +13593,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for International Legal Cooperation.",
       "lowerIsBetter": false
     },
     {
@@ -13665,7 +13601,6 @@
       "subcomponentId": "financial-secrecy",
       "componentId": "investment",
       "unit": "score",
-      "description": "Placeholder description for Beneficial Ownership.",
       "lowerIsBetter": false
     },
     {
@@ -13674,7 +13609,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Business & Human Rights.",
       "lowerIsBetter": false
     },
     {
@@ -13683,7 +13617,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Natural Resources.",
       "lowerIsBetter": false
     },
     {
@@ -13692,7 +13625,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Anti-Corruption.",
       "lowerIsBetter": false
     },
     {
@@ -13701,7 +13633,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Investment Agreements.",
       "lowerIsBetter": false
     },
     {
@@ -13710,7 +13641,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Corporate Tax Rate Alignment.",
       "lowerIsBetter": false
     },
     {
@@ -13719,7 +13649,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Migrant inflow.",
       "lowerIsBetter": false
     },
     {
@@ -13728,7 +13657,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Female Immigrants.",
       "lowerIsBetter": false
     },
     {
@@ -13737,7 +13665,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Refugee Hosting.",
       "lowerIsBetter": false
     },
     {
@@ -13746,7 +13673,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for International Migration Agreements.",
       "lowerIsBetter": false
     },
     {
@@ -13755,7 +13681,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Integration Policies.",
       "lowerIsBetter": false
     },
     {
@@ -13764,7 +13689,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Tariff Average.",
       "lowerIsBetter": false
     },
     {
@@ -13773,7 +13697,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Tariff Peaks.",
       "lowerIsBetter": false
     },
     {
@@ -13782,7 +13705,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Agricultural Subsidies.",
       "lowerIsBetter": false
     },
     {
@@ -13791,7 +13713,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Customs.",
       "lowerIsBetter": false
     },
     {
@@ -13800,7 +13721,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Infrastructure.",
       "lowerIsBetter": false
     },
     {
@@ -13809,7 +13729,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Services Trade Restrictiveness.",
       "lowerIsBetter": false
     },
     {
@@ -13818,7 +13737,6 @@
       "subcomponentId": "greenhouse-gas-emissions",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Emissions (excluding LULUCF).",
       "lowerIsBetter": false
     },
     {
@@ -13827,7 +13745,6 @@
       "subcomponentId": "greenhouse-gas-emissions",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for NDC Ambition.",
       "lowerIsBetter": false
     },
     {
@@ -13836,7 +13753,6 @@
       "subcomponentId": "greenhouse-gas-emissions",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Emissions from LULUCF.",
       "lowerIsBetter": false
     },
     {
@@ -13845,7 +13761,6 @@
       "subcomponentId": "greenhouse-gas-emissions",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Emissions from Trade.",
       "lowerIsBetter": false
     },
     {
@@ -13854,7 +13769,6 @@
       "subcomponentId": "fossil-fuel-production",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Oil Production.",
       "lowerIsBetter": false
     },
     {
@@ -13863,7 +13777,6 @@
       "subcomponentId": "fossil-fuel-production",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Gas Production.",
       "lowerIsBetter": false
     },
     {
@@ -13872,7 +13785,6 @@
       "subcomponentId": "fossil-fuel-production",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Coal Production.",
       "lowerIsBetter": false
     },
     {
@@ -13881,7 +13793,6 @@
       "subcomponentId": "fossil-fuel-support",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Support to Oil.",
       "lowerIsBetter": false
     },
     {
@@ -13890,7 +13801,6 @@
       "subcomponentId": "fossil-fuel-support",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Support to Gas.",
       "lowerIsBetter": false
     },
     {
@@ -13899,7 +13809,6 @@
       "subcomponentId": "fossil-fuel-support",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Support to Coal.",
       "lowerIsBetter": false
     },
     {
@@ -13908,7 +13817,6 @@
       "subcomponentId": "fossil-fuel-support",
       "componentId": "environment",
       "unit": "score",
-      "description": "Placeholder description for Support to Electricity.",
       "lowerIsBetter": false
     },
     {
@@ -13917,7 +13825,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Carbon Pricing.",
       "lowerIsBetter": false
     },
     {
@@ -13926,7 +13833,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Fishing Subsidies.",
       "lowerIsBetter": false
     },
     {
@@ -13935,7 +13841,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Biodiversity and Environmental Agreements.",
       "lowerIsBetter": false
     },
     {
@@ -13944,7 +13849,6 @@
       "subcomponentId": "antimicrobial-resistance",
       "componentId": "health",
       "unit": "score",
-      "description": "Placeholder description for Antibiotic Consumption in Humans.",
       "lowerIsBetter": false
     },
     {
@@ -13953,7 +13857,6 @@
       "subcomponentId": "antimicrobial-resistance",
       "componentId": "health",
       "unit": "score",
-      "description": "Placeholder description for Antibiotic Consumption in Livestock Animals.",
       "lowerIsBetter": false
     },
     {
@@ -13962,7 +13865,6 @@
       "subcomponentId": "antimicrobial-resistance",
       "componentId": "health",
       "unit": "score",
-      "description": "Placeholder description for AMR Governance.",
       "lowerIsBetter": false
     },
     {
@@ -13971,7 +13873,6 @@
       "subcomponentId": "vaccination-coverage",
       "componentId": "health",
       "unit": "score",
-      "description": "Placeholder description for Measles Vaccine (MCV2) Coverage.",
       "lowerIsBetter": false
     },
     {
@@ -13980,7 +13881,6 @@
       "subcomponentId": "vaccination-coverage",
       "componentId": "health",
       "unit": "score",
-      "description": "Placeholder description for Diphtheria, Tetanus Toxoid, and Pertussis Vaccine (DTP3) Coverage.",
       "lowerIsBetter": false
     },
     {
@@ -13989,7 +13889,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Pandemic Preparedness.",
       "lowerIsBetter": false
     },
     {
@@ -13998,7 +13897,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Treaties.",
       "lowerIsBetter": false
     },
     {
@@ -14007,7 +13905,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Duration of Export Restrictions on Food and Health Products.",
       "lowerIsBetter": false
     },
     {
@@ -14016,7 +13913,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Number of Health and Food Products covered by Export Restrictions.",
       "lowerIsBetter": false
     },
     {
@@ -14025,7 +13921,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Tobacco Supply Chains.",
       "lowerIsBetter": false
     },
     {
@@ -14034,7 +13929,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Financial Contributions to the UN DPO.",
       "lowerIsBetter": false
     },
     {
@@ -14043,7 +13937,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Monetary Equivalent Value of UN Troop Contributions.",
       "lowerIsBetter": false
     },
     {
@@ -14052,7 +13945,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Monetary Equivalent Value of Non-UN Troop Contributions.",
       "lowerIsBetter": false
     },
     {
@@ -14061,7 +13953,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Female Peacekeepers.",
       "lowerIsBetter": false
     },
     {
@@ -14070,7 +13961,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Sea Lanes Protection.",
       "lowerIsBetter": false
     },
     {
@@ -14079,7 +13969,6 @@
       "subcomponentId": "arms-trade",
       "componentId": "security",
       "unit": "score",
-      "description": "Placeholder description for Arms Trade Volume.",
       "lowerIsBetter": false
     },
     {
@@ -14088,7 +13977,6 @@
       "subcomponentId": "arms-trade",
       "componentId": "security",
       "unit": "score",
-      "description": "Placeholder description for Conflict Potential of Arms Exports.",
       "lowerIsBetter": false
     },
     {
@@ -14097,7 +13985,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for International Security Conventions.",
       "lowerIsBetter": false
     },
     {
@@ -14106,7 +13993,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Government Support.",
       "lowerIsBetter": false
     },
     {
@@ -14115,7 +14001,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Tax Incentives.",
       "lowerIsBetter": false
     },
     {
@@ -14124,7 +14009,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Foreign Students.",
       "lowerIsBetter": false
     },
     {
@@ -14133,7 +14017,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Female Students.",
       "lowerIsBetter": false
     },
     {
@@ -14142,7 +14025,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Research Collaboration.",
       "lowerIsBetter": false
     },
     {
@@ -14151,7 +14033,6 @@
       "subcomponentId": "",
       "componentId": "",
       "unit": "score",
-      "description": "Placeholder description for Intellectual Property Rights.",
       "lowerIsBetter": false
     }
   ],

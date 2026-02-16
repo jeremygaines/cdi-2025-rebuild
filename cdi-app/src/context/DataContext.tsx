@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import type { CDIData, Country, Component, Subcomponent, Indicator, CountryGroup, CountryReport } from '@/types';
+import type { CDIData, Country, Component, Subcomponent, Indicator, CountryGroup, CountryReport, Blurbs } from '@/types';
 
 interface DataContextType {
   data: CDIData | null;
@@ -9,6 +9,7 @@ interface DataContextType {
   indicators: Indicator[];
   countryGroups: CountryGroup[];
   countryReports: Record<string, CountryReport>;
+  blurbs: Blurbs;
   year: number;
   loading: boolean;
   error: Error | null;
@@ -17,6 +18,7 @@ interface DataContextType {
   getSubcomponent: (id: string) => Subcomponent | undefined;
   getIndicator: (id: string) => Indicator | undefined;
   getCountryReport: (id: string) => CountryReport | undefined;
+  getBlurb: (componentId: string, subcomponentId?: string, indicatorId?: string) => string | undefined;
 }
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -24,6 +26,7 @@ const DataContext = createContext<DataContextType | null>(null);
 export function DataProvider({ children }: { children: ReactNode }) {
   const [data, setData] = useState<CDIData | null>(null);
   const [countryReports, setCountryReports] = useState<Record<string, CountryReport>>({});
+  const [blurbs, setBlurbs] = useState<Blurbs>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -51,6 +54,14 @@ export function DataProvider({ children }: { children: ReactNode }) {
         }
         const reportsData = await reportsResponse.json();
         setCountryReports(reportsData);
+
+        // Load blurbs
+        const blurbsResponse = await fetch('/data/blurbs.json');
+        if (!blurbsResponse.ok) {
+          throw new Error('Failed to load blurbs');
+        }
+        const blurbsData = await blurbsResponse.json();
+        setBlurbs(blurbsData);
 
         // Transform country groups to match our data structure
         const countryGroups: CountryGroup[] = [
@@ -82,6 +93,15 @@ export function DataProvider({ children }: { children: ReactNode }) {
   const getSubcomponent = (id: string) => data?.subcomponents.find(s => s.id === id);
   const getIndicator = (id: string) => data?.indicators.find(i => i.id === id);
   const getCountryReport = (id: string) => countryReports[id];
+  const getBlurb = (componentId: string, subcomponentId?: string, indicatorId?: string): string | undefined => {
+    const comp = blurbs[componentId];
+    if (!comp) return undefined;
+    if (!subcomponentId) return comp.description;
+    const sub = comp.subcomponents[subcomponentId];
+    if (!sub) return undefined;
+    if (!indicatorId) return sub.description;
+    return sub.indicators[indicatorId]?.description;
+  };
 
   const value: DataContextType = {
     data,
@@ -91,6 +111,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     indicators: data?.indicators ?? [],
     countryGroups: data?.countryGroups ?? [],
     countryReports,
+    blurbs,
     year: data?.year ?? 2025,
     loading,
     error,
@@ -99,6 +120,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
     getSubcomponent,
     getIndicator,
     getCountryReport,
+    getBlurb,
   };
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;

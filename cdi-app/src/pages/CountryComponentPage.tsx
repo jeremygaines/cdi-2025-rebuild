@@ -7,7 +7,7 @@ import { ScoreBar } from '@/components/visualization/ScoreBar';
 
 export function CountryComponentPage() {
   const { countryId, componentId } = useParams<{ countryId: string; componentId: string }>();
-  const { loading, error, getCountry, getComponent, components, subcomponents } = useData();
+  const { loading, error, getCountry, getComponent, components, subcomponents, getBlurb } = useData();
   const { showAdjusted } = useFilters();
 
   if (loading) return <Loading />;
@@ -43,7 +43,7 @@ export function CountryComponentPage() {
     <div>
       <Hero
         title={`${country.name}: ${component.name}`}
-        subtitle={component.description}
+        subtitle={getBlurb(component.id)?.replace(/<[^>]+>/g, '').slice(0, 200)}
       />
 
       <div className="max-w-7xl mx-auto px-4 py-6">

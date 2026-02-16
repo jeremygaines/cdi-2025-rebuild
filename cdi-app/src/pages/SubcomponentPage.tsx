@@ -51,7 +51,7 @@ export function SubcomponentPage() {
     componentId: string;
     subcomponentId: string;
   }>();
-  const { loading, error, getComponent, components, subcomponents, indicators, countries } = useData();
+  const { loading, error, getComponent, components, subcomponents, indicators, countries, getBlurb } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
@@ -184,15 +184,10 @@ export function SubcomponentPage() {
                 </p>
               )}
 
-              {subcomponent.description && (
+              {getBlurb(component.id, subcomponent.id) && (
                 <div
                   className="text-gray-700 leading-relaxed space-y-4"
-                  dangerouslySetInnerHTML={{
-                    __html: subcomponent.description
-                      .split('\n\n')
-                      .map(para => `<p>${para}</p>`)
-                      .join('')
-                  }}
+                  dangerouslySetInnerHTML={{ __html: getBlurb(component.id, subcomponent.id)! }}
                 />
               )}
 
@@ -472,6 +467,7 @@ function DetailsDrawer({
   nextSubcomponent,
   onClose,
 }: DetailsDrawerProps) {
+  const { getBlurb } = useData();
   const compScore = country.components[component.id];
   const subScore = compScore?.subcomponents?.[subcomponent.id];
   const displayScore = subScore?.score ?? 0;
@@ -553,16 +549,11 @@ function DetailsDrawer({
           {subcomponent.name}
         </h3>
 
-        {subcomponent.description && (
+        {getBlurb(component.id, subcomponent.id) && (
           <div className="text-gray-600 mb-8 leading-relaxed">
             <div
               className="space-y-4"
-              dangerouslySetInnerHTML={{
-                __html: subcomponent.description
-                  .split('\n\n')
-                  .map(para => `<p>${para}</p>`)
-                  .join('')
-              }}
+              dangerouslySetInnerHTML={{ __html: getBlurb(component.id, subcomponent.id)! }}
             />
           </div>
         )}

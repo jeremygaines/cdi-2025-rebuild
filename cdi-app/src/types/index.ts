@@ -40,7 +40,6 @@ export interface Component {
   shortName: string;
   color: string;
   group: 'finance' | 'exchange' | 'global';
-  description: string;
   subcomponents: string[]; // array of subcomponent IDs
 }
 
@@ -49,7 +48,6 @@ export interface Subcomponent {
   name: string;
   componentId: string;
   subtitle: string;
-  description: string;
   weight: string;
   indicators: string[]; // array of indicator IDs
 }
@@ -60,9 +58,23 @@ export interface Indicator {
   subcomponentId: string;
   componentId: string;
   unit: string;
-  description: string;
   lowerIsBetter: boolean;
 }
+
+export interface BlurbEntry {
+  name: string;
+  description: string;
+}
+
+export interface SubcomponentBlurb extends BlurbEntry {
+  indicators: Record<string, BlurbEntry>;
+}
+
+export interface ComponentBlurb extends BlurbEntry {
+  subcomponents: Record<string, SubcomponentBlurb>;
+}
+
+export type Blurbs = Record<string, ComponentBlurb>;
 
 export interface CountryGroup {
   id: string;

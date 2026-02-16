@@ -52,7 +52,7 @@ export function IndicatorPage() {
     subcomponentId: string;
     indicatorId: string;
   }>();
-  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries } = useData();
+  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries, getBlurb } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -162,15 +162,10 @@ export function IndicatorPage() {
                 </p>
               )}
 
-              {indicator.description && (
+              {getBlurb(component.id, subcomponent.id, indicator.id) && (
                 <div
                   className="text-gray-700 leading-relaxed space-y-4"
-                  dangerouslySetInnerHTML={{
-                    __html: indicator.description
-                      .split('\n\n')
-                      .map(para => `<p>${para}</p>`)
-                      .join('')
-                  }}
+                  dangerouslySetInnerHTML={{ __html: getBlurb(component.id, subcomponent.id, indicator.id)! }}
                 />
               )}
 
@@ -444,6 +439,7 @@ function DetailsDrawer({
   nextIndicator,
   onClose,
 }: DetailsDrawerProps) {
+  const { getBlurb } = useData();
   const compScore = country.components[component.id];
   const subScore = compScore?.subcomponents?.[subcomponent.id];
   const indScore = subScore?.indicators?.[indicator.id];
@@ -542,16 +538,11 @@ function DetailsDrawer({
           </p>
         )}
 
-        {indicator.description && (
+        {getBlurb(component.id, subcomponent.id, indicator.id) && (
           <div className="text-gray-600 mb-8 leading-relaxed">
             <div
               className="space-y-4"
-              dangerouslySetInnerHTML={{
-                __html: indicator.description
-                  .split('\n\n')
-                  .map(para => `<p>${para}</p>`)
-                  .join('')
-              }}
+              dangerouslySetInnerHTML={{ __html: getBlurb(component.id, subcomponent.id, indicator.id)! }}
             />
           </div>
         )}

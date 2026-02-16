@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run transform-data && tsc -b && vite build",
+    "build": "tsc -b && vite build",
     "build:only": "tsc -b && vite build",
     "transform-data": "tsx scripts/transform-data.ts",
     "lint": "eslint .",

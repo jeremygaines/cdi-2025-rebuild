@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
-import type { Country, Component, Subcomponent, Indicator } from '@/types';
+import type { Country, Component, Subcomponent, Indicator, CountryReport } from '@/types';
 
 // Component colors
 const COMPONENT_COLORS: Record<string, string> = {
@@ -48,7 +48,7 @@ const ROW_BASE_COLOR = 'rgb(153, 129, 92)';
 
 export function ComponentPage() {
   const { componentId } = useParams<{ componentId: string }>();
-  const { loading, error, getComponent, components, countries, subcomponents, indicators } = useData();
+  const { loading, error, getComponent, components, countries, subcomponents, indicators, getCountryReport, getBlurb } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
@@ -172,15 +172,10 @@ export function ComponentPage() {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left column - Description */}
             <div className="lg:w-1/2">
-              {component.description && (
+              {getBlurb(component.id) && (
                 <div
                   className="text-gray-700 leading-relaxed space-y-4"
-                  dangerouslySetInnerHTML={{
-                    __html: component.description
-                      .split('\n\n')
-                      .map(para => `<p>${para}</p>`)
-                      .join('')
-                  }}
+                  dangerouslySetInnerHTML={{ __html: getBlurb(component.id)! }}
                 />
               )}
             </div>
@@ -298,7 +293,11 @@ export function ComponentPage() {
                   : getRowBgColor(componentColor, isEven);
 
                 return (
-                  <tr key={country.id} className="border-b border-gray-200">
+                  <tr
+                    key={country.id}
+                    className="border-b border-gray-200 cursor-pointer"
+                    onClick={() => setSelectedCountry(isSelected ? null : country)}
+                  >
                     {/* Rank cell */}
                     <td
                       className="px-4 py-4"
@@ -343,15 +342,12 @@ export function ComponentPage() {
 
                     {/* View Details cell */}
                     <td className="px-4 py-4 text-right">
-                      <button
-                        onClick={() => setSelectedCountry(isSelected ? null : country)}
-                        className="text-cdi-primary hover:underline text-sm flex items-center gap-1"
-                      >
+                      <span className="text-cdi-primary text-sm flex items-center gap-1">
                         View Details
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
-                      </button>
+                      </span>
                     </td>
                   </tr>
                 );
@@ -374,6 +370,7 @@ export function ComponentPage() {
             prevComponent={prevComponent}
             nextComponent={nextComponent}
             onClose={() => setSelectedCountry(null)}
+            getCountryReport={getCountryReport}
           />
         )}
       </div>
@@ -428,6 +425,7 @@ interface DetailsDrawerProps {
   prevComponent: Component | null;
   nextComponent: Component | null;
   onClose: () => void;
+  getCountryReport: (id: string) => CountryReport | undefined;
 }
 
 function DetailsDrawer({
@@ -442,6 +440,7 @@ function DetailsDrawer({
   prevComponent,
   nextComponent,
   onClose,
+  getCountryReport,
 }: DetailsDrawerProps) {
   const compScore = country.components[component.id];
   const displayScore = showAdjusted ? compScore?.scoreAdjusted : compScore?.score;
@@ -449,7 +448,16 @@ function DetailsDrawer({
   const overallRank = showAdjusted ? country.rankAdjusted : country.rank;
   const overallScore = showAdjusted ? country.scoreAdjusted : country.score;
 
+  const countryReport = getCountryReport(country.id);
+  const componentBlurb = countryReport?.components?.[component.id];
+
   return (
+    <>
+    {/* Backdrop */}
+    <div
+      className="fixed inset-0 z-40"
+      onClick={onClose}
+    />
     <div
       className="fixed right-0 top-0 h-full bg-white shadow-xl z-50 overflow-y-auto"
       style={{ width: '75%', maxWidth: '900px' }}
@@ -523,19 +531,12 @@ function DetailsDrawer({
           {component.name}
         </h3>
 
-        <div className="text-gray-600 mb-8 leading-relaxed">
-          {component.description && (
-            <div
-              className="space-y-4"
-              dangerouslySetInnerHTML={{
-                __html: component.description
-                  .split('\n\n')
-                  .map(para => `<p>${para}</p>`)
-                  .join('')
-              }}
-            />
-          )}
-        </div>
+        {componentBlurb && (
+          <div
+            className="text-gray-600 mb-8 leading-relaxed space-y-4"
+            dangerouslySetInnerHTML={{ __html: componentBlurb }}
+          />
+        )}
 
         {/* Subcomponents with bars */}
         {subcomponents.map(subcomp => {
@@ -645,6 +646,7 @@ function DetailsDrawer({
         </div>
       </div>
     </div>
+    </>
   );
 }
 

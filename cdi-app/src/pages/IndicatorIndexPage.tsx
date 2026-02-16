@@ -4,7 +4,7 @@ import { Loading } from '@/components/common/Loading';
 import { Hero } from '@/components/layout/Hero';
 
 export function IndicatorIndexPage() {
-  const { loading, error, components, subcomponents, indicators } = useData();
+  const { loading, error, components, subcomponents, indicators, getBlurb } = useData();
 
   if (loading) return <Loading />;
   if (error) return <div className="p-8 text-red-600">Error: {error.message}</div>;
@@ -54,7 +54,9 @@ export function IndicatorIndexPage() {
                 >
                   {component.name}
                 </Link>
-                <p className="text-white/80 text-sm mt-1">{component.description}</p>
+                {getBlurb(component.id) && (
+                  <div className="text-white/80 text-sm mt-1" dangerouslySetInnerHTML={{ __html: getBlurb(component.id)! }} />
+                )}
               </div>
 
               {/* Subcomponents and indicators */}
