@@ -1,16 +1,101 @@
-# Claude project instructions for CDI rebuild
+# CLAUDE.md — CDI Rebuild
 
-## Background on project
+## What This Project Is
 
-The Center for Global Development, my organization, has a major project called the Commitment to Development Index (CDI). It's a ranking of several dozen countries that's published every year that assesses how their policies contribute to international development. There is one master score which is based on seven main components, including trade policies, climate policies, development finance, etc. The score in each of those seven main categories, in turn, is based on a number of sub-indicators. The main page shows the scores for each country, and then you can click a country to expand more information and go into a separate page for it with a more detailed report. Similarly you can click on each of the column headings to go into a separate page with a more detailed exploration of that component and the indicators that make it up. All the interactivity consists of basic filtering options for the data and the ability to expand/contract certain areas, no recalculations or anything complicated.
+A standalone React rebuild of the Center for Global Development's Commitment to Development Index (CDI). The CDI ranks ~40 countries on how their policies affect international development, across 8 components. This app was previously a Vue app embedded in CGD's Drupal CMS; it is being rebuilt as a static site deployable to Vercel/Cloudflare Pages.
 
-Right now this project is built as a Vue app that is hosted on the larger Drupal server for our site, and which uses the Drupal site's database for data and the site's stylesheet for certain styles. This makes it quite fragile and difficult to work with. I'd like to rebuild it as a standalone static vue app that can be hosted somewhere like Vercel or Cloudflare Pages.
+**Status:** Work in progress. Core pages and data pipeline exist but the app is not yet complete.
 
-## reference materials
-This folder contains a couple of screenshots of the main page of the app
+## Tech Stack
 
-## data
-This includes a number of CSVs with data for different parts of the tool. It includes the scores for the main page, as well as a great deal of data for subindicators that will be used on the more detailed country and component reports. It does not include all the text that will be present on those more detailed sub-pages--for now just use placeholder data.
+- React 19 + TypeScript
+- Vite (with `@` path alias → `./src`)
+- Tailwind CSS v4 (via `@tailwindcss/vite` plugin)
+- React Router v7
+- Papa Parse (CSV parsing in build scripts)
+- Mammoth (Word doc parsing in build scripts)
 
-## site_code_backup
-This is a full download of our current website's drupal code from pantheon. inside this folder on the path /web/modules/custom/cdi_admin seems to be a module containing some of the relevant build code for the existing vue app
+## Project Layout
+
+```
+/                          ← repo root (also the app root)
+├── src/                   ← React application source
+│   ├── components/        ← reusable UI (common/, drawer/, filters/, layout/, modals/, table/, visualization/)
+│   ├── context/           ← DataContext.tsx (loads all data), FilterContext.tsx (group filter + adjusted toggle)
+│   ├── pages/             ← route-level components (HomePage, ComponentPage, SubcomponentPage, etc.)
+│   ├── types/index.ts     ← all TypeScript interfaces
+│   ├── App.tsx            ← BrowserRouter + Routes
+│   └── main.tsx           ← entry point
+├── public/data/           ← generated JSON files loaded at runtime (do NOT edit by hand)
+├── scripts/               ← build-time data transformation (CSV/DOCX → JSON)
+├── source-data/           ← raw CSVs and Word docs (the authoritative data source)
+├── docs/                  ← planning docs and reference screenshots
+└── vercel.json            ← rewrite rules for client-side routing
+```
+
+## Data Architecture
+
+### Hierarchy (4 levels)
+
+Country → Component (8) → Subcomponent (~42) → Indicator (~69)
+
+### Key data files
+
+| Runtime JSON (public/data/) | Generated from | Script |
+|---|---|---|
+| `cdi-data.json` | `source-data/components.csv`, `subcomponents.csv`, `indicators.csv` | `scripts/transform-data.ts` |
+| `country-groups.json` | Hardcoded in transform script | `scripts/transform-data.ts` |
+| `country-reports.json` | `source-data/country report word docs/*.docx` | `scripts/parse-country-reports.ts` |
+| `blurbs.json` | `source-data/blurbs.docx` | `scripts/parse-blurbs.ts` |
+
+To regenerate data: `npm run transform-data` (for CSVs) or `npx tsx scripts/parse-country-reports.ts` (for reports).
+
+### Core types (src/types/index.ts)
+
+- `Country` — id (ISO code), name, score, scoreAdjusted, rank, rankAdjusted, components (nested Record)
+- `Component` — id (slug like "development-finance"), name, shortName, color, group, subcomponents[]
+- `Subcomponent` — id, name, componentId, indicators[]
+- `Indicator` — id, name, subcomponentId, componentId
+- `CDIData` — the top-level shape: countries[], components[], subcomponents[], indicators[], countryGroups[], year
+- `CountryReport` — countryCode, countryName, overall (HTML string), components (Record of HTML strings)
+- `Blurbs` / `ComponentBlurb` / `SubcomponentBlurb` — descriptive text for components/subcomponents/indicators
+
+### Two scoring modes
+
+Every country has **raw** scores/rankings and **income-adjusted** scores/rankings. The `showAdjusted` toggle in FilterContext switches between them throughout the app.
+
+## Routes
+
+| Path | Page | Purpose |
+|---|---|---|
+| `/` | HomePage | Main ranking table |
+| `/component/:componentId` | ComponentPage | Component detail + country rankings |
+| `/component/:componentId/:subcomponentId` | SubcomponentPage | Subcomponent detail |
+| `/component/:componentId/:subcomponentId/:indicatorId` | IndicatorPage | Indicator detail |
+| `/indicators` | IndicatorIndexPage | Full indicator listing |
+| `/country/:countryId` | CountryReportPage | Country profile |
+| `/country/:countryId/:componentId` | CountryComponentPage | Country + component detail |
+
+## State Management
+
+- **DataContext** — loads `cdi-data.json`, `country-groups.json`, `country-reports.json`, and `blurbs.json` on mount. Provides getter functions (`getCountry`, `getComponent`, etc.).
+- **FilterContext** — manages `selectedGroupId` (country group filter) and `showAdjusted` (income-adjusted toggle). These filters apply across all pages.
+
+## The 8 Components
+
+Development Finance, Investment, Migration, Trade, Environment, Health, Security, Technology. Each has a distinct color defined in the data. They are grouped into three categories: finance, exchange, and global.
+
+## Development Commands
+
+- `npm run dev` — Vite dev server (localhost:5173)
+- `npm run build` — TypeScript check + Vite production build
+- `npm run transform-data` — regenerate JSON from source CSVs
+- `npm run lint` — ESLint
+
+## Conventions
+
+- Path alias: use `@/` for imports from `src/` (e.g., `import { DataProvider } from '@/context/DataContext'`)
+- Component IDs are kebab-case slugs (e.g., `"development-finance"`, `"vaccination-coverage"`)
+- Country IDs are 3-letter ISO codes (e.g., `"SWE"`, `"USA"`)
+- Styling uses Tailwind utility classes; component colors come from the data
+- The app is fully static — no backend, no API calls except fetching local JSON files
