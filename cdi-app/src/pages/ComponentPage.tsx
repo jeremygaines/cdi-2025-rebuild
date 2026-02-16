@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
+import { AboutBar } from '@/components/layout/AboutBar';
+import { FilterBar } from '@/components/filters/FilterBar';
 import type { Country, Component, Subcomponent, Indicator, CountryReport } from '@/types';
 
 // Component colors
@@ -48,8 +50,8 @@ const ROW_BASE_COLOR = 'rgb(153, 129, 92)';
 
 export function ComponentPage() {
   const { componentId } = useParams<{ componentId: string }>();
-  const { loading, error, getComponent, components, countries, subcomponents, indicators, getCountryReport, getBlurb } = useData();
-  const { showAdjusted } = useFilters();
+  const { loading, error, getComponent, components, countries, countryGroups, subcomponents, indicators, getCountryReport, getBlurb } = useData();
+  const { showAdjusted, selectedGroupId } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
 
@@ -57,17 +59,22 @@ export function ComponentPage() {
   const componentColor = component ? COMPONENT_COLORS[component.id] || component.color : '#888';
   const headerColor = component ? HEADER_COLORS[component.id] || componentColor : '#666';
 
-  // Sort countries by component score
+  // Filter by country group, then sort by component score (keeping original ranks)
   const sortedCountries = useMemo(() => {
     if (!component) return [];
-    return [...countries].sort((a, b) => {
+    let filtered = countries;
+    if (selectedGroupId !== 'all') {
+      const group = countryGroups.find(g => g.id === selectedGroupId);
+      if (group) filtered = countries.filter(c => group.countryIds.includes(c.id));
+    }
+    return [...filtered].sort((a, b) => {
       const aComp = a.components[component.id];
       const bComp = b.components[component.id];
       const aRank = showAdjusted ? aComp?.rankAdjusted : aComp?.rank;
       const bRank = showAdjusted ? bComp?.rankAdjusted : bComp?.rank;
       return (aRank ?? 999) - (bRank ?? 999);
     });
-  }, [countries, component, showAdjusted]);
+  }, [countries, countryGroups, selectedGroupId, component, showAdjusted]);
 
   // Get subcomponents for this component
   const componentSubcomponents = useMemo(() => {
@@ -139,6 +146,10 @@ export function ComponentPage() {
           </Link>
         </div>
       </div>
+
+      {/* About CDI bar and Filter bar */}
+      <AboutBar />
+      <FilterBar />
 
       {/* Component tabs row */}
       <div className="border-b overflow-x-auto">

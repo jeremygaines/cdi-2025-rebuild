@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
+import { AboutBar } from '@/components/layout/AboutBar';
 
 interface HeroProps {
   title?: string;
@@ -131,18 +132,7 @@ export function Hero({ title, subtitle, showKeyFindings = true }: HeroProps) {
       </div>
 
       {/* About link section */}
-      <div className="border-t border-white/20" style={{ backgroundColor: '#006a71' }}>
-        <div className="max-w-7xl mx-auto px-4 py-3 text-center">
-          <a
-            href="https://www.cgdev.org/cdi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/80 hover:text-white text-sm hover:underline"
-          >
-            About CDI and key findings
-          </a>
-        </div>
-      </div>
+      <AboutBar />
     </div>
   );
 }

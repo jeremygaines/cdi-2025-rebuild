@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { Loading } from '@/components/common/Loading';
+import { AboutBar } from '@/components/layout/AboutBar';
+import { FilterBar } from '@/components/filters/FilterBar';
 import type { Country, Component, Subcomponent, Indicator } from '@/types';
 
 // Component colors - same as ComponentPage
@@ -51,8 +53,8 @@ export function SubcomponentPage() {
     componentId: string;
     subcomponentId: string;
   }>();
-  const { loading, error, getComponent, components, subcomponents, indicators, countries, getBlurb, blurbs } = useData();
-  const { showAdjusted } = useFilters();
+  const { loading, error, getComponent, components, subcomponents, indicators, countries, countryGroups, getBlurb, blurbs } = useData();
+  const { showAdjusted, selectedGroupId } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
 
@@ -95,11 +97,15 @@ export function SubcomponentPage() {
     });
   };
 
-  // Sort countries by subcomponent score
+  // Filter by country group, then sort by subcomponent score (keeping original ranks)
   const sortedCountries = useMemo(() => {
     if (!subcomponent || !component) return [];
-
-    return [...countries].sort((a, b) => {
+    let filtered = countries;
+    if (selectedGroupId !== 'all') {
+      const group = countryGroups.find(g => g.id === selectedGroupId);
+      if (group) filtered = countries.filter(c => group.countryIds.includes(c.id));
+    }
+    return [...filtered].sort((a, b) => {
       const aComp = a.components[component.id];
       const bComp = b.components[component.id];
       const aSubScore = aComp?.subcomponents?.[subcomponent.id];
@@ -108,7 +114,7 @@ export function SubcomponentPage() {
       const bRank = bSubScore?.rank ?? 999;
       return aRank - bRank;
     });
-  }, [countries, component, subcomponent]);
+  }, [countries, countryGroups, selectedGroupId, component, subcomponent]);
 
   if (loading) return <Loading />;
   if (error) return <div className="p-8 text-red-600">Error: {error.message}</div>;
@@ -142,6 +148,10 @@ export function SubcomponentPage() {
           </Link>
         </div>
       </div>
+
+      {/* About CDI bar and Filter bar */}
+      <AboutBar />
+      <FilterBar disableAdjusted />
 
       {/* Component tabs row */}
       <div className="border-b overflow-x-auto">

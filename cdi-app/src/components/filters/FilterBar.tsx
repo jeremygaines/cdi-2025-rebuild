@@ -4,7 +4,11 @@ import { useFilters } from '@/context/FilterContext';
 import { HelpModal } from '@/components/modals/HelpModal';
 import { helpContent, type HelpContentKey } from '@/content/helpContent';
 
-export function FilterBar() {
+interface FilterBarProps {
+  disableAdjusted?: boolean;
+}
+
+export function FilterBar({ disableAdjusted = false }: FilterBarProps) {
   const { countryGroups } = useData();
   const { selectedGroupId, setSelectedGroupId, showAdjusted, setShowAdjusted } = useFilters();
   const [activeHelpModal, setActiveHelpModal] = useState<HelpContentKey | null>(null);
@@ -38,28 +42,29 @@ export function FilterBar() {
           {/* Right side - Toggle and button */}
           <div className="flex items-center gap-6">
             {/* Income-adjusted toggle */}
-            <div className="flex items-center gap-3">
+            <div className={`flex items-center gap-3${disableAdjusted ? ' opacity-40' : ''}`}>
               <div className="flex items-center gap-1">
                 <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
                   Income-Adjusted Rankings
                 </span>
-                <InfoIcon onClick={() => setActiveHelpModal('incomeAdjusted')} />
+                {!disableAdjusted && <InfoIcon onClick={() => setActiveHelpModal('incomeAdjusted')} />}
               </div>
               <button
-                onClick={() => setShowAdjusted(!showAdjusted)}
+                onClick={() => !disableAdjusted && setShowAdjusted(!showAdjusted)}
+                disabled={disableAdjusted}
                 className={`relative inline-flex h-6 w-12 items-center rounded-full transition-colors ${
-                  showAdjusted ? 'bg-cdi-primary' : 'bg-gray-300'
+                  disableAdjusted ? 'bg-gray-300 cursor-not-allowed' : showAdjusted ? 'bg-cdi-primary' : 'bg-gray-300'
                 }`}
                 role="switch"
-                aria-checked={showAdjusted}
+                aria-checked={disableAdjusted ? false : showAdjusted}
               >
                 <span
                   className={`inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform ${
-                    showAdjusted ? 'translate-x-6' : 'translate-x-0.5'
+                    !disableAdjusted && showAdjusted ? 'translate-x-6' : 'translate-x-0.5'
                   }`}
                 />
-                <span className={`absolute text-[10px] font-bold ${showAdjusted ? 'left-1.5 text-white' : 'right-1.5 text-gray-500'}`}>
-                  {showAdjusted ? 'ON' : 'OFF'}
+                <span className={`absolute text-[10px] font-bold ${!disableAdjusted && showAdjusted ? 'left-1.5 text-white' : 'right-1.5 text-gray-500'}`}>
+                  {!disableAdjusted && showAdjusted ? 'ON' : 'OFF'}
                 </span>
               </button>
             </div>
