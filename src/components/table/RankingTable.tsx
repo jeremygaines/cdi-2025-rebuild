@@ -4,6 +4,7 @@ import { useData } from '@/context/DataContext';
 import { useFilters } from '@/context/FilterContext';
 import { HelpModal } from '@/components/modals/HelpModal';
 import { helpContent, type HelpContentKey } from '@/content/helpContent';
+import { RankTooltip } from '@/components/visualization/ScoreBar';
 import { CountryOverview } from './CountryOverview';
 import type { Country, Component } from '@/types';
 
@@ -286,6 +287,9 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
         const displayScore = showAdjusted
           ? compScore?.scoreAdjusted
           : compScore?.score;
+        const displayRank = showAdjusted
+          ? compScore?.rankAdjusted
+          : compScore?.rank;
         const percentage = Math.round(displayScore ?? 0);
 
         // Cell background uses the component's GROUP color
@@ -303,15 +307,20 @@ function CountryRow({ country, components, showAdjusted, isEven, onRowClick, isS
               <span className="text-sm" style={{ color: '#5e6666' }}>
                 {percentage}%
               </span>
-              {/* Progress bar */}
-              <div className="w-full h-2 bg-gray-200 rounded-sm overflow-hidden">
-                <div
-                  className="h-full transition-all duration-300"
-                  style={{
-                    width: `${percentage}%`,
-                    backgroundColor: component.color
-                  }}
-                />
+              {/* Progress bar with rank tooltip */}
+              <div className="relative group/bar w-full">
+                <div className="w-full h-2 bg-gray-200 rounded-sm overflow-hidden">
+                  <div
+                    className="h-full transition-all duration-300"
+                    style={{
+                      width: `${percentage}%`,
+                      backgroundColor: component.color
+                    }}
+                  />
+                </div>
+                {displayRank != null && (
+                  <RankTooltip rank={displayRank} color={component.color} label={component.shortName} />
+                )}
               </div>
             </div>
           </td>

@@ -28,7 +28,13 @@
 
 body {
   @apply bg-white text-gray-900 antialiased;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* Body text (paragraphs, descriptions, report content) uses PT Sans */
+p,
+.body-text {
+  font-family: 'PT Sans', sans-serif;
 }
 
 #root {
@@ -65,7 +71,7 @@ select:focus-visible {
 /* Country report content styles */
 .text-gray-700 a,
 .space-y-4 a {
-  @apply text-cdi-primary underline hover:text-cdi-dark;
+  @apply text-cdi-primary no-underline hover:underline hover:text-cdi-dark;
 }
 
 .space-y-4 p {

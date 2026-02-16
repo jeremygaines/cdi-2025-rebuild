@@ -105,6 +105,8 @@ export function ComponentRankingTable({ componentId }: ComponentRankingTableProp
                         color={component.color}
                         size="sm"
                         showValue={false}
+                        rank={displayRank}
+                        label={component.name}
                       />
                     </div>
                   </div>
