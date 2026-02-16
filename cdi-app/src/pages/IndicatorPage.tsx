@@ -52,9 +52,10 @@ export function IndicatorPage() {
     subcomponentId: string;
     indicatorId: string;
   }>();
-  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries, getBlurb, blurbs } = useData();
+  const { loading, error, getComponent, getSubcomponent, getIndicator, components, subcomponents, indicators, countries, getBlurb, blurbs } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
 
   const component = getComponent(componentId ?? '');
   const subcomponent = getSubcomponent(subcomponentId ?? '');
@@ -67,6 +68,40 @@ export function IndicatorPage() {
     if (!subcomponent) return [];
     return indicators.filter(i => i.subcomponentId === subcomponent.id);
   }, [indicators, subcomponent]);
+
+  // Get all subcomponents for this component (for sidebar nav)
+  const componentSubcomponents = useMemo(() => {
+    if (!component) return [];
+    return subcomponents.filter(s => s.componentId === component.id);
+  }, [subcomponents, component]);
+
+  // Get indicators grouped by subcomponent
+  const indicatorsBySubcomponent = useMemo(() => {
+    if (!component) return {};
+    const componentIndicators = indicators.filter(i => i.componentId === component.id);
+    const grouped: Record<string, Indicator[]> = {};
+    for (const ind of componentIndicators) {
+      if (ind.subcomponentId) {
+        if (!grouped[ind.subcomponentId]) {
+          grouped[ind.subcomponentId] = [];
+        }
+        grouped[ind.subcomponentId].push(ind);
+      }
+    }
+    return grouped;
+  }, [indicators, component]);
+
+  const toggleSubcomponent = (subcompId: string) => {
+    setExpandedSubcomponents(prev => {
+      const next = new Set(prev);
+      if (next.has(subcompId)) {
+        next.delete(subcompId);
+      } else {
+        next.add(subcompId);
+      }
+      return next;
+    });
+  };
 
   // Sort countries by indicator score
   const sortedCountries = useMemo(() => {
@@ -191,7 +226,7 @@ export function IndicatorPage() {
               </p>
             </div>
 
-            {/* Right column - Indicators list */}
+            {/* Right column - Component navigation */}
             <div className="lg:w-1/2 lg:pl-8">
               <div
                 className="p-3"
@@ -201,51 +236,80 @@ export function IndicatorPage() {
                   className="font-bold uppercase m-0"
                   style={{ color: componentColor }}
                 >
-                  {subcomponent.name}
+                  {component.name}
                 </h5>
-                <p className="text-xs text-gray-500 mt-1">Indicators</p>
               </div>
 
               <div className="mt-2">
-                {subcomponentIndicators.map(ind => {
-                  const isActive = ind.id === indicator.id;
+                {componentSubcomponents.map(subcomp => {
+                  const isActiveSubcomp = subcomp.id === subcomponent.id;
+                  const subcompIndicators = indicatorsBySubcomponent[subcomp.id] || [];
+                  const isExpanded = expandedSubcomponents.has(subcomp.id) || isActiveSubcomp;
+                  const hasIndicators = subcompIndicators.length > 0;
+
                   return (
-                    <div key={ind.id} className="border-b border-gray-200">
-                      <Link
-                        to={`/component/${component.id}/${subcomponent.id}/${ind.id}`}
-                        className="block p-3 hover:bg-gray-50 transition-colors"
+                    <div key={subcomp.id} className="border-b border-gray-200">
+                      <div
+                        className="flex items-center"
                         style={{
-                          backgroundColor: isActive ? `${componentColor}20` : 'transparent'
+                          backgroundColor: isActiveSubcomp ? `${componentColor}20` : 'transparent'
                         }}
                       >
-                        <h5
-                          className={`hover:underline ${isActive ? 'font-bold' : 'font-semibold'}`}
-                          style={{ color: componentColor }}
-                        >
-                          {ind.name}
-                          {isActive && <span className="ml-2 text-gray-400">›</span>}
-                        </h5>
-                        {ind.unit && (
-                          <span className="text-xs text-gray-400">{ind.unit}</span>
+                        {hasIndicators && (
+                          <button
+                            onClick={() => toggleSubcomponent(subcomp.id)}
+                            className="p-3 hover:bg-gray-100 transition-colors"
+                            aria-label={isExpanded ? 'Collapse' : 'Expand'}
+                          >
+                            <svg
+                              className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
                         )}
-                      </Link>
+                        <Link
+                          to={`/component/${component.id}/${subcomp.id}`}
+                          className={`flex-1 p-3 hover:bg-gray-50 transition-colors ${!hasIndicators ? 'pl-10' : 'pl-0'}`}
+                        >
+                          <h5
+                            className={`hover:underline ${isActiveSubcomp ? 'font-bold' : 'font-semibold'}`}
+                            style={{ color: componentColor }}
+                          >
+                            {subcomp.name}
+                          </h5>
+                        </Link>
+                      </div>
+
+                      {/* Expandable indicators list */}
+                      {isExpanded && hasIndicators && (
+                        <div
+                          className="pl-10 pb-2"
+                          style={{
+                            backgroundColor: isActiveSubcomp ? `${componentColor}10` : 'transparent'
+                          }}
+                        >
+                          {subcompIndicators.map(ind => {
+                            const isActiveInd = ind.id === indicator.id;
+                            return (
+                              <Link
+                                key={ind.id}
+                                to={`/component/${component.id}/${subcomp.id}/${ind.id}`}
+                                className={`block py-1.5 px-3 text-sm hover:text-gray-900 hover:bg-gray-50 transition-colors ${isActiveInd ? 'font-bold text-gray-900' : 'text-gray-600'}`}
+                              >
+                                {ind.name}
+                                {isActiveInd && <span className="ml-2 text-gray-400">›</span>}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
                   );
                 })}
-              </div>
-
-              {/* Link back to subcomponent */}
-              <div className="mt-4">
-                <Link
-                  to={`/component/${component.id}/${subcomponent.id}`}
-                  className="text-sm hover:underline flex items-center gap-1"
-                  style={{ color: componentColor }}
-                >
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Back to {subcomponent.name}
-                </Link>
               </div>
             </div>
           </div>
