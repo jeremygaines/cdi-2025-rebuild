@@ -51,7 +51,7 @@ export function SubcomponentPage() {
     componentId: string;
     subcomponentId: string;
   }>();
-  const { loading, error, getComponent, components, subcomponents, indicators, countries, getBlurb } = useData();
+  const { loading, error, getComponent, components, subcomponents, indicators, countries, getBlurb, blurbs } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
   const [expandedSubcomponents, setExpandedSubcomponents] = useState<Set<string>>(new Set());
@@ -178,9 +178,9 @@ export function SubcomponentPage() {
               <h1 className="text-3xl font-light text-gray-800 mb-2">
                 {subcomponent.name}
               </h1>
-              {subcomponent.subtitle && (
+              {blurbs[component.id]?.subcomponents[subcomponent.id]?.subtitle && (
                 <p className="text-lg italic text-gray-500 mb-6">
-                  {subcomponent.subtitle}
+                  {blurbs[component.id].subcomponents[subcomponent.id].subtitle}
                 </p>
               )}
 
@@ -190,10 +190,6 @@ export function SubcomponentPage() {
                   dangerouslySetInnerHTML={{ __html: getBlurb(component.id, subcomponent.id)! }}
                 />
               )}
-
-              <p className="mt-6 text-gray-600">
-                The weight of this indicator is <strong>{subcomponent.weight}</strong>.
-              </p>
             </div>
 
             {/* Right column - Subcomponents list */}
@@ -558,9 +554,6 @@ function DetailsDrawer({
           </div>
         )}
 
-        <p className="text-gray-600 mb-8">
-          Weight: <strong>{subcomponent.weight}</strong>
-        </p>
 
         {/* Other subcomponents in this component */}
         <div className="border-t pt-6">

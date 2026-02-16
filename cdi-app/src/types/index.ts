@@ -47,8 +47,6 @@ export interface Subcomponent {
   id: string;
   name: string;
   componentId: string;
-  subtitle: string;
-  weight: string;
   indicators: string[]; // array of indicator IDs
 }
 
@@ -63,6 +61,7 @@ export interface Indicator {
 
 export interface BlurbEntry {
   name: string;
+  subtitle: string;
   description: string;
 }
 

@@ -13149,336 +13149,252 @@
       "id": "development-finance-quality",
       "name": "Development Finance Quality",
       "componentId": "development-finance",
-      "subtitle": "How effectively aid is delivered and aligned with recipient needs",
-      "weight": "50 percent of the development finance component",
       "indicators": []
     },
     {
       "id": "development-finance-quantity",
       "name": "Development Finance Quantity",
       "componentId": "development-finance",
-      "subtitle": "Volume of cross-border development finance relative to GNI",
-      "weight": "50 percent of the development finance component",
       "indicators": []
     },
     {
       "id": "financial-secrecy",
       "name": "Financial Secrecy",
       "componentId": "investment",
-      "subtitle": "Measures to prevent illicit financial flows and money laundering",
-      "weight": "20 percent of the investment component",
       "indicators": []
     },
     {
       "id": "business-human-rights",
       "name": "Business & Human Rights",
       "componentId": "investment",
-      "subtitle": "Implementation of human rights standards for business operations",
-      "weight": "15 percent of the investment component",
       "indicators": []
     },
     {
       "id": "natural-resources",
       "name": "Natural Resources",
       "componentId": "investment",
-      "subtitle": "Governance of natural resource investment and extraction",
-      "weight": "15 percent of the investment component",
       "indicators": []
     },
     {
       "id": "anti-corruption",
       "name": "Anti-corruption",
       "componentId": "investment",
-      "subtitle": "Enforcement of anti-bribery laws for international business",
-      "weight": "15 percent of the investment component",
       "indicators": []
     },
     {
       "id": "investment-agreements",
       "name": "Investment Agreements",
       "componentId": "investment",
-      "subtitle": "Development-friendliness of bilateral investment treaties",
-      "weight": "20 percent of the investment component",
       "indicators": []
     },
     {
       "id": "corporate-tax-rate-alignment",
       "name": "Corporate Tax Rate Alignment",
       "componentId": "investment",
-      "subtitle": "Participation in global minimum tax frameworks",
-      "weight": "15 percent of the investment component",
       "indicators": []
     },
     {
       "id": "migrant-inflow",
       "name": "Migrant Inflow",
       "componentId": "migration",
-      "subtitle": "Acceptance of migrants from lower-income countries",
-      "weight": "25 percent of the migration component",
       "indicators": []
     },
     {
       "id": "female-immigrants",
       "name": "Female Immigrants",
       "componentId": "migration",
-      "subtitle": "Gender balance among accepted migrants",
-      "weight": "10 percent of the migration component",
       "indicators": []
     },
     {
       "id": "refugee-hosting",
       "name": "Refugee Hosting",
       "componentId": "migration",
-      "subtitle": "Number of refugees hosted relative to population",
-      "weight": "25 percent of the migration component",
       "indicators": []
     },
     {
       "id": "international-migration-conventions",
       "name": "International Migration Conventions",
       "componentId": "migration",
-      "subtitle": "Participation in international frameworks protecting migrants",
-      "weight": "15 percent of the migration component",
       "indicators": []
     },
     {
       "id": "integration-policies",
       "name": "Integration Policies",
       "componentId": "migration",
-      "subtitle": "Policies enabling migrants to integrate into society",
-      "weight": "25 percent of the migration component",
       "indicators": []
     },
     {
       "id": "tariff-average",
       "name": "Tariff Average",
       "componentId": "trade",
-      "subtitle": "Average tariff rates weighted by partner country income",
-      "weight": "25 percent of the trade component",
       "indicators": []
     },
     {
       "id": "tariff-peaks",
       "name": "Tariff Peaks",
       "componentId": "trade",
-      "subtitle": "Prevalence of very high tariffs on specific products",
-      "weight": "15 percent of the trade component",
       "indicators": []
     },
     {
       "id": "agricultural-subsidies",
       "name": "Agricultural Subsidies",
       "componentId": "trade",
-      "subtitle": "Trade-distorting support to domestic agricultural producers",
-      "weight": "25 percent of the trade component",
       "indicators": []
     },
     {
       "id": "trade-logistics",
       "name": "Trade Logistics",
       "componentId": "trade",
-      "subtitle": "Quality of customs procedures and trade infrastructure",
-      "weight": "20 percent of the trade component",
       "indicators": []
     },
     {
       "id": "services-trade-restrictiveness",
       "name": "Services Trade Restrictiveness",
       "componentId": "trade",
-      "subtitle": "Barriers to trade in services with developing countries",
-      "weight": "15 percent of the trade component",
       "indicators": []
     },
     {
       "id": "greenhouse-gas-emissions",
       "name": "Greenhouse Gas Emissions",
       "componentId": "environment",
-      "subtitle": "Direct emissions from energy, industry, waste, and agriculture",
-      "weight": "20 percent of the environment component",
       "indicators": []
     },
     {
       "id": "ndc-ambition",
       "name": "NDC Ambition",
       "componentId": "environment",
-      "subtitle": "Planned emissions reduction as percentage of projected emissions in 2030 under business-as-usual scenario",
-      "weight": "10 percent of the environment component",
       "indicators": []
     },
     {
       "id": "fossil-fuel-production",
       "name": "Fossil Fuel Production",
       "componentId": "environment",
-      "subtitle": "Production of oil, gas, and coal relative to population",
-      "weight": "15 percent of the environment component",
       "indicators": []
     },
     {
       "id": "fossil-fuel-support",
       "name": "Fossil Fuel Support",
       "componentId": "environment",
-      "subtitle": "Subsidies supporting fossil fuel production and consumption",
-      "weight": "15 percent of the environment component",
       "indicators": []
     },
     {
       "id": "carbon-pricing",
       "name": "Carbon Pricing",
       "componentId": "environment",
-      "subtitle": "Effective carbon price through taxes and emissions trading",
-      "weight": "15 percent of the environment component",
       "indicators": []
     },
     {
       "id": "fishing-subsidies",
       "name": "Fishing subsidies",
       "componentId": "environment",
-      "subtitle": "Subsidies contributing to overfishing and harmful practices",
-      "weight": "10 percent of the environment component",
       "indicators": []
     },
     {
       "id": "international-environmental-conventions",
       "name": "International Environmental Conventions",
       "componentId": "environment",
-      "subtitle": "Participation in biodiversity and environmental agreements",
-      "weight": "15 percent of the environment component",
       "indicators": []
     },
     {
       "id": "antimicrobial-resistance",
       "name": "Antimicrobial Resistance",
       "componentId": "health",
-      "subtitle": "Policies and consumption related to antibiotic resistance",
-      "weight": "20 percent of the health component",
       "indicators": []
     },
     {
       "id": "vaccination-coverage",
       "name": "Vaccination Coverage",
       "componentId": "health",
-      "subtitle": "Domestic vaccination rates for globally important diseases",
-      "weight": "15 percent of the health component",
       "indicators": []
     },
     {
       "id": "pandemic-preparedness",
       "name": "Pandemic Preparedness",
       "componentId": "health",
-      "subtitle": "Readiness systems and plans for disease outbreaks",
-      "weight": "20 percent of the health component",
       "indicators": []
     },
     {
       "id": "treaties",
       "name": "Treaties",
       "componentId": "health",
-      "subtitle": "Participation in international health treaties and codes",
-      "weight": "15 percent of the health component",
       "indicators": []
     },
     {
       "id": "export-restrictions-on-food-and-health",
       "name": "Export Restrictions on Food and Health",
       "componentId": "health",
-      "subtitle": "Restrictions on exports of food and health products",
-      "weight": "15 percent of the health component",
       "indicators": []
     },
     {
       "id": "tobacco-supply-chains",
       "name": "Tobacco Supply Chains",
       "componentId": "health",
-      "subtitle": "Regulation of international tobacco trade",
-      "weight": "15 percent of the health component",
       "indicators": []
     },
     {
       "id": "peacekeeping-contributions",
       "name": "Peacekeeping Contributions",
       "componentId": "security",
-      "subtitle": "Financial and personnel contributions to UN peacekeeping",
-      "weight": "30 percent of the security component",
       "indicators": []
     },
     {
       "id": "female-peacekeepers",
       "name": "Female Peacekeepers",
       "componentId": "security",
-      "subtitle": "Proportion of peacekeepers who are women",
-      "weight": "10 percent of the security component",
       "indicators": []
     },
     {
       "id": "sea-lanes-protection",
       "name": "Sea Lanes Protection",
       "componentId": "security",
-      "subtitle": "Naval contributions to protecting international shipping",
-      "weight": "20 percent of the security component",
       "indicators": []
     },
     {
       "id": "arms-trade",
       "name": "Arms Trade",
       "componentId": "security",
-      "subtitle": "Volume and destination of arms exports",
-      "weight": "25 percent of the security component",
       "indicators": []
     },
     {
       "id": "international-security-conventions",
       "name": "International Security Conventions",
       "componentId": "security",
-      "subtitle": "Participation in international security treaties",
-      "weight": "15 percent of the security component",
       "indicators": []
     },
     {
       "id": "government-support",
       "name": "Government Support",
       "componentId": "technology",
-      "subtitle": "Direct government funding for research and development",
-      "weight": "20 percent of the technology component",
       "indicators": []
     },
     {
       "id": "tax-incentives",
       "name": "Tax Incentives",
       "componentId": "technology",
-      "subtitle": "Tax incentives for private sector R&D investment",
-      "weight": "15 percent of the technology component",
       "indicators": []
     },
     {
       "id": "foreign-students",
       "name": "Foreign Students",
       "componentId": "technology",
-      "subtitle": "Students from developing countries welcomed for study",
-      "weight": "20 percent of the technology component",
       "indicators": []
     },
     {
       "id": "female-students",
       "name": "Female Students",
       "componentId": "technology",
-      "subtitle": "Gender balance among foreign students from developing countries",
-      "weight": "10 percent of the technology component",
       "indicators": []
     },
     {
       "id": "research-collaboration",
       "name": "Research Collaboration",
       "componentId": "technology",
-      "subtitle": "Academic collaboration with researchers in developing countries",
-      "weight": "15 percent of the technology component",
       "indicators": []
     },
     {
       "id": "intellectual-property-rights",
       "name": "Intellectual Property Rights",
       "componentId": "technology",
-      "subtitle": "IPR provisions in trade agreements affecting technology access",
-      "weight": "20 percent of the technology component",
       "indicators": []
     }
   ],

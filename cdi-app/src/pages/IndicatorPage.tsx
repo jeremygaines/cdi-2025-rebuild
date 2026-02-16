@@ -52,7 +52,7 @@ export function IndicatorPage() {
     subcomponentId: string;
     indicatorId: string;
   }>();
-  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries, getBlurb } = useData();
+  const { loading, error, getComponent, getSubcomponent, getIndicator, components, indicators, countries, getBlurb, blurbs } = useData();
   const { showAdjusted } = useFilters();
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
 
@@ -153,6 +153,11 @@ export function IndicatorPage() {
               <h1 className="text-3xl font-light text-gray-800 mb-2">
                 {indicator.name}
               </h1>
+              {blurbs[component.id]?.subcomponents[subcomponent.id]?.indicators[indicator.id]?.subtitle && (
+                <p className="text-lg italic text-gray-500 mb-4">
+                  {blurbs[component.id].subcomponents[subcomponent.id].indicators[indicator.id].subtitle}
+                </p>
+              )}
               {indicator.unit && (
                 <p className="text-sm text-gray-500 mb-4">
                   Unit: <span className="font-medium text-cdi-primary">{indicator.unit}</span>
